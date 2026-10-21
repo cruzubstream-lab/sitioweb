@@ -1,2 +1,122 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hyrostudios: noticias, proyectos, recursos y novedades de nuestra comunidad.">
+  <meta name="theme-color" content="#101010">
+  <title>Hyrostudios | Inicio</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0b0b0f; --panel:#15151d; --red:#ef3340; --text:#f6f6f8; --muted:#b7b7c4; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, sans-serif; background: radial-gradient(circle at top right, #321016 0, var(--bg) 42%); color:var(--text); line-height:1.6; }
+    a { color:inherit; }
+    .wrap { width:min(1080px, 92%); margin:auto; }
+    header { padding:18px 0; border-bottom:1px solid #ffffff18; background:#0b0b0fcc; position:sticky; top:0; backdrop-filter:blur(12px); }
+    nav { display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap; }
+    .brand { font-weight:900; font-size:1.25rem; letter-spacing:.04em; text-decoration:none; }
+    .brand span { color:var(--red); }
+    .links { display:flex; gap:18px; flex-wrap:wrap; }
+    .links a { color:var(--muted); text-decoration:none; font-size:.95rem; }
+    .links a:hover { color:white; }
+    .hero { padding:90px 0 70px; }
+    .tag { color:#ff7b83; font-weight:700; text-transform:uppercase; letter-spacing:.15em; font-size:.78rem; }
+    h1 { font-size:clamp(2.6rem, 8vw, 5.5rem); line-height:1.02; margin:.35em 0; letter-spacing:-.05em; }
+    h1 span { color:var(--red); }
+    .intro { max-width:650px; color:var(--muted); font-size:1.12rem; }
+    .button { display:inline-block; margin:14px 10px 0 0; padding:12px 18px; border-radius:10px; background:var(--red); color:white; font-weight:750; text-decoration:none; }
+    .button.secondary { background:#ffffff12; border:1px solid #ffffff24; }
+    section { padding:48px 0; }
+    .section-title { font-size:clamp(1.6rem, 4vw, 2.4rem); margin:0 0 8px; }
+    .sub { color:var(--muted); margin-top:0; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; margin-top:24px; }
+    .card { padding:22px; border:1px solid #ffffff18; background:linear-gradient(145deg,#1b1b25,#111116); border-radius:16px; }
+    .card h3 { margin-top:0; }
+    .pill { display:inline-block; color:#ff9aa0; background:#ef33401b; border:1px solid #ef334044; border-radius:99px; padding:3px 9px; font-size:.78rem; font-weight:700; }
+    footer { border-top:1px solid #ffffff18; color:var(--muted); padding:25px 0; margin-top:40px; }
+    @media (max-width:560px) { .hero { padding:65px 0 45px; } .links { gap:12px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav aria-label="Navegación principal">
+        <a class="brand" href="#inicio">HYRO<span>STUDIOS</span></a>
+        <div class="links">
+          <a href="#proyectos">Proyectos</a>
+          <a href="#recursos">Recursos</a>
+          <a href="#noticias">Noticias</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero wrap" id="inicio">
+      <div class="tag">Creatividad · Comunidad · Proyectos</div>
+      <h1>Bienvenido a<br><span>Hyrostudios.</span></h1>
+      <p class="intro">Un espacio para descubrir nuestros proyectos, consultar novedades y encontrar recursos de la comunidad. Estamos preparando nuevas publicaciones; vuelve pronto para ver las actualizaciones.</p>
+      <a class="button" href="#proyectos">Explorar proyectos</a>
+      <a class="button secondary" href="#noticias">Ver novedades</a>
+    </section>
+
+    <section class="wrap" id="proyectos">
+      <h2 class="section-title">Nuestros proyectos</h2>
+      <p class="sub">Conoce lo que estamos creando en Hyrostudios.</p>
+      <div class="grid">
+        <article class="card">
+          <span class="pill">Proyecto</span>
+          <h3>Minecraft</h3>
+          <p>Noticias, ideas y recursos relacionados con nuestros proyectos de Minecraft.</p>
+        </article>
+        <article class="card">
+          <span class="pill">Comunidad</span>
+          <h3>Comunidad Hyro</h3>
+          <p>Un lugar para compartir novedades, participar y descubrir próximos eventos.</p>
+        </article>
+        <article class="card">
+          <span class="pill">En desarrollo</span>
+          <h3>Más proyectos</h3>
+          <p>Esta sección se podrá actualizar cuando publiquemos nuevos proyectos.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap" id="recursos">
+      <h2 class="section-title">Recursos y descargas</h2>
+      <p class="sub">Aquí podrás añadir enlaces a mods, archivos, guías y otros recursos.</p>
+      <div class="card">
+        <h3>Próximamente</h3>
+        <p>Los enlaces de descarga se añadirán aquí cuando estén listos. Comprueba siempre la fuente y los requisitos de cada archivo.</p>
+      </div>
+    </section>
+
+    <section class="wrap" id="noticias">
+      <h2 class="section-title">Noticias</h2>
+      <p class="sub">Novedades y anuncios de Hyrostudios.</p>
+      <div class="card">
+        <span class="pill">Bienvenida</span>
+        <h3>¡Estamos preparando la web!</h3>
+        <p>Este es el inicio de Hyrostudios. Pronto podrás encontrar aquí nuevas publicaciones y actualizaciones.</p>
+      </div>
+    </section>
+
+    <section class="wrap" id="contacto">
+      <h2 class="section-title">Contacto</h2>
+      <p class="sub">
+      
+      </p>
+      <div class="card">
+        <p>Correo: <a href="mailto:contact@info.hyrostudios.com">contact@info.hyrostudios.com</a></p>
+        <p>Comunidad: Discord oficial https://discord.gg/Nj4MSpSTAM</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© <span id="year">2026</span> Hyrostudios. Todos los derechos reservados.</div>
+  </footer>
+</body>
+</html>
