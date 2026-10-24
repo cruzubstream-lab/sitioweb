@@ -247,6 +247,15 @@ dialog.modal::backdrop{background:#020818cc}
 .hilo-cabeza .texto,.respuesta .texto{white-space:pre-wrap;overflow-wrap:anywhere}
 .respuesta{display:grid;grid-template-columns:40px 1fr;gap:12px;padding:14px 16px;background:#0d1b3a;border-left:4px solid var(--borde)}
 .respuesta > div{min-width:0}
+.misterio{margin-top:40px;display:grid;grid-template-columns:200px 1fr;gap:28px;align-items:center;padding:24px;background:linear-gradient(135deg,#1a0f3a,var(--noche-2));border:2px solid #4b2a8f}
+.misterio-img{aspect-ratio:1;max-width:100%;display:grid;place-items:center;background:radial-gradient(circle,#7a3cff55 0%,transparent 70%)}
+.misterio-img svg{width:80%;height:auto;filter:drop-shadow(0 0 18px #7a3cffaa);animation:latido 3s ease-in-out infinite}
+@keyframes latido{0%,100%{filter:drop-shadow(0 0 10px #7a3cff88);transform:scale(1)}50%{filter:drop-shadow(0 0 26px #b98cffcc);transform:scale(1.04)}}
+.misterio-texto{display:grid;gap:8px;min-width:0}
+.misterio-texto h3{font-family:var(--f-pixel);font-size:clamp(1.6rem,4vw,2.2rem)}
+.misterio-texto p{color:var(--tenue)}
+.misterio-fecha{font-family:var(--f-pixel);color:var(--oro)!important;font-size:1.1rem}
+@media (max-width:720px){.misterio{grid-template-columns:1fr;text-align:center}.misterio-img{max-width:180px;margin:0 auto}}
 footer{border-top:1px solid var(--borde);margin-top:72px}
 footer .envoltura{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-block:28px;color:var(--tenue);font-size:.9rem}
 footer a{color:var(--tenue)}
@@ -329,6 +338,23 @@ footer a{color:var(--tenue)}
           <p>Todos entran con los mismos 46 mods del servidor, así no hay errores de “mods distintos” al conectarte.</p>
         </div>
       </div>
+      <article class="misterio" aria-label="Próximo proyecto">
+        <div class="misterio-img" aria-hidden="true">
+          <svg viewBox="0 0 32 32" shape-rendering="crispEdges">
+            <path fill="#2a1450" d="M12 2h8v2h4v2h2v4h2v12h-2v4h-2v2h-4v2h-8v-2H8v-2H6v-4H4V10h2V6h2V4h4z"/>
+            <path fill="#7a3cff" d="M12 4h8v2h4v4h2v12h-2v4h-4v2h-8v-2H8v-4H6V10h2V6h4z" opacity=".55"/>
+            <path fill="#c9a6ff" d="M15 6h2v3h3v2h2v2h-2v2h-3v4h-2v-4h-3v-2h-2v-2h2V9h3zM14 11v2h4v-2z"/>
+            <path fill="#ffb000" d="M15 21h2v2h2v2h-2v2h-2v-2h-2v-2h2z"/>
+            <path fill="#ffffff" d="M9 9h1v1H9zM23 18h1v1h-1zM8 20h1v1H8zM22 7h1v1h-1z" opacity=".8"/>
+          </svg>
+        </div>
+        <div class="misterio-texto">
+          <span class="etiqueta" style="color:#c9a6ff">Próximamente</span>
+          <h3>¿Siguiente proyecto???</h3>
+          <p>Algo nuevo se está preparando en Hyro Studios. Todavía no podemos contar nada.</p>
+          <p class="misterio-fecha">Fecha: posiblemente para Navidad 2026</p>
+        </div>
+      </article>
     </div>
   </section>
 
