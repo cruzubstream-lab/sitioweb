@@ -4,7 +4,7 @@ compatibility_date = "2026-10-01"
 
 [vars]
 DISCORD_CLIENT_ID = "1563355453935849563"
-ADMIN_IDS = ""
+ADMIN_IDS = "1330710808656740495"
 
 [[d1_databases]]
 binding = "DB"
