@@ -6,5 +6,6 @@ export async function onRequestGet(context) {
   return json({
     usuario: usuario ? { ...usuario, admin: esAdmin(context, usuario) } : null,
     discordClientId: context.env.DISCORD_CLIENT_ID || "",
+    googleClientId: context.env.GOOGLE_CLIENT_ID || "",
   });
 }

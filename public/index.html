@@ -217,6 +217,9 @@ dialog.modal::backdrop{background:#020818cc}
 .modal-cuerpo p{color:var(--tenue)}
 .btn-discord{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#5865f2;color:#fff;border:0;padding:14px 18px;font-weight:700;font-size:1rem;cursor:pointer;font-family:var(--f-texto)}
 .btn-discord svg{width:22px;height:22px}
+.o-sep{display:flex;align-items:center;gap:10px;color:var(--tenue);font-size:.85rem}
+.o-sep::before,.o-sep::after{content:"";flex:1;height:1px;background:var(--borde)}
+.google-btn{min-height:44px;display:flex;justify-content:center}
 .btn-texto{justify-self:start;background:none;border:0;color:var(--tenue);cursor:pointer;font:inherit;text-decoration:underline}
 /* Foro */
 .foro-barra{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:18px}
@@ -385,8 +388,8 @@ footer a{color:var(--tenue)}
         <p>Descarga el instalador de tu computadora. Si tienes Mac y no sabes cuál elegir, mira <a href="#cual-mac">qué chip tiene tu Mac</a>.</p>
       </div>
       <div class="aviso-login" id="aviso-descarga">
-        <span><b>Inicia sesión para descargar.</b> Entra con tu cuenta de Discord: con la misma sesión también puedes escribir en el foro.</span>
-        <button class="btn-mini lleno" type="button" data-entrar>Iniciar sesión con Discord</button>
+        <span><b>Inicia sesión para descargar.</b> Entra con Discord o con tu Gmail: con la misma sesión también puedes escribir en el foro.</span>
+        <button class="btn-mini lleno" type="button" data-entrar>Iniciar sesión</button>
       </div>
       <div class="descargas">
         <article class="tarjeta" data-so="windows">
@@ -496,7 +499,7 @@ footer a{color:var(--tenue)}
       <div class="cabecera">
         <span class="etiqueta">Foro</span>
         <h2>Foro de la comunidad</h2>
-        <p>Pregunta, ayuda a otros jugadores o propón ideas para el servidor. Cualquiera puede leer; para crear un tema o responder, inicia sesión con Discord.</p>
+        <p>Pregunta, ayuda a otros jugadores o propón ideas para el servidor. Cualquiera puede leer; para crear un tema o responder, inicia sesión con Discord o Google.</p>
       </div>
       <div class="foro-barra">
         <div class="chips" id="chips" role="group" aria-label="Categorías">
@@ -597,11 +600,13 @@ footer a{color:var(--tenue)}
   <div class="modal-cuerpo">
     <span class="etiqueta">Cuenta</span>
     <h2 id="modal-titulo" style="font-size:1.6rem">Inicia sesión</h2>
-    <p id="modal-texto">Para descargar el launcher y escribir en el foro, entra con tu cuenta de Discord. Solo vemos tu nombre y tu foto de perfil.</p>
+    <p id="modal-texto">Para descargar el launcher y escribir en el foro, entra con tu cuenta de Discord o de Google (Gmail). Solo vemos tu nombre y tu foto de perfil.</p>
     <button class="btn-discord" type="button" id="btn-discord">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.3 5.3A16.6 16.6 0 0 0 15.2 4l-.5 1a15.4 15.4 0 0 0-5.4 0l-.5-1a16.6 16.6 0 0 0-4.1 1.3C2.1 9.2 1.4 13 1.7 16.8a16.8 16.8 0 0 0 5.1 2.6l1.1-1.7c-.6-.2-1.2-.5-1.7-.9l.4-.3a11.9 11.9 0 0 0 10.8 0l.4.3c-.5.4-1.1.7-1.7.9l1.1 1.7a16.8 16.8 0 0 0 5.1-2.6c.4-4.4-.7-8.2-3-11.5zM8.7 14.5c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm6.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z"/></svg>
       Continuar con Discord
     </button>
+    <div class="o-sep" id="google-sep" hidden><span>o</span></div>
+    <div id="google-btn" class="google-btn" hidden></div>
     <p class="error" id="modal-error" hidden></p>
     <button class="btn-texto" type="button" id="modal-cerrar">Ahora no</button>
   </div>
@@ -622,14 +627,41 @@ const RUTAS = {windows:"/descargar/windows", macArm:"/descargar/mac-apple", macI
 const CLAVE_DE_RUTA = {"windows":"windows","mac-apple":"macArm","mac-intel":"macIntel","windows-alterno":"windowsAlt"};
 
 /* ===== Sesión ===== */
-let yo = null, discordClientId = "";
+let yo = null, discordClientId = "", googleClientId = "", googleListo = false;
 const $ = (id) => document.getElementById(id);
 const modal = $("modal-login");
 function abrirLogin(texto, volver){
-  $("modal-texto").textContent = texto || "Para descargar el launcher y escribir en el foro, entra con tu cuenta de Discord. Solo vemos tu nombre y tu foto de perfil.";
+  $("modal-texto").textContent = texto || "Para descargar el launcher y escribir en el foro, entra con tu cuenta de Discord o de Google (Gmail). Solo vemos tu nombre y tu foto de perfil.";
   $("modal-error").hidden = true;
   modal.dataset.volver = volver || (location.pathname + location.search + location.hash);
   if (modal.showModal) modal.showModal(); else modal.setAttribute("open","");
+  prepararGoogle();
+}
+function prepararGoogle(){
+  if (!googleClientId) return;
+  const pintar = () => {
+    if (!window.google || !google.accounts) return;
+    if (!googleListo) {
+      google.accounts.id.initialize({ client_id: googleClientId, callback: entrarConGoogle, ux_mode: "popup" });
+      googleListo = true;
+    }
+    const caja = $("google-btn"); caja.textContent = ""; caja.hidden = false; $("google-sep").hidden = false;
+    google.accounts.id.renderButton(caja, { theme: "filled_black", size: "large", text: "continue_with", shape: "rectangular", width: Math.min(360, caja.clientWidth || 320), locale: "es" });
+  };
+  if (window.google && google.accounts) return pintar();
+  if (!document.getElementById("gsi")) {
+    const sc = document.createElement("script"); sc.id = "gsi"; sc.src = "https://accounts.google.com/gsi/client"; sc.async = true; sc.onload = pintar;
+    document.head.appendChild(sc);
+  }
+}
+async function entrarConGoogle(resp){
+  try {
+    const r = await fetch("/api/login-google", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ credential: resp.credential }) });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || "Error");
+    location.href = modal.dataset.volver || "/";
+    if ((modal.dataset.volver || "/").split("#")[0] === location.pathname + location.search) location.reload();
+  } catch (e) { $("modal-error").textContent = e.message; $("modal-error").hidden = false; }
 }
 function cerrarLogin(){ if (modal.close) modal.close(); else modal.removeAttribute("open"); }
 $("modal-cerrar").onclick = cerrarLogin;
@@ -669,7 +701,7 @@ document.querySelectorAll("[data-descarga]").forEach(a => {
     if (yo) return;
     e.preventDefault();
     const ruta = a.getAttribute("href");
-    abrirLogin("Inicia sesión con Discord para descargar el launcher. Al volver, la descarga empieza sola.", "/?bajar=" + encodeURIComponent(ruta.split("/").pop()) + "#descargar");
+    abrirLogin("Inicia sesión con Discord o con Google para descargar el launcher. Al volver, la descarga empieza sola.", "/?bajar=" + encodeURIComponent(ruta.split("/").pop()) + "#descargar");
   });
 });
 
@@ -678,12 +710,12 @@ async function cargarSesion(){
     const r = await fetch("/api/yo", {cache:"no-store"});
     if (!r.ok) throw 0;
     const d = await r.json();
-    yo = d.usuario; discordClientId = d.discordClientId || "";
+    yo = d.usuario; discordClientId = d.discordClientId || ""; googleClientId = d.googleClientId || "";
   } catch(e) { yo = null; }
   pintarCuenta();
   const q = new URLSearchParams(location.search);
   const entrar = q.get("entrar"), bajar = q.get("bajar");
-  if (entrar && CLAVE_DE_RUTA[entrar] && !yo) abrirLogin("Inicia sesión con Discord para descargar el launcher. Al volver, la descarga empieza sola.", "/?bajar=" + entrar + "#descargar");
+  if (entrar && CLAVE_DE_RUTA[entrar] && !yo) abrirLogin("Inicia sesión con Discord o con Google para descargar el launcher. Al volver, la descarga empieza sola.", "/?bajar=" + entrar + "#descargar");
   if (bajar && CLAVE_DE_RUTA[bajar] && yo) { history.replaceState(null, "", "/#descargar"); location.href = "/descargar/" + bajar; }
 }
 
@@ -709,7 +741,7 @@ if (so) {
   const btn = document.getElementById("btn-principal");
   document.getElementById("btn-principal-texto").textContent = "Descargar para " + nombres[so];
   btn.href = RUTAS[so]; btn.dataset.descarga = so;
-  btn.addEventListener("click", (e) => { if (yo) return; e.preventDefault(); abrirLogin("Inicia sesión con Discord para descargar el launcher. Al volver, la descarga empieza sola.", "/?bajar=" + RUTAS[so].split("/").pop() + "#descargar"); });
+  btn.addEventListener("click", (e) => { if (yo) return; e.preventDefault(); abrirLogin("Inicia sesión con Discord o con Google para descargar el launcher. Al volver, la descarga empieza sola.", "/?bajar=" + RUTAS[so].split("/").pop() + "#descargar"); });
   document.getElementById("detectado").innerHTML = "Detectamos <b>" + nombres[so] + "</b>. ¿Otro sistema? <a href=\"#descargar\">Ver todas las descargas</a>.";
   const card = document.querySelector('.tarjeta [data-descarga="'+so+'"]').closest(".tarjeta");
   card.classList.add("recomendada");
@@ -817,7 +849,7 @@ async function abrirTema(id){
       hilo.append(f);
     } else {
       const b = el("button",{className:"btn-mini lleno",type:"button",textContent:"Inicia sesión para responder"});
-      b.onclick = () => abrirLogin("Inicia sesión con Discord para responder en el foro.", "/#foro");
+      b.onclick = () => abrirLogin("Inicia sesión con Discord o con Google para responder en el foro.", "/#foro");
       hilo.append(b);
     }
     $("foro-lista").hidden = true; $("form-tema").hidden = true; hilo.hidden = false;
@@ -831,7 +863,7 @@ document.querySelectorAll(".chip-cat").forEach(c => c.onclick = () => {
   cargarTemas();
 });
 $("btn-nuevo").onclick = () => {
-  if (!yo) { abrirLogin("Inicia sesión con Discord para crear un tema en el foro.", "/#foro"); return; }
+  if (!yo) { abrirLogin("Inicia sesión con Discord o con Google para crear un tema en el foro.", "/#foro"); return; }
   $("form-tema").hidden = false; $("tema-titulo").focus();
 };
 $("tema-cancelar").onclick = () => { $("form-tema").hidden = true; };
