@@ -1,0 +1,12 @@
+name = "hyrostudios"
+pages_build_output_dir = "./public"
+compatibility_date = "2026-10-01"
+
+[vars]
+DISCORD_CLIENT_ID = "1563355453935849563"
+ADMIN_IDS = ""
+
+[[d1_databases]]
+binding = "DB"
+database_name = "hyrostudios-foro"
+database_id = "09efc7eb-2924-4818-b8ca-9b0cbc1bd5da"
