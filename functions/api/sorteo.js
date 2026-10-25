@@ -24,7 +24,6 @@ async function estado(context, usuario) {
     meta: META,
     registrados,
     cerrado,
-    ganador: cerrado && results.length && results[0].votos > 0 ? results[0] : null,
     participantes: results,
     miVoto,
     yoParticipo,

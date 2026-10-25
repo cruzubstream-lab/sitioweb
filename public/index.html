@@ -64,6 +64,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .menu a{color:var(--tenue);text-decoration:none;font-weight:600;font-size:.95rem}
 .menu a:hover{color:var(--texto)}
 .menu .discord-mini{color:var(--texto);background:#5865f2;padding:6px 12px;border-radius:6px}
+@media (max-width:1240px){.menu{gap:14px}.menu a[href="#instalar"],.menu a[href="#noticias"],.menu a[href="#ayuda"]{display:none}}
+@media (max-width:980px){.menu a[href="#proyectos"],.menu a[href="#dificultad"]{display:none}}
 @media (max-width:720px){.menu a:not(.discord-mini){display:none}}
 
 /* Botones pixel */
@@ -311,6 +313,14 @@ dialog.modal::backdrop{background:#020818cc}
 .btn-votar:disabled{opacity:.4;cursor:default}
 .sorteo-reglas{color:var(--tenue);font-size:.85rem}
 .ganador{padding:16px;border:2px solid var(--oro);background:#2a1e05;font-weight:700}
+.contador-grande{margin-top:18px;display:grid;justify-items:center;gap:4px;padding:24px 16px;text-align:center;background:var(--noche-2);border:2px solid var(--borde)}
+.contador-cifra{display:flex;align-items:baseline;gap:8px;font-family:var(--f-pixel)}
+.contador-cifra b{font-size:clamp(3rem,10vw,4.5rem);line-height:1;color:var(--ok);text-shadow:3px 3px 0 #1d5a36;font-variant-numeric:tabular-nums}
+.contador-cifra span{font-size:1.4rem;color:var(--tenue)}
+.contador-texto{color:var(--tenue);max-width:40em}
+.contador-grande.cumplida{border-color:var(--oro);background:#2a1e05}
+.contador-grande.cumplida .contador-cifra b{color:var(--oro);text-shadow:3px 3px 0 #b85a00}
+.contador-grande.cumplida .contador-texto b{color:var(--oro)}
 .contador-usuarios{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:2px solid var(--borde);background:var(--noche-2);color:var(--tenue);width:max-content;max-width:100%}
 .contador-usuarios b{font-family:var(--f-pixel);color:var(--ok);font-size:1.2rem;font-variant-numeric:tabular-nums}
 .punto{width:8px;height:8px;background:var(--ok);box-shadow:0 0 8px var(--ok);animation:latido 2s ease-in-out infinite}
@@ -489,6 +499,11 @@ footer a{color:var(--tenue)}
         </div>
         <ol class="ranking" id="sorteo-lista"></ol>
         <p class="sorteo-reglas">Reglas: un voto por cuenta (puedes cambiarlo mientras el sorteo esté abierto), no puedes votarte a ti mismo y si hay empate gana quien se apuntó primero. El premio se entrega como código de regalo oficial de Minecraft.</p>
+      </div>
+      <div class="contador-grande" id="contador-grande">
+        <span class="etiqueta">Comunidad Hyro</span>
+        <p class="contador-cifra"><b id="contador-cifra">–</b><span>/ 90</span></p>
+        <p class="contador-texto" id="contador-texto">personas registradas en hyrostudios.com</p>
       </div>
     </div>
   </section>
@@ -1022,10 +1037,12 @@ function pintarSorteo(){
   $("sorteo-relleno").style.width = pct + "%";
   $("sorteo-barra").setAttribute("aria-valuenow", s.registrados);
   const est = $("sorteo-estado"); est.textContent = "";
+  $("contador-cifra").textContent = s.registrados;
+  $("contador-grande").classList.toggle("cumplida", s.cerrado);
   if (s.cerrado) {
-    est.append("¡Llegamos a la meta! El sorteo terminó. ");
-    if (s.ganador) { const b = el("b",{textContent:"Ganador: " + s.ganador.nombre + " (" + s.ganador.votos + " votos)"}); est.append(b); }
-    else est.append("No hubo votos.");
+    est.append(el("b",{textContent:"¡Meta cumplida!"}), " Próximamente se anunciará al ganador en la comunidad de Discord.");
+    $("contador-texto").textContent = "";
+    $("contador-texto").append(el("b",{textContent:"¡Meta cumplida! "}), "Próximamente se anunciará al ganador en nuestra ", el("a",{href:DISCORD,target:"_blank",rel:"noopener",textContent:"comunidad de Discord"}), ".");
   } else {
     const faltan = s.meta - s.registrados;
     est.append("Faltan ", el("b",{textContent: faltan + (faltan === 1 ? " usuario" : " usuarios")}), " para cerrar el sorteo. " + s.participantes.length + (s.participantes.length === 1 ? " participante." : " participantes."));
