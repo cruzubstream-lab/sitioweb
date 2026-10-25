@@ -268,6 +268,24 @@ dialog.modal::backdrop{background:#020818cc}
 .actual-fecha time{color:var(--azul)}
 .actual-texto{display:grid;gap:12px;color:var(--tenue);min-width:0}
 @media (max-width:820px){.actual{grid-template-columns:1fr}}
+.dias{display:grid;gap:20px}
+.dia{display:grid;gap:16px;padding:28px;background:var(--noche-2);border:2px solid var(--borde);border-top:4px solid #ff4d5e}
+.dia-cabeza{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.dia-num{font-family:var(--f-pixel);font-size:1.6rem;color:#fff;background:#c4213a;padding:8px 14px;box-shadow:inset -3px -3px 0 #7a0f20,inset 3px 3px 0 #ff7a8a;line-height:1}
+.dia-cabeza h3{font-family:var(--f-pixel);font-size:clamp(1.4rem,3.5vw,1.9rem)}
+.dia-fecha{color:var(--azul);font-weight:700}
+.dia-intro,.dia-cierre{color:var(--tenue);max-width:62em}
+.cambios{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.cambio{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start;padding:16px;background:#0b1630;border:2px solid #4a1a26}
+.cambio-ico{width:44px;height:44px;display:grid;place-items:center;background:#1a0f1c;border:2px solid #4a1a26}
+.cambio-ico svg{width:28px;height:28px}
+.cambio h4{margin:0 0 4px;font-size:1rem}
+.cambio p{color:var(--tenue);font-size:.93rem}
+.cambio > div{min-width:0}
+.dia-proximo{font-weight:600}
+.dia-proximo b{color:var(--oro)}
+.dia-firma{color:#5fd38a;font-weight:700}
+@media (max-width:900px){.cambios{grid-template-columns:1fr}}
 footer{border-top:1px solid var(--borde);margin-top:72px}
 footer .envoltura{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-block:28px;color:var(--tenue);font-size:.9rem}
 footer a{color:var(--tenue)}
@@ -282,6 +300,7 @@ footer a{color:var(--tenue)}
     </a>
     <nav class="menu" aria-label="Secciones">
       <a href="#proyectos">Proyectos</a>
+      <a href="#dificultad">Dificultad</a>
       <a href="#descargar">Descargar</a>
       <a href="#instalar">Cómo instalar</a>
       <a href="#noticias">Noticias</a>
@@ -377,6 +396,45 @@ footer a{color:var(--tenue)}
           <p class="misterio-fecha">Fecha: posiblemente para Navidad 2026</p>
         </div>
       </article>
+    </div>
+  </section>
+
+  <section class="bloque" id="dificultad" style="padding-top:0">
+    <div class="envoltura">
+      <div class="cabecera">
+        <span class="etiqueta">MultiverSafio 1</span>
+        <h2>Cambios de dificultad</h2>
+        <p>Cada día de evento el servidor se vuelve más difícil. Aquí quedan anotados todos los cambios, día por día.</p>
+      </div>
+      <div class="dias">
+        <article class="dia" id="dia-1">
+          <header class="dia-cabeza">
+            <span class="dia-num">Día 1</span>
+            <div>
+              <h3>¡Día 1 completado!</h3>
+              <p class="dia-fecha"><time datetime="2026-10-24">Sábado 24 de octubre de 2026</time></p>
+            </div>
+          </header>
+          <p class="dia-intro">¡El primer día de nuestra aventura ha llegado a su fin! Hoy hubo nuevos desafíos y cambios de dificultad que harán que sobrevivir sea cada vez más complicado.</p>
+          <ul class="cambios">
+            <li class="cambio">
+              <span class="cambio-ico" aria-hidden="true"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#5fd38a" d="M6 1h4v2h2v2h1v4h-2v1H9v5H7v-5H5V9H3V5h1V3h2z"/><path fill="#ff6b6b" d="M1 1h2v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v2h-2v-1h-1v-1h-1v-1h-1v-1h-1v-1H9V9H8V8H7V7H6V6H5V5H4V4H3V3H2V2H1z"/></svg></span>
+              <div><h4>Sin brotes de árboles</h4><p>Los árboles ya no sueltan brotes al romperlos.</p></div>
+            </li>
+            <li class="cambio">
+              <span class="cambio-ico" aria-hidden="true"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#3a2a1a" d="M3 2h10v4H3z"/><path fill="#c9966b" d="M3 5h10v8H3z"/><path fill="#ffffff" d="M4 7h3v2H4zM9 7h3v2H9z"/><path fill="#6b3f2a" d="M6 11h4v1H6z"/><path fill="#2f7fd6" d="M3 13h10v2H3z"/></svg></span>
+              <div><h4>Herobrine aparece de noche</h4><p>Tengan cuidado cuando caiga la noche: nunca sabrán cuándo puede aparecer.</p></div>
+            </li>
+            <li class="cambio">
+              <span class="cambio-ico" aria-hidden="true"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#4caf50" d="M3 1h10v14H3z"/><path fill="#1b1b1b" d="M4 4h3v3H4zM9 4h3v3H9zM7 7h2v2H7zM5 9h6v3H5zM5 12h2v1H5zM9 12h2v1H9z"/><path fill="#7fd0ff" d="M1 3h1v4H1zM14 2h1v5h-1zM2 10h1v4H2zM13 9h1v4h-1z"/></svg></span>
+              <div><h4>Creepers cargados</h4><p>Los creepers aparecen cargados por defecto, así que cada encuentro es mucho más peligroso.</p></div>
+            </li>
+          </ul>
+          <p class="dia-cierre">Estos son todos los cambios aplicados durante el Día 1. ¡Prepárense, porque la dificultad seguirá poniendo a prueba su supervivencia!</p>
+          <p class="dia-proximo">Nos vemos el <b>lunes</b> con el <b>Día 2</b> de MultiverSafio. ¿Quién logrará sobrevivir?</p>
+          <p class="dia-firma">— Equipo de HyroStudio</p>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -487,6 +545,7 @@ footer a{color:var(--tenue)}
         <h2>Novedades</h2>
       </div>
       <div class="noticias">
+        <article class="noticia"><time datetime="2026-10-24">24 oct 2026</time><h3>Día 1 completado</h3><p>Terminó el primer día de MultiverSafio 1 con tres cambios de dificultad: sin brotes de árboles, Herobrine de noche y creepers cargados. <a href="#dificultad">Ver los cambios</a>.</p></article>
         <article class="noticia"><time datetime="2026-10-24">24 oct 2026</time><h3>¡Arranca MultiverSafio 1!</h3><p>El sábado 24 de octubre empieza MultiverSafio 1. Descarga el launcher, inicia sesión con tu cuenta de Minecraft y entra directo al servidor.</p></article>
         <article class="noticia"><time datetime="2026-10-23">23 oct 2026</time><h3>Ya puedes descargar el launcher</h3><p>MultiverSafio ya está disponible para Windows, Mac con Apple M y Mac con Intel. Descárgalo arriba y sigue la guía de instalación.</p></article>
         <article class="noticia"><time datetime="2026-10-23">23 oct 2026</time><h3>Estrenamos web</h3><p>hyrostudios.com es la página oficial de Hyro Studios. Aquí publicaremos los próximos proyectos y eventos. Los anuncios al momento salen primero en el Discord.</p></article>
