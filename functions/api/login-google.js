@@ -26,7 +26,7 @@ export async function onRequestPost(context) {
   const db = context.env.DB;
   await db.batch([
     db.prepare(
-      "INSERT INTO usuarios (id, nombre, avatar, creado) VALUES (?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET nombre = excluded.nombre, avatar = excluded.avatar"
+      "INSERT INTO usuarios (id, nombre, avatar, creado) VALUES (?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET nombre = CASE WHEN usuarios.personalizado = 1 THEN usuarios.nombre ELSE excluded.nombre END, avatar = CASE WHEN usuarios.personalizado = 1 THEN usuarios.avatar ELSE excluded.avatar END"
     ).bind(id, nombre, avatar, ahora),
     db.prepare("INSERT INTO sesiones (token, usuario_id, expira) VALUES (?, ?, ?)").bind(token, id, ahora + 30 * 86400),
   ]);

@@ -27,9 +27,11 @@ export async function usuarioActual(context) {
   if (!token) return null;
   const ahora = Math.floor(Date.now() / 1000);
   const fila = await context.env.DB.prepare(
-    "SELECT u.id, u.nombre, u.avatar FROM sesiones s JOIN usuarios u ON u.id = s.usuario_id WHERE s.token = ? AND s.expira > ?"
+    "SELECT u.id, u.nombre, u.avatar, u.personalizado FROM sesiones s JOIN usuarios u ON u.id = s.usuario_id WHERE s.token = ? AND s.expira > ?"
   ).bind(token, ahora).first();
-  return fila || null;
+  if (!fila) return null;
+  fila.proveedor = fila.id.startsWith("g:") ? "google" : "discord";
+  return fila;
 }
 
 export function esAdmin(context, usuario) {

@@ -326,6 +326,22 @@ dialog.modal::backdrop{background:#020818cc}
 .contador-usuarios b{font-family:var(--f-pixel);color:var(--ok);font-size:1.2rem;font-variant-numeric:tabular-nums}
 .punto{width:8px;height:8px;background:var(--ok);box-shadow:0 0 8px var(--ok);animation:latido 2s ease-in-out infinite}
 @media (max-width:720px){.sorteo-meta{grid-template-columns:56px 1fr}.premio svg{width:56px;height:56px}.sorteo-acciones{grid-column:1/-1}.ranking li{grid-template-columns:26px 32px 1fr auto;}.ranking img{width:32px;height:32px}.ranking .btn-votar{grid-column:2/-1}}
+.perfil-vista{display:flex;align-items:center;gap:14px;padding:12px;background:#06102a;border:2px solid var(--borde)}
+.perfil-vista img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid var(--azul);background:#0b1630}
+.perfil-vista span{font-weight:700;font-size:1.1rem;overflow-wrap:anywhere}
+.campo{display:grid;gap:6px;font-weight:600;font-size:.92rem}
+.campo input{font:inherit;color:var(--texto);background:#06102a;border:2px solid var(--borde);padding:10px 12px}
+.campo input:focus{outline:none;border-color:var(--azul)}
+.campo small{color:var(--tenue);font-weight:400}
+.avatares{border:0;margin:0;padding:0;display:grid;gap:10px}
+.avatares legend{font-weight:600;font-size:.92rem;margin-bottom:8px}
+.avatares-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.av-op{aspect-ratio:1;max-width:100%;padding:0;border:2px solid var(--borde);background:#06102a;cursor:pointer;border-radius:50%;overflow:hidden}
+.av-op img{width:100%;height:100%;object-fit:cover;display:block}
+.av-op[aria-pressed="true"]{border-color:var(--oro);box-shadow:0 0 0 2px var(--oro)}
+.subir{justify-self:start;cursor:pointer}
+.cuenta .perfil-btn{display:flex;align-items:center;gap:8px;background:none;border:0;color:var(--texto);cursor:pointer;font:inherit;padding:0}
+#modal-perfil{max-height:calc(100% - 32px);overflow:auto}
 footer{border-top:1px solid var(--borde);margin-top:72px}
 footer .envoltura{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-block:28px;color:var(--tenue);font-size:.9rem}
 footer a{color:var(--tenue)}
@@ -743,6 +759,27 @@ footer a{color:var(--tenue)}
   </div>
 </dialog>
 
+<dialog class="modal" id="modal-perfil" aria-labelledby="perfil-titulo">
+  <form class="modal-cuerpo" id="form-perfil">
+    <span class="etiqueta">Tu perfil</span>
+    <h2 id="perfil-titulo" style="font-size:1.6rem">Elige cómo te verán</h2>
+    <p id="perfil-texto">Este nombre y esta foto aparecen en el foro y en el sorteo.</p>
+    <div class="perfil-vista"><img id="perfil-img" alt="Tu foto de perfil" src=""><span id="perfil-vista-nombre"></span></div>
+    <label for="perfil-nombre" class="campo">Nombre de usuario
+      <input id="perfil-nombre" maxlength="20" minlength="3" required autocomplete="nickname" placeholder="Ej.: Cruzub">
+      <small>Entre 3 y 20 caracteres: letras, números, espacios, guion, punto o guion bajo.</small>
+    </label>
+    <fieldset class="avatares">
+      <legend>Foto de perfil</legend>
+      <div class="avatares-grid" id="avatares-grid"></div>
+      <label class="btn-mini subir" for="perfil-archivo">Subir mi foto</label>
+      <input type="file" id="perfil-archivo" accept="image/png,image/jpeg,image/webp" hidden>
+    </fieldset>
+    <p class="error" id="perfil-error" hidden></p>
+    <div class="form-fila"><button class="btn azul" type="submit" id="perfil-guardar">Guardar perfil</button><button class="btn-texto" type="button" id="perfil-cerrar">Ahora no</button></div>
+  </form>
+</dialog>
+
 <footer>
   <div class="envoltura">
     <span>© 2026 Hyro Studios · MultiverSafio</span>
@@ -816,9 +853,11 @@ function pintarCuenta(){
   if (yo) {
     const img = document.createElement("img"); img.src = yo.avatar; img.alt = "";
     const n = document.createElement("span"); n.className = "quien"; n.textContent = yo.nombre;
+    const pb = document.createElement("button"); pb.type = "button"; pb.className = "perfil-btn"; pb.title = "Editar mi perfil"; pb.setAttribute("aria-label", "Editar mi perfil (" + yo.nombre + ")");
+    pb.append(img, n); pb.onclick = () => abrirPerfil(false);
     const salir = document.createElement("button"); salir.className = "btn-mini"; salir.type = "button"; salir.textContent = "Salir";
     salir.onclick = async () => { try { await fetch("/api/salir", {method:"POST"}); } catch(e){} yo = null; pintarCuenta(); };
-    c.append(img, n, salir);
+    c.append(pb, salir);
   } else {
     const b = document.createElement("button"); b.className = "btn-mini lleno"; b.type = "button"; b.textContent = "Iniciar sesión";
     b.onclick = () => abrirLogin(); c.append(b);
@@ -1067,7 +1106,87 @@ function pintarSorteo(){
     lista.append(el("li",null, el("img",{src:p.avatar,alt:""}), el("span",{className:"nombre",textContent:p.nombre}), el("span",{className:"votos",textContent:p.votos + (p.votos === 1 ? " voto" : " votos")}), voto));
   });
 }
-cargarSesion().then(() => { cargarTemas(); cargarSorteo(); });
+
+/* ===== Perfil ===== */
+const PRESETS = [
+  ["#1a9fe0","#0b1630"],["#ffb000","#3a1f00"],["#5fd38a","#06231a"],["#ff6b81","#3a0a14"],
+  ["#b77dff","#1e0b3a"],["#ff8a3d","#3a1600"],["#7ff3ff","#06303a"],["#e9f0ff","#1b2160"],["#c4213a","#ffd1d1"]
+];
+const CARAS = ["0110011001100110","0000011001100000","0110000000000110","0100100000000010"];
+function dibujarPreset(i){
+  const c = document.createElement("canvas"); c.width = c.height = 128; const g = c.getContext("2d");
+  const [fg,bg] = PRESETS[i]; g.fillStyle = bg; g.fillRect(0,0,128,128);
+  const px = 16, o = 0;
+  // cabeza tipo bloque con ojos y boca simétricos (cada preset distinto)
+  g.fillStyle = fg; g.fillRect(2*px,2*px,4*px,4*px);
+  g.fillStyle = bg;
+  const ojos = [[3,3],[4,3]]; ojos.forEach(([x,y])=>g.fillRect(x*px+(i%2?0:2), y*px+4, 10, 12));
+  g.fillRect(3*px, 4*px+ (i%3)*4, 2*px, 6);
+  g.fillStyle = fg; g.globalAlpha = .35; g.fillRect(1*px,6*px,6*px,2*px); g.globalAlpha = 1;
+  if (i % 4 === 0) { g.fillStyle = "#ffffff"; g.fillRect(2*px, 1*px+8, 4*px, 8); }
+  if (i % 4 === 2) { g.fillStyle = fg; g.fillRect(1*px+8, 1*px, 8, px); g.fillRect(6*px, 1*px, 8, px); }
+  return c.toDataURL("image/png");
+}
+let fotoElegida = null; // dataURL nueva o null = mantener
+function marcarAv(btn){ document.querySelectorAll(".av-op").forEach(b => b.setAttribute("aria-pressed", b === btn)); }
+function abrirPerfil(primeraVez){
+  const m = $("modal-perfil");
+  $("perfil-titulo").textContent = primeraVez ? "Elige cómo te verán" : "Editar mi perfil";
+  $("perfil-texto").textContent = primeraVez ? "Es tu primera vez aquí. Elige tu nombre de usuario y tu foto: aparecerán en el foro y en el sorteo." : "Este nombre y esta foto aparecen en el foro y en el sorteo.";
+  $("perfil-cerrar").textContent = primeraVez ? "Usar mi nombre de " + (yo.proveedor === "google" ? "Google" : "Discord") : "Cancelar";
+  $("perfil-nombre").value = yo.nombre; $("perfil-vista-nombre").textContent = yo.nombre;
+  $("perfil-img").src = yo.avatar; $("perfil-error").hidden = true; fotoElegida = null;
+  const grid = $("avatares-grid"); grid.textContent = "";
+  const actual = el("button",{type:"button",className:"av-op",title:"Mi foto actual"}, el("img",{src:yo.avatar,alt:"Mi foto actual"}));
+  actual.onclick = () => { fotoElegida = null; $("perfil-img").src = yo.avatar; marcarAv(actual); };
+  grid.append(actual); marcarAv(actual);
+  PRESETS.forEach((_, i) => {
+    const url = dibujarPreset(i);
+    const b = el("button",{type:"button",className:"av-op",title:"Avatar " + (i+1)}, el("img",{src:url,alt:"Avatar " + (i+1)}));
+    b.onclick = () => { fotoElegida = url; $("perfil-img").src = url; marcarAv(b); };
+    grid.append(b);
+  });
+  m.dataset.primera = primeraVez ? "1" : "";
+  if (m.showModal) m.showModal(); else m.setAttribute("open","");
+}
+$("perfil-nombre").addEventListener("input", e => { $("perfil-vista-nombre").textContent = e.target.value || "…"; });
+$("perfil-archivo").addEventListener("change", e => {
+  const f = e.target.files && e.target.files[0]; if (!f) return;
+  if (!/^image\/(png|jpeg|webp)$/.test(f.type)) { $("perfil-error").textContent = "Elige una imagen PNG, JPG o WEBP."; $("perfil-error").hidden = false; return; }
+  const img = new Image(), url = URL.createObjectURL(f);
+  img.onload = () => {
+    const c = document.createElement("canvas"); c.width = c.height = 128; const g = c.getContext("2d");
+    const lado = Math.min(img.width, img.height);
+    g.drawImage(img, (img.width-lado)/2, (img.height-lado)/2, lado, lado, 0, 0, 128, 128);
+    URL.revokeObjectURL(url);
+    let d = c.toDataURL("image/webp", .85); if (!d.startsWith("data:image/webp")) d = c.toDataURL("image/jpeg", .85);
+    fotoElegida = d; $("perfil-img").src = d;
+    const b = el("button",{type:"button",className:"av-op",title:"Mi foto subida"}, el("img",{src:d,alt:"Mi foto subida"}));
+    b.onclick = () => { fotoElegida = d; $("perfil-img").src = d; marcarAv(b); };
+    $("avatares-grid").prepend(b); marcarAv(b); $("perfil-error").hidden = true;
+  };
+  img.onerror = () => { $("perfil-error").textContent = "No se pudo leer esa imagen."; $("perfil-error").hidden = false; };
+  img.src = url; e.target.value = "";
+});
+async function guardarPerfil(nombre, foto){
+  const r = await fetch("/api/perfil", {method:"POST", headers:{"content-type":"application/json"}, body:JSON.stringify({nombre, foto})});
+  const d = await r.json().catch(()=>({}));
+  if (!r.ok) throw new Error(d.error || "No se pudo guardar el perfil.");
+  yo = {...yo, ...d.usuario}; pintarCuenta(); cargarTemas(); cargarSorteo();
+}
+$("form-perfil").addEventListener("submit", async e => {
+  e.preventDefault();
+  const b = $("perfil-guardar"); b.disabled = true; b.textContent = "Guardando…";
+  try { await guardarPerfil($("perfil-nombre").value, fotoElegida); $("modal-perfil").close(); }
+  catch(err) { $("perfil-error").textContent = err.message; $("perfil-error").hidden = false; }
+  finally { b.disabled = false; b.textContent = "Guardar perfil"; }
+});
+$("perfil-cerrar").onclick = async () => {
+  const m = $("modal-perfil");
+  if (m.dataset.primera) { try { await guardarPerfil(yo.nombre, null); } catch(e) {} }
+  m.close();
+};
+cargarSesion().then(() => { cargarTemas(); cargarSorteo(); if (yo && yo.proveedor === "google" && !yo.personalizado) abrirPerfil(true); });
 </script>
 </body>
 </html>

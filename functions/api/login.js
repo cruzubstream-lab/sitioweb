@@ -24,7 +24,7 @@ export async function onRequestPost(context) {
 
   await db.batch([
     db.prepare(
-      "INSERT INTO usuarios (id, nombre, avatar, creado) VALUES (?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET nombre = excluded.nombre, avatar = excluded.avatar"
+      "INSERT INTO usuarios (id, nombre, avatar, creado) VALUES (?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET nombre = CASE WHEN usuarios.personalizado = 1 THEN usuarios.nombre ELSE excluded.nombre END, avatar = CASE WHEN usuarios.personalizado = 1 THEN usuarios.avatar ELSE excluded.avatar END"
     ).bind(u.id, nombre, avatar, ahora),
     db.prepare("INSERT INTO sesiones (token, usuario_id, expira) VALUES (?, ?, ?)").bind(token, u.id, ahora + 30 * 86400),
     db.prepare("DELETE FROM sesiones WHERE expira < ?").bind(ahora),
