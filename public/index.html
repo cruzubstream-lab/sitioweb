@@ -286,6 +286,35 @@ dialog.modal::backdrop{background:#020818cc}
 .dia-proximo b{color:var(--oro)}
 .dia-firma{color:#5fd38a;font-weight:700}
 @media (max-width:900px){.cambios{grid-template-columns:1fr}}
+.sorteo{display:grid;gap:18px;padding:28px;background:linear-gradient(135deg,#0f2a1c,var(--noche-2));border:2px solid #3c9a5a}
+.sorteo-meta{display:grid;grid-template-columns:72px 1fr auto;gap:20px;align-items:center}
+.premio svg{width:72px;height:72px;filter:drop-shadow(0 0 14px #5fd38a66)}
+.sorteo-progreso{display:grid;gap:8px;min-width:0}
+.cuenta-num{font-size:1.1rem}
+.cuenta-num b{font-family:var(--f-pixel);font-size:1.8rem;color:var(--ok);font-variant-numeric:tabular-nums}
+.barra-prog{height:16px;background:#06102a;border:2px solid #3c9a5a;overflow:hidden}
+.barra-prog span{display:block;height:100%;width:0;background:repeating-linear-gradient(90deg,#5fd38a 0 10px,#3c9a5a 10px 20px);transition:width .6s}
+.sorteo-estado{color:var(--tenue);font-size:.95rem}
+.sorteo-estado b{color:var(--oro)}
+.sorteo-acciones{display:flex;gap:8px;flex-wrap:wrap}
+.ranking{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:pos}
+.ranking li{display:grid;grid-template-columns:34px 40px 1fr auto auto;gap:12px;align-items:center;padding:10px 14px;background:#0b1630;border:2px solid var(--borde);counter-increment:pos}
+.ranking li.vacio::before{content:none}
+.ranking li::before{content:counter(pos);font-family:var(--f-pixel);font-size:1.2rem;color:var(--tenue);text-align:center}
+.ranking li:first-child{border-color:var(--oro)}
+.ranking li:first-child::before{color:var(--oro)}
+.ranking img{width:40px;height:40px;border-radius:50%}
+.ranking .nombre{font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ranking .votos{font-family:var(--f-pixel);color:var(--ok);font-variant-numeric:tabular-nums;white-space:nowrap}
+.btn-votar{font-family:var(--f-pixel);font-size:.95rem;padding:6px 12px;border:2px solid var(--ok);background:transparent;color:var(--ok);cursor:pointer}
+.btn-votar[aria-pressed="true"]{background:var(--ok);color:#06231a}
+.btn-votar:disabled{opacity:.4;cursor:default}
+.sorteo-reglas{color:var(--tenue);font-size:.85rem}
+.ganador{padding:16px;border:2px solid var(--oro);background:#2a1e05;font-weight:700}
+.contador-usuarios{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:2px solid var(--borde);background:var(--noche-2);color:var(--tenue);width:max-content;max-width:100%}
+.contador-usuarios b{font-family:var(--f-pixel);color:var(--ok);font-size:1.2rem;font-variant-numeric:tabular-nums}
+.punto{width:8px;height:8px;background:var(--ok);box-shadow:0 0 8px var(--ok);animation:latido 2s ease-in-out infinite}
+@media (max-width:720px){.sorteo-meta{grid-template-columns:56px 1fr}.premio svg{width:56px;height:56px}.sorteo-acciones{grid-column:1/-1}.ranking li{grid-template-columns:26px 32px 1fr auto;}.ranking img{width:32px;height:32px}.ranking .btn-votar{grid-column:2/-1}}
 footer{border-top:1px solid var(--borde);margin-top:72px}
 footer .envoltura{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-block:28px;color:var(--tenue);font-size:.9rem}
 footer a{color:var(--tenue)}
@@ -301,6 +330,7 @@ footer a{color:var(--tenue)}
     <nav class="menu" aria-label="Secciones">
       <a href="#proyectos">Proyectos</a>
       <a href="#dificultad">Dificultad</a>
+      <a href="#sorteo">Sorteo</a>
       <a href="#descargar">Descargar</a>
       <a href="#instalar">Cómo instalar</a>
       <a href="#noticias">Noticias</a>
@@ -438,6 +468,31 @@ footer a{color:var(--tenue)}
     </div>
   </section>
 
+  <section class="bloque" id="sorteo" style="padding-top:0">
+    <div class="envoltura">
+      <div class="cabecera">
+        <span class="etiqueta">Sorteo</span>
+        <h2>Sorteo de Minecraft Premium</h2>
+        <p>Al llegar a <b>90 usuarios registrados</b> en la web, el participante con más votos gana una copia de <b>Minecraft: Java Edition (Premium)</b>. Inicia sesión, apúntate y vota por quien quieras.</p>
+      </div>
+      <div class="sorteo">
+        <div class="sorteo-meta">
+          <div class="premio" aria-hidden="true">
+            <svg viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#7a4a1f" d="M2 6h12v9H2z"/><path fill="#5fd38a" d="M1 3h14v4H1z"/><path fill="#3c9a5a" d="M1 6h14v1H1z"/><path fill="#ffb000" d="M7 3h2v12H7z"/><path fill="#ffdd66" d="M5 0h2v1h1v2H6V2H5zM9 1h1V0h2v2h-1v1H9z"/></svg>
+          </div>
+          <div class="sorteo-progreso">
+            <p class="cuenta-num"><b id="sorteo-registrados">–</b> / <span id="sorteo-meta">90</span> usuarios registrados</p>
+            <div class="barra-prog" role="progressbar" aria-labelledby="sorteo-registrados" aria-valuemin="0" aria-valuemax="90" id="sorteo-barra"><span id="sorteo-relleno"></span></div>
+            <p class="sorteo-estado" id="sorteo-estado">Cargando el sorteo…</p>
+          </div>
+          <div class="sorteo-acciones" id="sorteo-acciones"></div>
+        </div>
+        <ol class="ranking" id="sorteo-lista"></ol>
+        <p class="sorteo-reglas">Reglas: un voto por cuenta (puedes cambiarlo mientras el sorteo esté abierto), no puedes votarte a ti mismo y si hay empate gana quien se apuntó primero. El premio se entrega como código de regalo oficial de Minecraft.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="bloque" id="descargar" style="padding-top:0">
     <div class="envoltura">
       <div class="cabecera">
@@ -559,6 +614,7 @@ footer a{color:var(--tenue)}
         <span class="etiqueta">Foro</span>
         <h2>Foro de la comunidad</h2>
         <p>Pregunta, ayuda a otros jugadores o propón ideas para el servidor. Cualquiera puede leer; para crear un tema o responder, inicia sesión con Discord o Google.</p>
+        <p class="contador-usuarios"><span class="punto" aria-hidden="true"></span><b id="foro-usuarios">–</b> usuarios registrados en la comunidad</p>
       </div>
       <div class="foro-barra">
         <div class="chips" id="chips" role="group" aria-label="Categorías">
@@ -936,7 +992,64 @@ $("form-tema").onsubmit = async (e) => {
   abrirTema(d.id);
 };
 
-cargarSesion().then(cargarTemas);
+
+/* ===== Sorteo ===== */
+let sorteo = null;
+async function cargarSorteo(){
+  try {
+    const r = await fetch("/api/sorteo", {cache:"no-store"});
+    if (!r.ok) throw 0;
+    sorteo = await r.json();
+  } catch(e) {
+    $("sorteo-estado").textContent = "El sorteo se ve en hyrostudios.com.";
+    return;
+  }
+  pintarSorteo();
+}
+async function accionSorteo(cuerpo){
+  if (!yo) { abrirLogin("Inicia sesión con Discord o con Google para participar y votar en el sorteo.", "/#sorteo"); return; }
+  const r = await fetch("/api/sorteo", {method:"POST", headers:{"content-type":"application/json"}, body:JSON.stringify(cuerpo)});
+  const d = await r.json().catch(()=>({}));
+  if (!r.ok) { $("sorteo-estado").textContent = d.error || "No se pudo completar."; return; }
+  sorteo = d; pintarSorteo();
+}
+function pintarSorteo(){
+  const s = sorteo;
+  $("sorteo-registrados").textContent = s.registrados;
+  $("foro-usuarios").textContent = s.registrados;
+  $("sorteo-meta").textContent = s.meta;
+  const pct = Math.min(100, Math.round(s.registrados / s.meta * 100));
+  $("sorteo-relleno").style.width = pct + "%";
+  $("sorteo-barra").setAttribute("aria-valuenow", s.registrados);
+  const est = $("sorteo-estado"); est.textContent = "";
+  if (s.cerrado) {
+    est.append("¡Llegamos a la meta! El sorteo terminó. ");
+    if (s.ganador) { const b = el("b",{textContent:"Ganador: " + s.ganador.nombre + " (" + s.ganador.votos + " votos)"}); est.append(b); }
+    else est.append("No hubo votos.");
+  } else {
+    const faltan = s.meta - s.registrados;
+    est.append("Faltan ", el("b",{textContent: faltan + (faltan === 1 ? " usuario" : " usuarios")}), " para cerrar el sorteo. " + s.participantes.length + (s.participantes.length === 1 ? " participante." : " participantes."));
+  }
+  const acc = $("sorteo-acciones"); acc.textContent = "";
+  if (!s.cerrado) {
+    if (!yo) { const b = el("button",{className:"btn",type:"button",textContent:"Iniciar sesión para participar"}); b.onclick = () => accionSorteo({}); acc.append(b); }
+    else if (!s.yoParticipo) { const b = el("button",{className:"btn",type:"button",textContent:"¡Participar!"}); b.onclick = () => accionSorteo({accion:"participar"}); acc.append(b); }
+    else { const b = el("button",{className:"btn-texto",type:"button",textContent:"Ya participas · Salir del sorteo"}); let seguro=false; b.onclick = () => { if(!seguro){seguro=true;b.textContent="Pulsa otra vez para salir (pierdes tus votos)";return;} accionSorteo({accion:"salir"}); }; acc.append(b); }
+  }
+  const lista = $("sorteo-lista"); lista.textContent = "";
+  if (!s.participantes.length) { lista.append(el("li",{className:"vacio",style:"display:block",textContent:"Todavía no hay participantes. ¡Sé el primero en apuntarte!"})); return; }
+  s.participantes.forEach(p => {
+    const voto = el("button",{className:"btn-votar",type:"button"});
+    const mio = s.miVoto === p.id;
+    voto.setAttribute("aria-pressed", mio);
+    voto.textContent = mio ? "Tu voto" : "Votar";
+    voto.disabled = s.cerrado || (yo && yo.id === p.id);
+    if (yo && yo.id === p.id) voto.textContent = "Eres tú";
+    voto.onclick = () => accionSorteo({accion:"votar", participante:p.id});
+    lista.append(el("li",null, el("img",{src:p.avatar,alt:""}), el("span",{className:"nombre",textContent:p.nombre}), el("span",{className:"votos",textContent:p.votos + (p.votos === 1 ? " voto" : " votos")}), voto));
+  });
+}
+cargarSesion().then(() => { cargarTemas(); cargarSorteo(); });
 </script>
 </body>
 </html>
