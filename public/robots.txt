@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /auth/
+Disallow: /descargar/
+
+Sitemap: https://hyrostudios.com/sitemap.xml

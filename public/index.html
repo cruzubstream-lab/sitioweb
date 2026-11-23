@@ -26,7 +26,7 @@
 <meta name="twitter:image" content="https://hyrostudios.com/og-imagen.png">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
- {"@type":"Organization","@id":"https://hyrostudios.com/#org","name":"Hyro Studios","url":"https://hyrostudios.com/","logo":"https://hyrostudios.com/icono-512.png","email":"contact@info.hyrostudios.com","sameAs":["https://www.instagram.com/hyro_community","https://www.tiktok.com/@hyro_community","https://discord.gg/Nj4MSpSTAM"]},
+ {"@type":"Organization","@id":"https://hyrostudios.com/#org","name":"Hyro Studios","url":"https://hyrostudios.com/","logo":"https://hyrostudios.com/icono-512.png","sameAs":["https://www.instagram.com/hyro_community","https://www.tiktok.com/@hyro_community","https://discord.gg/Nj4MSpSTAM"]},
  {"@type":"WebSite","@id":"https://hyrostudios.com/#web","name":"Hyro Studios","url":"https://hyrostudios.com/","publisher":{"@id":"https://hyrostudios.com/#org"}}
 ]}
 </script>
@@ -60,6 +60,10 @@ body{
   font-family:var(--f-texto);font-size:16px;line-height:1.6;
 }
 main p,main h1,main h2,main h3{text-shadow:0 1px 3px #03040fcc}
+.aviso-cookies{position:fixed;left:16px;right:16px;bottom:16px;z-index:60;max-width:560px;margin-inline:auto;display:flex;gap:14px;align-items:center;padding:14px 16px;background:#0b1630f2;border:2px solid var(--borde);box-shadow:0 10px 30px #000a}
+.aviso-cookies[hidden]{display:none}
+.aviso-cookies p{margin:0;font-size:.92rem;color:var(--tenue)}
+.aviso-cookies .btn-mini{flex:none}
 #espacio{position:fixed;inset:0;width:100vw;height:100vh;z-index:-1;image-rendering:pixelated;image-rendering:crisp-edges;pointer-events:none;display:block}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
 a{color:var(--azul)}
@@ -659,10 +663,10 @@ footer a{color:var(--tenue)}
         <h2>Escríbenos</h2>
         <p>Para colaboraciones, prensa o cualquier duda.</p>
         <div class="correo">
-          <output id="correo">contact@info.hyrostudios.com</output>
+          <output id="correo" data-correo>contact [arroba] info.hyrostudios.com</output>
           <button class="copiar" id="btn-copiar" type="button">Copiar</button>
         </div>
-        <a href="mailto:contact@info.hyrostudios.com" style="font-size:.92rem">Abrir en mi correo</a>
+        <a data-correo-link href="#contacto" style="font-size:.92rem">Abrir en mi correo</a>
         <div class="donar">
           <h3>¿Quieres apoyarnos?</h3>
           <p>Si quieres donar, te lo agradeceríamos muchísimo. Tu donación será para mejorar el servidor y para la comunidad. No es obligatorio donar, pero si quieres hacerlo, contáctanos al correo de arriba.</p>
@@ -736,12 +740,29 @@ footer a{color:var(--tenue)}
 <footer>
   <div class="envoltura">
     <span>© 2026 Hyro Studios</span>
-    <span><a href="https://www.instagram.com/hyro_community" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.tiktok.com/@hyro_community" target="_blank" rel="noopener">TikTok</a> · <a href="https://discord.gg/Nj4MSpSTAM" target="_blank" rel="noopener">Discord</a> · contact@info.hyrostudios.com</span>
-    <span><a href="/privacidad.html">Privacidad</a> · No afiliado con Mojang ni Microsoft.</span>
+    <span><a href="https://www.instagram.com/hyro_community" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.tiktok.com/@hyro_community" target="_blank" rel="noopener">TikTok</a> · <a href="https://discord.gg/Nj4MSpSTAM" target="_blank" rel="noopener">Discord</a></span>
+    <span><a href="/privacidad.html">Privacidad</a> · <a href="/terminos.html">Términos</a> · No afiliado con Mojang ni Microsoft.</span>
   </div>
 </footer>
 
+<div class="aviso-cookies" id="aviso-cookies" role="region" aria-label="Aviso de cookies" hidden>
+  <p>🍪 Solo usamos una cookie necesaria para mantener tu sesión. Nada de publicidad ni rastreo. <a href="/privacidad.html">Más info</a></p>
+  <button type="button" class="btn-mini lleno" id="aviso-ok">Entendido</button>
+</div>
 <script>
+/* Correo protegido contra spam (se arma en el navegador) */
+(function(){
+  const c = ["contact", "info.hyrostudios.com"].join("@");
+  document.querySelectorAll("[data-correo]").forEach(e => e.textContent = c);
+  document.querySelectorAll("[data-correo-link]").forEach(e => e.href = "mailto:" + c);
+})();
+/* Aviso de cookies */
+(function(){
+  const a = document.getElementById("aviso-cookies"); if (!a) return;
+  let visto = false; try { visto = localStorage.getItem("hs_aviso") === "1"; } catch(e) {}
+  if (!visto) a.hidden = false;
+  document.getElementById("aviso-ok").addEventListener("click", () => { a.hidden = true; try { localStorage.setItem("hs_aviso", "1"); } catch(e) {} });
+})();
 /* ===== Fondo: espacio exterior pixelado estilo Minecraft ===== */
 (function(){
   const cv = document.getElementById("espacio"); if (!cv || !cv.getContext) return;
