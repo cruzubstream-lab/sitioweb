@@ -37,7 +37,7 @@
 /* Layout: noche pixelada; héroe con el logo, el próximo proyecto con un adelanto del launcher, comunidad y foro. Un solo tema oscuro a propósito (mundo de juego). */
 :root{
   --noche:#0b1630;      /* fondo (color del logo) */
-  --noche-2:#101f42;    /* superficies */
+  --noche-2:#101f42e6;  /* superficies (un poco transparentes para ver el espacio) */
   --borde:#22386b;
   --texto:#e9f0ff;
   --tenue:#9fb2d8;
@@ -56,17 +56,11 @@
 [hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{
-  margin:0;background:var(--noche);color:var(--texto);
+  margin:0;background:#03040f;color:var(--texto);
   font-family:var(--f-texto);font-size:16px;line-height:1.6;
-  background-image:
-    radial-gradient(1px 1px at 12% 18%, #ffffff55 50%, transparent 51%),
-    radial-gradient(1px 1px at 78% 9%, #ffffff44 50%, transparent 51%),
-    radial-gradient(2px 2px at 64% 32%, #1a9fe066 50%, transparent 51%),
-    radial-gradient(1px 1px at 33% 52%, #ffffff33 50%, transparent 51%),
-    radial-gradient(2px 2px at 88% 61%, #ffb00044 50%, transparent 51%),
-    radial-gradient(1px 1px at 6% 77%, #ffffff44 50%, transparent 51%);
-  background-size:520px 520px;
 }
+main p,main h1,main h2,main h3{text-shadow:0 1px 3px #03040fcc}
+#espacio{position:fixed;inset:0;width:100vw;height:100vh;z-index:-1;image-rendering:pixelated;image-rendering:crisp-edges;pointer-events:none;display:block}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
 a{color:var(--azul)}
 a:focus-visible,button:focus-visible{outline:3px solid var(--oro);outline-offset:3px;border-radius:4px}
@@ -428,6 +422,7 @@ footer a{color:var(--tenue)}
 </style>
 </head>
 <body>
+<canvas id="espacio" aria-hidden="true"></canvas>
 <header class="barra">
   <div class="envoltura">
     <a class="marca" href="#inicio" aria-label="Hyro Studios, inicio">
@@ -747,6 +742,105 @@ footer a{color:var(--tenue)}
 </footer>
 
 <script>
+/* ===== Fondo: espacio exterior pixelado estilo Minecraft ===== */
+(function(){
+  const cv = document.getElementById("espacio"); if (!cv || !cv.getContext) return;
+  const g = cv.getContext("2d");
+  const quieto = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let W = 0, H = 0, P = 4, fondo = null, estrellas = [], fugaz = null, t = 0;
+  // Generador aleatorio con semilla: el cielo es siempre el mismo
+  function rnd(seed){ let s = seed >>> 0; return () => (s = (s * 1664525 + 1013904223) >>> 0) / 4294967296; }
+
+  function planeta(c, cx, cy, r, colores, r2, sombra){
+    const B = Math.max(2, Math.round(r / 6)); // tamaño de "bloque"
+    for (let y = -r; y <= r; y += B) for (let x = -r; x <= r; x += B) {
+      const d = Math.hypot(x + B/2, y + B/2); if (d > r) continue;
+      c.fillStyle = colores[Math.floor(r2() * colores.length)];
+      c.fillRect(cx + x, cy + y, B, B);
+      // sombra en la cara opuesta a la luz
+      const s = (x * sombra[0] + y * sombra[1]) / r;
+      if (s > .15) { c.fillStyle = "rgba(2,4,18," + Math.min(.75, (s - .15) * 1.1) + ")"; c.fillRect(cx + x, cy + y, B, B); }
+    }
+  }
+
+  function construir(){
+    P = innerWidth < 700 ? 3 : 4;
+    W = Math.ceil(innerWidth / P); H = Math.ceil(innerHeight / P);
+    cv.width = W; cv.height = H;
+    fondo = document.createElement("canvas"); fondo.width = W; fondo.height = H;
+    const c = fondo.getContext("2d"), r = rnd(1977);
+    // Degradado en franjas (como el cielo de Minecraft)
+    const franjas = ["#03040f","#050717","#070a1f","#090d29","#0b1032","#0e1139","#120f3f","#170d44"];
+    const alto = Math.ceil(H / franjas.length);
+    franjas.forEach((col, i) => { c.fillStyle = col; c.fillRect(0, i * alto, W, alto + 1); });
+    // Nebulosas en bloques
+    [[.18,.30,"#7a3cff"],[.82,.72,"#1a9fe0"],[.55,.12,"#d6249f"]].forEach(([fx, fy, col]) => {
+      const cx = fx * W, cy = fy * H, R = Math.max(W, H) * .22;
+      for (let i = 0; i < 260; i++) {
+        const a = r() * Math.PI * 2, d = Math.pow(r(), 1.6) * R, s = 2 + Math.floor(r() * 4);
+        c.globalAlpha = .035 + r() * .05; c.fillStyle = col;
+        c.fillRect(Math.round((cx + Math.cos(a) * d) / s) * s, Math.round((cy + Math.sin(a) * d * .6) / s) * s, s, s);
+      }
+    });
+    c.globalAlpha = 1;
+    // Planeta "overworld" (hierba, tierra y agua)
+    const base = Math.min(W, H), movil = innerWidth < 700;
+    planeta(c, Math.round(W * (movil ? 1.02 : .86)), Math.round(H * (movil ? .2 : .26)), Math.round(base * (movil ? .24 : .13)),
+      ["#5d9b3a","#4f8a2e","#6fb043","#3d6fd6","#2f5fc4","#8b5a2b","#6f4520","#4f8a2e"], r, [-.7,.7]);
+    // Luna cuadrada con cráteres (como la de Minecraft)
+    const lx = Math.round(W * (movil ? .78 : .1)), ly = Math.round(H * (movil ? .04 : .16)), ls = Math.max(8, Math.round(base * (movil ? .06 : .07)));
+    c.fillStyle = "#d8dbe2"; c.fillRect(lx, ly, ls, ls);
+    c.fillStyle = "#b9bdc8"; const q = Math.max(2, Math.round(ls / 6));
+    [[1,1],[3,2],[2,4],[4,4],[1,3]].forEach(([a,b]) => c.fillRect(lx + a*q, ly + b*q, q, q));
+    c.fillStyle = "rgba(216,219,226,.10)"; c.fillRect(lx - q, ly - q, ls + 2*q, ls + 2*q);
+    // Islita del End flotando
+    const ex = Math.round(W * (movil ? .72 : .2)), ey = Math.round(H * (movil ? .9 : .82)), es = Math.max(3, Math.round(base / 70));
+    const isla = ["..XXXX..",".XXXXXX.","XXXXXXXX",".XXXXXX.","..XXXX..","...XX..."];
+    isla.forEach((fila, j) => [...fila].forEach((ch, i) => { if (ch === "X") { c.fillStyle = (i + j) % 3 ? "#dbd8a0" : "#c8c48a"; c.fillRect(ex + i*es, ey + j*es, es, es); } }));
+    c.fillStyle = "#1b1b24"; c.fillRect(ex + 3*es, ey - es*3, es*2, es*3); // obsidiana
+    c.fillStyle = "#b98cff"; c.fillRect(ex + 3*es, ey - es*4, es*2, es);    // cristal
+    // En móvil se atenúan los adornos para que el texto se lea bien
+    if (movil) { c.fillStyle = "rgba(3,4,15,.45)"; c.fillRect(0, 0, W, H); }
+    // Estrellas (titilan)
+    estrellas = [];
+    const n = Math.round(W * H / 260);
+    for (let i = 0; i < n; i++) {
+      const big = r() < .08;
+      estrellas.push({ x: Math.floor(r() * W), y: Math.floor(r() * H), cruz: big, f: r() * 6.28, v: .6 + r() * 1.6,
+        col: r() < .12 ? "#ffd86b" : (r() < .2 ? "#9fd8ff" : "#ffffff") });
+    }
+    dibujar();
+  }
+
+  function dibujar(){
+    g.drawImage(fondo, 0, 0);
+    for (const e of estrellas) {
+      const a = quieto ? .8 : .35 + .65 * Math.abs(Math.sin(e.f + t * e.v));
+      g.globalAlpha = a; g.fillStyle = e.col;
+      g.fillRect(e.x, e.y, 1, 1);
+      if (e.cruz) { g.globalAlpha = a * .55; g.fillRect(e.x - 1, e.y, 1, 1); g.fillRect(e.x + 1, e.y, 1, 1); g.fillRect(e.x, e.y - 1, 1, 1); g.fillRect(e.x, e.y + 1, 1, 1); }
+    }
+    g.globalAlpha = 1;
+    if (fugaz) {
+      for (let k = 0; k < 10; k++) { g.globalAlpha = (1 - k / 10) * .9; g.fillStyle = "#fff"; g.fillRect(Math.round(fugaz.x - k * 2), Math.round(fugaz.y - k), 2, 1); }
+      g.globalAlpha = 1;
+    }
+  }
+
+  let ultimo = 0;
+  function bucle(ms){
+    requestAnimationFrame(bucle);
+    if (document.hidden || ms - ultimo < 110) return; // ~9 fps, poco consumo
+    ultimo = ms; t += .11;
+    if (!fugaz && Math.random() < .012) fugaz = { x: Math.random() * W * .6, y: Math.random() * H * .3, vx: 4, vy: 2 };
+    if (fugaz) { fugaz.x += fugaz.vx; fugaz.y += fugaz.vy; if (fugaz.x > W || fugaz.y > H) fugaz = null; }
+    dibujar();
+  }
+  let espera; addEventListener("resize", () => { clearTimeout(espera); espera = setTimeout(construir, 150); });
+  construir();
+  if (!quieto) requestAnimationFrame(bucle);
+})();
+
 const DISCORD = "https://discord.gg/Nj4MSpSTAM";
 
 /* ===== Sesión ===== */
