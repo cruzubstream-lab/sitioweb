@@ -178,6 +178,26 @@ section.bloque{padding-block:72px}
 .hp-guia code{background:#0006;padding:2px 6px;border:1px solid var(--borde);font-size:.9rem;word-break:break-all}
 @media (max-width:900px){.hp-guia{grid-template-columns:1fr}}
 
+.hp-uso{margin-top:40px}
+.hp-uso h3{font-family:var(--f-pixel);font-size:1.35rem;margin:0 0 8px}
+.hp-uso>p{color:var(--tenue);margin:0 0 16px}
+.hp-figura{margin:0 0 18px;border:2px solid var(--borde);background:var(--noche-2)}
+.hp-figura img{display:block;width:100%;height:auto}
+.hp-leyenda{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:0 0 34px;padding:0;list-style:none}
+.hp-leyenda li{display:flex;gap:10px;align-items:flex-start;padding:12px;background:var(--noche-2);border:2px solid var(--borde);color:var(--tenue);font-size:.92rem}
+.hp-leyenda li b{color:#f6f6f8;display:block}
+.hp-num{flex:none;width:28px;height:28px;border-radius:50%;background:#6e28c8;color:#fff;display:grid;place-items:center;font-weight:700;border:2px solid #fff}
+.hp-unicas{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.hp-unica{background:var(--noche-2);border:2px solid var(--borde);display:flex;flex-direction:column}
+.hp-unica .img{position:relative;background:#111318;border-bottom:2px solid var(--borde);aspect-ratio:16/10;overflow:hidden}
+.hp-unica .img img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:8px}
+.hp-unica div.txt{padding:16px 18px}
+.hp-unica b.t{display:block;font-family:var(--f-pixel);font-size:1.1rem;margin-bottom:6px}
+.hp-unica p{color:var(--tenue);margin:0 0 8px;font-size:.95rem}
+.hp-unica .como{font-size:.9rem;color:var(--tenue)}
+.hp-unica .como b{color:#f6f6f8}
+@media (max-width:900px){.hp-leyenda{grid-template-columns:1fr 1fr}.hp-unicas{grid-template-columns:1fr}}
+
 /* Guías */
 .pestanas{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
 .pestana{font-family:var(--f-pixel);font-size:1.05rem;padding:10px 18px;border:2px solid var(--borde);background:transparent;color:var(--tenue);cursor:pointer}
@@ -542,6 +562,47 @@ footer a{color:var(--tenue)}
               <li><b>Notificaciones</b>: permítelas para saber cuándo se publican tus videos.</li>
             </ul></details>
         </div>
+      </div>
+      <div class="hp-uso" id="hyropix-uso">
+        <h3>Cómo se usa</h3>
+        <p>Al abrir HyroPix crea tu cuenta (o entra con Google) y verás esta pantalla:</p>
+        <figure class="hp-figura"><img src="/descargas/guia/hyropix-guia-pantalla.webp" alt="Pantalla del editor de fotos de HyroPix con las zonas principales numeradas" width="1200" height="702" loading="lazy"></figure>
+        <ol class="hp-leyenda">
+          <li><span class="hp-num">1</span><span><b>Foto / Video</b>Cambia entre el editor de fotos y el de video.</span></li>
+          <li><span class="hp-num">2</span><span><b>Archivo</b>Abre una imagen o importa videos, y exporta tu trabajo.</span></li>
+          <li><span class="hp-num">3</span><span><b>Herramientas</b>Pincel, selección, recorte, texto, formas y más.</span></li>
+          <li><span class="hp-num">4</span><span><b>Capas</b>Cada elemento va en su capa para editarlo por separado.</span></li>
+          <li><span class="hp-num">5</span><span><b>Tu perfil</b>Nombre, foto, contraseña y verificación en dos pasos.</span></li>
+        </ol>
+        <h3>Lo que solo tiene HyroPix</h3>
+        <p>Algunas funciones pensadas para creadores que no vas a encontrar juntas en otro editor:</p>
+        <div class="hp-unicas">
+          <article class="hp-unica">
+            <div class="img"><img src="/descargas/guia/hyropix-guia-vertical.webp" alt="Video horizontal convertido a vertical 9:16 con fondo desenfocado" width="900" height="403" loading="lazy"></div>
+            <div class="txt"><b class="t">De horizontal a vertical en un clic</b>
+              <p>Convierte cualquier video a 9:16 para TikTok y Shorts. Rellena los lados con un fondo desenfocado en lugar de franjas negras.</p>
+              <p class="como">En Video: <b>IA → Convertir a vertical 9:16</b>.</p></div>
+          </article>
+          <article class="hp-unica">
+            <div class="img"><img src="/descargas/guia/hyropix-guia-publicar.webp" alt="Ventana para publicar o programar un video en YouTube, Shorts y TikTok" width="558" height="518" loading="lazy"></div>
+            <div class="txt"><b class="t">Publica y programa sin salir del editor</b>
+              <p>Sube el mismo video a YouTube, Shorts y TikTok a la vez, ahora o a la hora que elijas. HyroPix prepara la versión vertical sola.</p>
+              <p class="como">En Video: botón <b>Publicar</b>, conecta tus cuentas y elige <b>Programar</b>.</p></div>
+          </article>
+          <article class="hp-unica">
+            <div class="img"><img src="/descargas/guia/hyropix-guia-emotes.webp" alt="Ventana para exportar un pack de emotes para Twitch y Discord" width="460" height="325" loading="lazy"></div>
+            <div class="txt"><b class="t">Pack de emotes para streamers</b>
+              <p>De una sola imagen saca todos los tamaños de Twitch, Discord, avatar e iconos, recortados y nítidos, en un ZIP.</p>
+              <p class="como">En Foto: <b>Archivo → Exportar pack para streamers</b>.</p></div>
+          </article>
+          <article class="hp-unica">
+            <div class="img"><img src="/descargas/guia/hyropix-guia-paleta.webp" alt="Paleta de colores sacada automáticamente de una imagen" width="440" height="296" loading="lazy"></div>
+            <div class="txt"><b class="t">Paleta de colores automática</b>
+              <p>Saca los colores principales de cualquier foto para que tus miniaturas y overlays combinen. Un clic y ya los tienes en tus muestras.</p>
+              <p class="como">En Foto: <b>Imagen → Paleta de colores de la imagen</b>.</p></div>
+          </article>
+        </div>
+        <p class="nota-version">Truco: pulsa <b>⌘K</b> en Mac o <b>Ctrl+K</b> en Windows para buscar cualquier función por su nombre.</p>
       </div>
       <p class="nota-version">Al conectar YouTube o TikTok, la app abre tu navegador para que inicies sesión y aceptes los permisos; luego vuelve sola a HyroPix. Estos avisos salen porque HyroPix aún no tiene un certificado de Apple o Microsoft; la app es segura si la descargas desde esta web.</p>
     </div>
