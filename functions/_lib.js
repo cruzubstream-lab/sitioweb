@@ -54,7 +54,17 @@ export const CATEGORIAS = ["preguntas", "launcher", "servidor", "sugerencias", "
 
 // Solo acepta escrituras desde el propio sitio (protección CSRF básica).
 export function mismoOrigen(request) {
+  const host = new URL(request.url).host;
   const origen = request.headers.get("origin");
-  if (!origen) return true;
-  return new URL(origen).host === new URL(request.url).host;
+  if (origen) {
+    try { return new URL(origen).host === host; } catch { return false; }
+  }
+  // Sin Origin: los navegadores modernos mandan Sec-Fetch-Site; si viene de otro sitio, se rechaza.
+  const sitio = request.headers.get("sec-fetch-site");
+  if (sitio) return sitio === "same-origin" || sitio === "none";
+  const ref = request.headers.get("referer");
+  if (ref) {
+    try { return new URL(ref).host === host; } catch { return false; }
+  }
+  return false;
 }

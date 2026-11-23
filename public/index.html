@@ -5,12 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b1630">
 <title>Hyro Studios</title>
-<meta name="description" content="Hyro Studios: proyectos, noticias y el launcher de MultiverSafio para Windows y macOS. Minecraft 1.21.1 con NeoForge y todos los mods listos.">
+<meta name="description" content="Hyro Studios: estudio de proyectos de Minecraft. Próximamente, nuestra propia network y un launcher nuevo estilo Lunar Client, con más juegos optimizados.">
+<link rel="canonical" href="https://hyrostudios.com/">
+<!-- Icono que sale en Google y en la pestaña del navegador -->
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/icono-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/icono-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<!-- Vista previa al compartir el enlace (Discord, WhatsApp, X, etc.) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hyro Studios">
+<meta property="og:title" content="Hyro Studios">
+<meta property="og:description" content="Próximamente: nuestra propia network y un launcher nuevo con más juegos optimizados.">
+<meta property="og:url" content="https://hyrostudios.com/">
+<meta property="og:image" content="https://hyrostudios.com/og-imagen.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Logo de Hyro Studios">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hyrostudios.com/og-imagen.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"Organization","@id":"https://hyrostudios.com/#org","name":"Hyro Studios","url":"https://hyrostudios.com/","logo":"https://hyrostudios.com/icono-512.png","email":"contact@info.hyrostudios.com","sameAs":["https://www.instagram.com/hyro_community","https://www.tiktok.com/@hyro_community","https://discord.gg/Nj4MSpSTAM"]},
+ {"@type":"WebSite","@id":"https://hyrostudios.com/#web","name":"Hyro Studios","url":"https://hyrostudios.com/","publisher":{"@id":"https://hyrostudios.com/#org"}}
+]}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
-/* Layout: noche pixelada de "multiverso"; héroe con el logo y botón de descarga, luego guías por sistema en columnas que se apilan en móvil. Un solo tema oscuro a propósito (mundo de juego). */
+/* Layout: noche pixelada; héroe con el logo, el próximo proyecto con un adelanto del launcher, comunidad y foro. Un solo tema oscuro a propósito (mundo de juego). */
 :root{
   --noche:#0b1630;      /* fondo (color del logo) */
   --noche-2:#101f42;    /* superficies */
@@ -19,7 +43,7 @@
   --tenue:#9fb2d8;
   --azul:#1a9fe0;       /* acento principal */
   --azul-osc:#0f5fa8;
-  --oro:#ffb000;        /* acento del título MultiverSafio */
+  --oro:#ffb000;        /* acento de títulos */
   --oro-claro:#fff3a0;
   --ok:#5fd38a;
   --f-pixel:"Pixelify Sans", ui-monospace, "Courier New", monospace;
@@ -64,8 +88,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .menu a{color:var(--tenue);text-decoration:none;font-weight:600;font-size:.95rem}
 .menu a:hover{color:var(--texto)}
 .menu .discord-mini{color:var(--texto);background:#5865f2;padding:6px 12px;border-radius:6px}
-.menu{gap:14px}.menu a[href="#instalar"],.menu a[href="#noticias"],.menu a[href="#ayuda"]{display:none}
-@media (max-width:980px){.menu a[href="#proyectos"],.menu a[href="#dificultad"]{display:none}}
+.menu{gap:14px}
 @media (max-width:720px){.menu a:not(.discord-mini){display:none}}
 @media (max-width:520px){.menu .discord-mini{display:none}.marca span{font-size:1.05rem}}
 
@@ -342,6 +365,43 @@ dialog.modal::backdrop{background:#020818cc}
 .subir{justify-self:start;cursor:pointer}
 .cuenta .perfil-btn{display:flex;align-items:center;gap:8px;background:none;border:0;color:var(--texto);cursor:pointer;font:inherit;padding:0}
 #modal-perfil{max-height:calc(100% - 32px);overflow:auto}
+/* Próximo proyecto */
+.heroe p.lead b{color:var(--texto)}
+.anuncios{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.anuncio{display:grid;gap:10px;align-content:start;padding:26px;background:var(--noche-2);border:2px solid var(--borde);border-top:4px solid var(--azul)}
+.anuncio:nth-child(2){border-top-color:var(--oro)}
+.anuncio h3{font-family:var(--f-pixel);font-size:clamp(1.5rem,3.5vw,2rem)}
+.anuncio p{color:var(--tenue)}
+.anuncio-ico{width:48px;height:48px;display:grid;place-items:center;background:#06102a;border:2px solid var(--borde)}
+.anuncio-ico svg{width:30px;height:30px}
+@media (max-width:820px){.anuncios{grid-template-columns:1fr}}
+.spoiler-bloque{margin-top:48px}
+.spoiler-titulo{font-family:var(--f-pixel);font-size:clamp(1.5rem,3.5vw,2rem)}
+.spoiler{position:relative;display:block;width:100%;padding:0;border:2px solid #4b2a8f;background:#060c1f;cursor:pointer;overflow:hidden;font:inherit;color:inherit;text-align:left}
+.spoiler .lanzador{filter:blur(14px) saturate(.6);transform:scale(1.04);transition:filter .5s, transform .5s}
+.spoiler[aria-pressed="true"] .lanzador{filter:blur(2.5px);transform:none}
+.spoiler-tapa{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:6px;background:#0b163099;transition:opacity .4s}
+.spoiler-tapa b{font-family:var(--f-pixel);font-size:clamp(1.8rem,6vw,3rem);color:#c9a6ff;letter-spacing:.2em;text-shadow:3px 3px 0 #2a1450}
+.spoiler-tapa small{color:var(--texto);font-weight:600}
+.spoiler[aria-pressed="true"] .spoiler-tapa{opacity:0}
+.lanzador{display:grid;grid-template-columns:64px 1fr;min-height:340px}
+.lz-lado{display:grid;align-content:start;justify-items:center;gap:12px;padding:14px 0;background:#081129;border-right:1px solid var(--borde)}
+.lz-logo{width:34px;height:34px;background:var(--azul);box-shadow:inset -4px -4px 0 var(--azul-osc)}
+.lz-juego{width:40px;height:40px;display:grid;place-items:center;font-family:var(--f-pixel);font-size:.85rem;color:var(--tenue);background:var(--noche-2);border:2px solid var(--borde)}
+.lz-juego.activo{color:var(--noche);background:var(--oro);border-color:var(--oro)}
+.lz-cuerpo{display:grid;grid-template-rows:auto 1fr auto;gap:14px;padding:16px;min-width:0}
+.lz-tope{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.lz-barra{height:12px;width:40%;background:var(--borde)}
+.lz-perfil{width:28px;height:28px;border-radius:50%;background:#5fd38a}
+.lz-banner{display:grid;align-content:end;gap:8px;padding:20px;min-height:160px;background:linear-gradient(135deg,#7a3cff88,#1a9fe055 55%,#0b1630),repeating-linear-gradient(90deg,#ffffff08 0 16px,transparent 16px 32px)}
+.lz-tag{font-family:var(--f-pixel);font-size:.8rem;letter-spacing:.14em;color:#c9a6ff}
+.lz-nombre{font-family:var(--f-pixel);font-size:clamp(1.6rem,5vw,2.6rem);line-height:1}
+.lz-jugar{justify-self:start;font-family:var(--f-pixel);font-weight:700;padding:10px 26px;color:var(--noche);background:var(--oro);box-shadow:inset -4px -4px 0 #b85a00, 0 4px 0 #6b3500}
+.lz-fila{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.lz-carta{display:grid;padding:12px;background:var(--noche-2);border:1px solid var(--borde);color:var(--tenue);font-size:.8rem}
+.lz-carta b{font-family:var(--f-pixel);font-size:1.05rem;color:var(--texto)}
+@media (max-width:600px){.lanzador{grid-template-columns:52px 1fr}.lz-fila{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.misterio{margin-top:48px}
 footer{border-top:1px solid var(--borde);margin-top:72px}
 footer .envoltura{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-block:28px;color:var(--tenue);font-size:.9rem}
 footer a{color:var(--tenue)}
@@ -355,13 +415,8 @@ footer a{color:var(--tenue)}
       <span><b>Hyro</b>Studios</span>
     </a>
     <nav class="menu" aria-label="Secciones">
-      <a href="#proyectos">Proyectos</a>
-      <a href="#dificultad">Dificultad</a>
+      <a href="#proyectos">Próximamente</a>
       <a href="#sorteo">Sorteo</a>
-      <a href="#descargar">Descargar</a>
-      <a href="#instalar">Cómo instalar</a>
-      <a href="#noticias">Noticias</a>
-      <a href="#ayuda">Ayuda</a>
       <a href="#foro">Foro</a>
       <a class="discord-mini" href="https://discord.gg/Nj4MSpSTAM" target="_blank" rel="noopener">Discord</a>
       <div class="cuenta" id="cuenta">
@@ -375,17 +430,14 @@ footer a{color:var(--tenue)}
   <section class="heroe">
     <div class="envoltura">
       <div class="heroe-texto">
-        <span class="etiqueta">Hyro Studios presenta</span>
-        <h1 class="titulo-pixel">MultiverSafio<small>El launcher oficial</small></h1>
-        <p class="lead">Un clic y entras. El launcher instala Minecraft 1.21.1 con NeoForge y todos los mods del evento, y te mete directo al servidor. Sin copiar carpetas ni buscar archivos.</p>
+        <span class="etiqueta">Hyro Studios · Próximamente</span>
+        <h1 class="titulo-pixel">Algo grande<small>se está preparando</small></h1>
+        <p class="lead">Estamos construyendo nuestra propia <b>network</b> y un <b>launcher nuevo</b> al estilo de Lunar Client, pero con muchas más cosas: más juegos optimizados, más rendimiento y todo en un solo lugar.</p>
         <div class="acciones">
-          <a class="btn" id="btn-principal" href="#descargar">
-            <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path fill="currentColor" d="M7 1h2v8h2v-2h2v2h-1v1h-1v1h-1v1H9v1H7v-1H6v-1H5v-1H4V9H3V7h2v2h2zM2 13h12v2H2z"/></svg>
-            <span id="btn-principal-texto">Descargar launcher</span>
-          </a>
-          <a class="btn fantasma" href="#instalar">Ver cómo instalar</a>
+          <a class="btn" href="#proyectos">Ver el adelanto</a>
+          <a class="btn fantasma" href="https://discord.gg/Nj4MSpSTAM" target="_blank" rel="noopener">Entérate primero en Discord</a>
         </div>
-        <p class="detectado" id="detectado">Disponible para Windows y macOS (Apple M e Intel).</p>
+        <p class="detectado">Fecha: posiblemente para <b>Navidad 2026</b>.</p>
       </div>
       <div class="portal" aria-hidden="true">
         <svg viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#1a9fe0" d="M7 1h2v1h2v1h1v2h1v6h-1v2h-1v1H9v1H7v-1H5v-1H4v-2H3V5h1V3h1V2h2z"/><path fill="#0f5fa8" d="M4 9h8v2h-1v2H9v1H7v-1H5v-2H4z"/><path fill="#0b1630" d="M5 5h2v5h2V5h2v7H9v-1H7v1H5z"/><path fill="#fff" opacity=".7" d="M7 2h2v1H7zM5 3h1v1H5z"/></svg>
@@ -393,50 +445,64 @@ footer a{color:var(--tenue)}
     </div>
   </section>
 
-  <div class="datos">
-    <div class="envoltura">
-      <div class="dato"><strong>1.21.1</strong><span>Minecraft Java</span></div>
-      <div class="dato"><strong>NeoForge 21.1</strong><span>Se instala solo</span></div>
-      <div class="dato"><strong>46 mods</strong><span>Incluidos en el launcher</span></div>
-      <div class="dato"><strong>1 clic</strong><span>Directo al servidor</span></div>
-    </div>
-  </div>
-
   <section class="bloque" id="proyectos">
     <div class="envoltura">
       <div class="cabecera">
-        <span class="etiqueta">Proyectos</span>
-        <h2>Nuestros proyectos</h2>
+        <span class="etiqueta">Próximo proyecto</span>
+        <h2>¿Cuál es el siguiente proyecto?</h2>
+        <p>Después de nuestro primer evento, vamos por algo mucho más grande. Esto es lo que viene:</p>
       </div>
-      <article class="actual">
-        <div class="actual-cabeza">
-          <span class="estado"><i aria-hidden="true"></i>Proyecto actual</span>
-          <h3>MultiverSafio 1</h3>
-          <p class="actual-fecha">Empieza el <time datetime="2026-10-24">sábado 24 de octubre de 2026</time></p>
-        </div>
-        <div class="actual-texto">
-          <p>MultiverSafio 1 es el primer gran evento de Minecraft de Hyro Studios. Nos tomó mucho tiempo llegar hasta aquí: semanas de pruebas, mods que se rompían entre sí, noches arreglando el launcher y ajustando el servidor para que todo funcionara a la primera.</p>
-          <p>Lo hicimos con muchas ganas y pensando en la comunidad. Queremos que cualquiera pueda entrar con un clic, sin pelearse con carpetas ni versiones, y que solo tenga que preocuparse por jugar. Gracias a todos los que nos apoyaron durante el desarrollo. Nos vemos en el multiverso.</p>
-        </div>
-      </article>
-      <div class="rasgos">
-        <div class="rasgo">
-          <div class="ico"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path fill="#ffb000" d="M2 3h12v10H2z"/><path fill="#0b1630" d="M4 5h3v2H4zM9 5h3v2H9zM4 9h8v2H4z"/></svg></div>
-          <h3>Instalación automática</h3>
-          <p>Descarga Minecraft 1.21.1, NeoForge y los mods por ti. Tú solo abres el launcher y le das a jugar.</p>
-        </div>
-        <div class="rasgo">
-          <div class="ico"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path fill="#1a9fe0" d="M6 1h4v8H6zM4 6h1v3h1v2h4V9h1V6h1v4h-1v2H9v2h2v1H5v-1h2v-2H5v-2H4z"/></svg></div>
-          <h3>Chat de voz incluido</h3>
-          <p>Simple Voice Chat ya viene instalado: habla con los demás jugadores dentro del servidor sin abrir otra app.</p>
-        </div>
-        <div class="rasgo">
-          <div class="ico"><svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path fill="#5fd38a" d="M2 8h2v2h2v2h1v-1h1V9h1V7h1V5h1V3h2v2h-1v2h-1v2h-1v2H9v2H8v1H6v-1H5v-1H4v-1H3v-1H2z"/></svg></div>
-          <h3>Siempre la versión correcta</h3>
-          <p>Todos entran con los mismos 46 mods del servidor, así no hay errores de “mods distintos” al conectarte.</p>
-        </div>
+
+      <div class="anuncios">
+        <article class="anuncio">
+          <div class="anuncio-ico" aria-hidden="true"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#1a9fe0" d="M2 2h12v4H2zM2 10h12v4H2z"/><path fill="#5fd38a" d="M3 3h2v2H3zM3 11h2v2H3z"/><path fill="#0b1630" d="M7 3h6v1H7zM7 11h6v1H7z"/><path fill="#9fb2d8" d="M7 6h2v4H7z"/></svg></div>
+          <span class="etiqueta">Nuevo</span>
+          <h3>Hyro Network</h3>
+          <p>Nuestra propia network de servidores: modos de juego, eventos y una comunidad que crece contigo. Todo pensado para jugar sin complicaciones.</p>
+        </article>
+        <article class="anuncio">
+          <div class="anuncio-ico" aria-hidden="true"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#ffb000" d="M2 2h12v12H2z"/><path fill="#0b1630" d="M3 3h10v8H3z"/><path fill="#1a9fe0" d="M6 5h1v1h1v1h1v1H8v1H7v1H6z"/><path fill="#b85a00" d="M3 12h10v1H3z"/></svg></div>
+          <span class="etiqueta">Nuevo</span>
+          <h3>Un launcher nuevo</h3>
+          <p>Como Lunar Client, pero con muchas más cosas: más juegos optimizados, más FPS, cosméticos y mods listos con un clic. Queremos que sea el mejor launcher que hayas usado.</p>
+        </article>
       </div>
-      <article class="misterio" aria-label="Próximo proyecto">
+
+      <div class="spoiler-bloque">
+        <div class="cabecera" style="margin-bottom:20px">
+          <span class="etiqueta" style="color:#c9a6ff">Pequeño spoiler</span>
+          <h3 class="spoiler-titulo">Un vistazo al launcher</h3>
+          <p>Todavía está en desarrollo, pero aquí va un adelanto de cómo se verá. Pulsa para destaparlo.</p>
+        </div>
+        <button class="spoiler" id="spoiler" type="button" aria-pressed="false" aria-label="Mostrar el adelanto del launcher">
+          <div class="lanzador" aria-hidden="true">
+            <div class="lz-lado">
+              <span class="lz-logo"></span>
+              <span class="lz-juego activo">MC</span>
+              <span class="lz-juego">??</span>
+              <span class="lz-juego">??</span>
+              <span class="lz-juego">+</span>
+            </div>
+            <div class="lz-cuerpo">
+              <div class="lz-tope"><span class="lz-barra"></span><span class="lz-perfil"></span></div>
+              <div class="lz-banner">
+                <span class="lz-tag">HYRO NETWORK</span>
+                <span class="lz-nombre">Nombre secreto</span>
+                <span class="lz-jugar">JUGAR</span>
+              </div>
+              <div class="lz-fila">
+                <span class="lz-carta"><b>+FPS</b>Optimizado</span>
+                <span class="lz-carta"><b>Mods</b>1 clic</span>
+                <span class="lz-carta"><b>Skins</b>Cosméticos</span>
+                <span class="lz-carta"><b>Amigos</b>Chat</span>
+              </div>
+            </div>
+          </div>
+          <span class="spoiler-tapa"><b>SPOILER</b><small>Toca para ver</small></span>
+        </button>
+      </div>
+
+      <article class="misterio" aria-label="Fecha del próximo proyecto">
         <div class="misterio-img" aria-hidden="true">
           <svg viewBox="0 0 32 32" shape-rendering="crispEdges">
             <path fill="#2a1450" d="M12 2h8v2h4v2h2v4h2v12h-2v4h-2v2h-4v2h-8v-2H8v-2H6v-4H4V10h2V6h2V4h4z"/>
@@ -448,50 +514,11 @@ footer a{color:var(--tenue)}
         </div>
         <div class="misterio-texto">
           <span class="etiqueta" style="color:#c9a6ff">Próximamente</span>
-          <h3>¿Siguiente proyecto???</h3>
-          <p>Algo nuevo se está preparando en Hyro Studios. Todavía no podemos contar nada.</p>
+          <h3>¿Cuándo sale?</h3>
+          <p>La network y el launcher llegarán juntos. Los primeros avisos, pruebas y adelantos saldrán en nuestro Discord.</p>
           <p class="misterio-fecha">Fecha: posiblemente para Navidad 2026</p>
         </div>
       </article>
-    </div>
-  </section>
-
-  <section class="bloque" id="dificultad" style="padding-top:0">
-    <div class="envoltura">
-      <div class="cabecera">
-        <span class="etiqueta">MultiverSafio 1</span>
-        <h2>Cambios de dificultad</h2>
-        <p>Cada día de evento el servidor se vuelve más difícil. Aquí quedan anotados todos los cambios, día por día.</p>
-      </div>
-      <div class="dias">
-        <article class="dia" id="dia-1">
-          <header class="dia-cabeza">
-            <span class="dia-num">Día 1</span>
-            <div>
-              <h3>¡Día 1 completado!</h3>
-              <p class="dia-fecha"><time datetime="2026-10-24">Sábado 24 de octubre de 2026</time></p>
-            </div>
-          </header>
-          <p class="dia-intro">¡El primer día de nuestra aventura ha llegado a su fin! Hoy hubo nuevos desafíos y cambios de dificultad que harán que sobrevivir sea cada vez más complicado.</p>
-          <ul class="cambios">
-            <li class="cambio">
-              <span class="cambio-ico" aria-hidden="true"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#5fd38a" d="M6 1h4v2h2v2h1v4h-2v1H9v5H7v-5H5V9H3V5h1V3h2z"/><path fill="#ff6b6b" d="M1 1h2v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v1h1v2h-2v-1h-1v-1h-1v-1h-1v-1h-1v-1H9V9H8V8H7V7H6V6H5V5H4V4H3V3H2V2H1z"/></svg></span>
-              <div><h4>Sin brotes de árboles</h4><p>Los árboles ya no sueltan brotes al romperlos.</p></div>
-            </li>
-            <li class="cambio">
-              <span class="cambio-ico" aria-hidden="true"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#3a2a1a" d="M3 2h10v4H3z"/><path fill="#c9966b" d="M3 5h10v8H3z"/><path fill="#ffffff" d="M4 7h3v2H4zM9 7h3v2H9z"/><path fill="#6b3f2a" d="M6 11h4v1H6z"/><path fill="#2f7fd6" d="M3 13h10v2H3z"/></svg></span>
-              <div><h4>Herobrine aparece de noche</h4><p>Tengan cuidado cuando caiga la noche: nunca sabrán cuándo puede aparecer.</p></div>
-            </li>
-            <li class="cambio">
-              <span class="cambio-ico" aria-hidden="true"><svg viewBox="0 0 16 16" shape-rendering="crispEdges"><path fill="#4caf50" d="M3 1h10v14H3z"/><path fill="#1b1b1b" d="M4 4h3v3H4zM9 4h3v3H9zM7 7h2v2H7zM5 9h6v3H5zM5 12h2v1H5zM9 12h2v1H9z"/><path fill="#7fd0ff" d="M1 3h1v4H1zM14 2h1v5h-1zM2 10h1v4H2zM13 9h1v4h-1z"/></svg></span>
-              <div><h4>Creepers cargados</h4><p>Los creepers aparecen cargados por defecto, así que cada encuentro es mucho más peligroso.</p></div>
-            </li>
-          </ul>
-          <p class="dia-cierre">Estos son todos los cambios aplicados durante el Día 1. ¡Prepárense, porque la dificultad seguirá poniendo a prueba su supervivencia!</p>
-          <p class="dia-proximo">Nos vemos el <b>lunes</b> con el <b>Día 2</b> de MultiverSafio. ¿Quién logrará sobrevivir?</p>
-          <p class="dia-firma">— Equipo de HyroStudio</p>
-        </article>
-      </div>
     </div>
   </section>
 
@@ -525,127 +552,12 @@ footer a{color:var(--tenue)}
     </div>
   </section>
 
-  <section class="bloque" id="descargar" style="padding-top:0">
-    <div class="envoltura">
-      <div class="cabecera">
-        <span class="etiqueta">Descargar</span>
-        <h2>Elige tu sistema</h2>
-        <p>Descarga el instalador de tu computadora. Si tienes Mac y no sabes cuál elegir, mira <a href="#cual-mac">qué chip tiene tu Mac</a>.</p>
-      </div>
-      <div class="aviso-login" id="aviso-descarga">
-        <span><b>Inicia sesión para descargar.</b> Entra con Discord o con tu Gmail: con la misma sesión también puedes escribir en el foro.</span>
-        <button class="btn-mini lleno" type="button" data-entrar>Iniciar sesión</button>
-      </div>
-      <div class="descargas">
-        <article class="tarjeta" data-so="windows">
-          <div class="so">
-            <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path fill="#1a9fe0" d="M1 2h6v6H1zM9 2h6v6H9zM1 9h6v6H1zM9 9h6v6H9z"/></svg>
-            <div><h3>Windows</h3><small>Windows 10 y 11 · 64 bits</small></div>
-          </div>
-          <span class="archivo">MultiverSafio-Windows-Instalador.exe · 172 MB</span>
-          <a class="btn azul" data-descarga="windows" href="/descargar/windows">Descargar para Windows</a>
-          <a class="alterna" data-descarga="windowsAlt" href="/descargar/windows-alterno" target="_blank" rel="noopener">¿No descarga? Descarga alternativa (MediaFire)</a>
-        </article>
-        <article class="tarjeta" data-so="mac-m">
-          <div class="so">
-            <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path fill="#e9f0ff" d="M9 1h2v2H9zM4 4h3v1h2V4h3v1h1v2h-1v3h1v2h-1v2h-1v1H9v-1H7v1H5v-1H4v-2H3V5h1z"/></svg>
-            <div><h3>Mac con Apple M</h3><small>Chips M1, M2, M3 y M4</small></div>
-          </div>
-          <span class="archivo">MultiverSafio-Mac-Apple-M1-M4.dmg · 188 MB</span>
-          <a class="btn azul" data-descarga="macArm" href="/descargar/mac-apple">Descargar para Mac Apple M</a>
-        </article>
-        <article class="tarjeta" data-so="mac-intel">
-          <div class="so">
-            <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path fill="#9fb2d8" d="M9 1h2v2H9zM4 4h3v1h2V4h3v1h1v2h-1v3h1v2h-1v2h-1v1H9v-1H7v1H5v-1H4v-2H3V5h1z"/></svg>
-            <div><h3>Mac con Intel</h3><small>Macs anteriores a 2020</small></div>
-          </div>
-          <span class="archivo">MultiverSafio-Mac-Intel.dmg · 194 MB</span>
-          <a class="btn azul" data-descarga="macIntel" href="/descargar/mac-intel">Descargar para Mac Intel</a>
-        </article>
-      </div>
-      <p class="nota-version">Minecraft 1.21.1 · NeoForge 21.1 · 46 mods. Necesitas una cuenta de Microsoft con Minecraft: Java Edition (o Game Pass). Descarga solo desde esta página o desde el Discord oficial.</p>
-    </div>
-  </section>
-
-  <section class="bloque" id="instalar" style="padding-top:0">
-    <div class="envoltura">
-      <div class="cabecera">
-        <span class="etiqueta">Cómo instalar</span>
-        <h2>Paso a paso</h2>
-        <p>Windows y macOS avisan la primera vez que abres un programa descargado de internet. Es normal: aquí te explicamos qué tocar.</p>
-      </div>
-      <div class="pestanas" role="tablist" aria-label="Sistema operativo">
-        <button class="pestana" role="tab" id="tab-windows" aria-controls="guia-windows" aria-selected="true">Windows</button>
-        <button class="pestana" role="tab" id="tab-mac" aria-controls="guia-mac" aria-selected="false">macOS</button>
-      </div>
-
-      <div class="guia" id="guia-windows" role="tabpanel" aria-labelledby="tab-windows">
-        <ol class="pasos">
-          <li><div><h3>Descarga el instalador</h3><p>Pulsa “Descargar para Windows”. Se guarda <code>MultiverSafio-Windows-Instalador.exe</code> en tu carpeta <b>Descargas</b>.</p></div></li>
-          <li><div><h3>Ábrelo</h3><p>Haz doble clic en el archivo. Si el navegador avisa que “no se descarga con frecuencia”, elige <b>Conservar</b>.</p></div></li>
-          <li><div><h3>Si aparece “Windows protegió tu PC”</h3><p>Haz clic en <b>Más información</b> y luego en <b>Ejecutar de todas formas</b>. Solo pasa la primera vez.</p></div></li>
-          <li><div><h3>Termina la instalación</h3><p>El instalador crea el acceso directo <b>MultiverSafio</b> en tu escritorio y en el menú Inicio.</p></div></li>
-          <li><div><h3>Inicia sesión y pulsa JUGAR</h3><p>Entra con tu cuenta de Microsoft que tenga Minecraft Java. La primera vez descarga el juego y los mods (unos minutos) y después entra directo al servidor.</p></div></li>
-        </ol>
-        <div class="aviso">
-          <h3>Así se ve el aviso de Windows</h3>
-          <div class="ventana" aria-hidden="true">
-            <div class="tope">Windows protegió tu PC</div>
-            <div class="cuerpo">
-              <span>Microsoft Defender SmartScreen impidió el inicio de una aplicación desconocida.</span>
-              <span class="lnk" style="outline:2px solid var(--oro);outline-offset:2px;width:max-content">Más información</span>
-              <div class="botones"><span class="marcado">Ejecutar de todas formas</span><span>No ejecutar</span></div>
-            </div>
-          </div>
-          <p>Sale porque el launcher todavía no tiene firma digital de Microsoft. Si lo descargaste de esta página o del Discord oficial, es seguro.</p>
-        </div>
-      </div>
-
-      <div class="guia" id="guia-mac" role="tabpanel" aria-labelledby="tab-mac" hidden>
-        <ol class="pasos">
-          <li><div><h3>Elige la versión de tu chip</h3><p id="cual-mac">Menú  → <b>Acerca de esta Mac</b>. Fíjate en la línea “Chip” o “Procesador”:</p>
-            <div class="chip"><div><strong>Chip Apple M1…M4</strong><span>Descarga “Mac Apple M”</span></div><div><strong>Procesador Intel</strong><span>Descarga “Mac Intel”</span></div></div></div></li>
-          <li><div><h3>Abre el .dmg</h3><p>Haz doble clic en el archivo descargado. Se abre una ventana con <code>MultiverSafio</code>.</p></div></li>
-          <li><div><h3>Arrástralo a Aplicaciones</h3><p>Arrastra el icono de MultiverSafio a la carpeta <b>Aplicaciones</b> de esa misma ventana.</p></div></li>
-          <li><div><h3>Ábrelo la primera vez</h3><p>Ábrelo desde Aplicaciones. Si macOS dice que no puede verificar al desarrollador, ve a <b>Ajustes del Sistema → Privacidad y seguridad</b>, baja hasta el mensaje de MultiverSafio y pulsa <b>Abrir igualmente</b>.</p></div></li>
-          <li><div><h3>Inicia sesión y pulsa JUGAR</h3><p>Entra con tu cuenta de Microsoft que tenga Minecraft Java. Permite el micrófono si quieres usar el chat de voz.</p></div></li>
-        </ol>
-        <div class="aviso">
-          <h3>Así se ve en Privacidad y seguridad</h3>
-          <div class="ventana mac" aria-hidden="true">
-            <div class="tope"><i></i><i></i><i></i>&nbsp;Privacidad y seguridad</div>
-            <div class="cuerpo">
-              <span>Se bloqueó el uso de “MultiverSafio” porque no es de un desarrollador identificado.</span>
-              <div class="botones"><span class="marcado">Abrir igualmente</span></div>
-            </div>
-          </div>
-          <p>En macOS 14 o anterior: clic derecho sobre la app → <b>Abrir</b> → <b>Abrir</b>. Si dice que la app “está dañada”, abre Terminal y escribe <code>xattr -cr /Applications/MultiverSafio.app</code>.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="bloque" id="noticias" style="padding-top:0">
-    <div class="envoltura">
-      <div class="cabecera">
-        <span class="etiqueta">Noticias</span>
-        <h2>Novedades</h2>
-      </div>
-      <div class="noticias">
-        <article class="noticia"><time datetime="2026-10-24">24 oct 2026</time><h3>Día 1 completado</h3><p>Terminó el primer día de MultiverSafio 1 con tres cambios de dificultad: sin brotes de árboles, Herobrine de noche y creepers cargados. <a href="#dificultad">Ver los cambios</a>.</p></article>
-        <article class="noticia"><time datetime="2026-10-24">24 oct 2026</time><h3>¡Arranca MultiverSafio 1!</h3><p>El sábado 24 de octubre empieza MultiverSafio 1. Descarga el launcher, inicia sesión con tu cuenta de Minecraft y entra directo al servidor.</p></article>
-        <article class="noticia"><time datetime="2026-10-23">23 oct 2026</time><h3>Ya puedes descargar el launcher</h3><p>MultiverSafio ya está disponible para Windows, Mac con Apple M y Mac con Intel. Descárgalo arriba y sigue la guía de instalación.</p></article>
-        <article class="noticia"><time datetime="2026-10-23">23 oct 2026</time><h3>Estrenamos web</h3><p>hyrostudios.com es la página oficial de Hyro Studios. Aquí publicaremos los próximos proyectos y eventos. Los anuncios al momento salen primero en el Discord.</p></article>
-      </div>
-    </div>
-  </section>
-
   <section class="bloque" id="foro" style="padding-top:0">
     <div class="envoltura">
       <div class="cabecera">
         <span class="etiqueta">Foro</span>
         <h2>Foro de la comunidad</h2>
-        <p>Pregunta, ayuda a otros jugadores o propón ideas para el servidor. Cualquiera puede leer; para crear un tema o responder, inicia sesión con Discord o Google.</p>
+        <p>Pregunta, ayuda a otros jugadores o propón ideas para la network y el launcher. Cualquiera puede leer; para crear un tema o responder, inicia sesión con Discord o Google.</p>
         <p class="contador-usuarios"><span class="punto" aria-hidden="true"></span><b id="foro-usuarios">–</b> usuarios registrados en la comunidad</p>
       </div>
       <div class="foro-barra">
@@ -660,7 +572,7 @@ footer a{color:var(--tenue)}
         <button class="btn" id="btn-nuevo" type="button">+ Nuevo tema</button>
       </div>
       <form class="form-foro" id="form-tema" hidden>
-        <label for="tema-titulo">Título<input id="tema-titulo" maxlength="120" required placeholder="Ej.: El launcher se queda en 0 % al descargar"></label>
+        <label for="tema-titulo">Título<input id="tema-titulo" maxlength="120" required placeholder="Ej.: ¿Qué juegos tendrá el nuevo launcher?"></label>
         <label for="tema-cat">Categoría
           <select id="tema-cat">
             <option value="preguntas">Preguntas</option><option value="launcher">Launcher</option><option value="servidor">Servidor</option><option value="sugerencias">Sugerencias</option><option value="general">General</option>
@@ -675,36 +587,18 @@ footer a{color:var(--tenue)}
     </div>
   </section>
 
-  <section class="bloque" id="ayuda" style="padding-top:0">
-    <div class="envoltura">
-      <div class="cabecera">
-        <span class="etiqueta">Ayuda</span>
-        <h2>Preguntas frecuentes</h2>
-      </div>
-      <div class="faq">
-        <details><summary>¿Tengo que instalar los mods o NeoForge aparte?</summary><p>No. El launcher instala Minecraft 1.21.1, Java, NeoForge 21.1 y los 46 mods, y entra directo al servidor.</p></details>
-        <details><summary>¿Necesito Minecraft original?</summary><p>Sí. Inicias sesión con tu cuenta de Microsoft y debe tener Minecraft: Java Edition comprado o Game Pass. Las cuentas no originales no pueden entrar.</p></details>
-        <details><summary>¿Por qué mi antivirus o mi sistema me avisa?</summary><p>El launcher aún no está firmado por Microsoft ni por Apple, y por eso el sistema pregunta la primera vez. Sigue los pasos de “Cómo instalar”. Descárgalo solo desde esta página o el Discord oficial.</p></details>
-        <details><summary>La primera vez tarda mucho, ¿es normal?</summary><p>Sí. Descarga el juego, Java y todos los mods, que pesan bastante. Deja el launcher abierto y no lo cierres hasta que termine. Las siguientes veces abre mucho más rápido.</p></details>
-        <details><summary>No sé si mi Mac es Apple M o Intel</summary><p>Menú  → Acerca de esta Mac. Si dice “Chip Apple M1, M2, M3 o M4”, descarga Mac Apple M. Si dice “Procesador Intel”, descarga Mac Intel.</p></details>
-        <details><summary>¿Cómo uso el chat de voz?</summary><p>Ya dentro del servidor, pulsa <b>V</b> para abrir la configuración de Simple Voice Chat y elige tu micrófono. En Mac, permite el acceso al micrófono cuando te lo pida.</p></details>
-        <details><summary>Algo no funciona, ¿a quién le escribo?</summary><p>Entra al Discord y escribe en el canal de soporte, o mándanos un correo a contact@info.hyrostudios.com con una captura del error.</p></details>
-      </div>
-    </div>
-  </section>
-
   <section class="comunidad" id="comunidad">
     <div class="envoltura">
       <div class="panel discord">
         <span class="etiqueta" style="color:#d6d9ff">Comunidad</span>
         <h2>Únete al Discord</h2>
-        <p>Anuncios del evento, soporte con el launcher y la comunidad de MultiverSafio.</p>
+        <p>Anuncios, adelantos del próximo proyecto y la comunidad de Hyro Studios. Ahí te enteras primero de todo.</p>
         <div><a class="btn" href="https://discord.gg/Nj4MSpSTAM" target="_blank" rel="noopener">Entrar al Discord</a></div>
       </div>
       <div class="panel">
         <span class="etiqueta">Contacto</span>
         <h2>Escríbenos</h2>
-        <p>Para colaboraciones, prensa o problemas con tu descarga.</p>
+        <p>Para colaboraciones, prensa o cualquier duda.</p>
         <div class="correo">
           <output id="correo">contact@info.hyrostudios.com</output>
           <button class="copiar" id="btn-copiar" type="button">Copiar</button>
@@ -747,7 +641,7 @@ footer a{color:var(--tenue)}
   <div class="modal-cuerpo">
     <span class="etiqueta">Cuenta</span>
     <h2 id="modal-titulo" style="font-size:1.6rem">Inicia sesión</h2>
-    <p id="modal-texto">Para descargar el launcher y escribir en el foro, entra con tu cuenta de Discord o de Google (Gmail). Solo vemos tu nombre y tu foto de perfil.</p>
+    <p id="modal-texto">Para escribir en el foro y participar en el sorteo, entra con tu cuenta de Discord o de Google (Gmail). Solo vemos tu nombre y tu foto de perfil.</p>
     <button class="btn-discord" type="button" id="btn-discord">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.3 5.3A16.6 16.6 0 0 0 15.2 4l-.5 1a15.4 15.4 0 0 0-5.4 0l-.5-1a16.6 16.6 0 0 0-4.1 1.3C2.1 9.2 1.4 13 1.7 16.8a16.8 16.8 0 0 0 5.1 2.6l1.1-1.7c-.6-.2-1.2-.5-1.7-.9l.4-.3a11.9 11.9 0 0 0 10.8 0l.4.3c-.5.4-1.1.7-1.7.9l1.1 1.7a16.8 16.8 0 0 0 5.1-2.6c.4-4.4-.7-8.2-3-11.5zM8.7 14.5c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm6.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z"/></svg>
       Continuar con Discord
@@ -782,7 +676,7 @@ footer a{color:var(--tenue)}
 
 <footer>
   <div class="envoltura">
-    <span>© 2026 Hyro Studios · MultiverSafio</span>
+    <span>© 2026 Hyro Studios</span>
     <span><a href="https://www.instagram.com/hyro_community" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.tiktok.com/@hyro_community" target="_blank" rel="noopener">TikTok</a> · <a href="https://discord.gg/Nj4MSpSTAM" target="_blank" rel="noopener">Discord</a> · contact@info.hyrostudios.com</span>
     <span><a href="/privacidad.html">Privacidad</a> · No afiliado con Mojang ni Microsoft.</span>
   </div>
@@ -790,16 +684,13 @@ footer a{color:var(--tenue)}
 
 <script>
 const DISCORD = "https://discord.gg/Nj4MSpSTAM";
-const nombres = {windows:"Windows", macArm:"Mac Apple M", macIntel:"Mac Intel"};
-const RUTAS = {windows:"/descargar/windows", macArm:"/descargar/mac-apple", macIntel:"/descargar/mac-intel", windowsAlt:"/descargar/windows-alterno"};
-const CLAVE_DE_RUTA = {"windows":"windows","mac-apple":"macArm","mac-intel":"macIntel","windows-alterno":"windowsAlt"};
 
 /* ===== Sesión ===== */
 let yo = null, discordClientId = "", googleClientId = "", googleListo = false;
 const $ = (id) => document.getElementById(id);
 const modal = $("modal-login");
 function abrirLogin(texto, volver){
-  $("modal-texto").textContent = texto || "Para descargar el launcher y escribir en el foro, entra con tu cuenta de Discord o de Google (Gmail). Solo vemos tu nombre y tu foto de perfil.";
+  $("modal-texto").textContent = texto || "Para escribir en el foro y participar en el sorteo, entra con tu cuenta de Discord o de Google (Gmail). Solo vemos tu nombre y tu foto de perfil.";
   $("modal-error").hidden = true;
   modal.dataset.volver = volver || (location.pathname + location.search + location.hash);
   if (modal.showModal) modal.showModal(); else modal.setAttribute("open","");
@@ -862,18 +753,7 @@ function pintarCuenta(){
     const b = document.createElement("button"); b.className = "btn-mini lleno"; b.type = "button"; b.textContent = "Iniciar sesión";
     b.onclick = () => abrirLogin(); c.append(b);
   }
-  $("aviso-descarga").hidden = !!yo;
 }
-
-/* Descargas: sin sesión se pide iniciar sesión primero */
-document.querySelectorAll("[data-descarga]").forEach(a => {
-  a.addEventListener("click", (e) => {
-    if (yo) return;
-    e.preventDefault();
-    const ruta = a.getAttribute("href");
-    abrirLogin("Inicia sesión con Discord o con Google para descargar el launcher. Al volver, la descarga empieza sola.", "/?bajar=" + encodeURIComponent(ruta.split("/").pop()) + "#descargar");
-  });
-});
 
 async function cargarSesion(){
   try {
@@ -883,53 +763,14 @@ async function cargarSesion(){
     yo = d.usuario; discordClientId = d.discordClientId || ""; googleClientId = d.googleClientId || "";
   } catch(e) { yo = null; }
   pintarCuenta();
-  const q = new URLSearchParams(location.search);
-  const entrar = q.get("entrar"), bajar = q.get("bajar");
-  if (entrar && CLAVE_DE_RUTA[entrar] && !yo) abrirLogin("Inicia sesión con Discord o con Google para descargar el launcher. Al volver, la descarga empieza sola.", "/?bajar=" + entrar + "#descargar");
-  if (bajar && CLAVE_DE_RUTA[bajar] && yo) { history.replaceState(null, "", "/#descargar"); location.href = "/descargar/" + bajar; }
 }
 
-/* Detectar sistema para el botón principal */
-function detectar(){
-  const ua = navigator.userAgent || "";
-  const plat = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "";
-  if (/Win/i.test(plat) || /Windows/i.test(ua)) return "windows";
-  if (/Mac/i.test(plat) || /Macintosh/i.test(ua)) {
-    if (/iPhone|iPad/i.test(ua) || (navigator.maxTouchPoints > 1)) return null;
-    try {
-      const gl = document.createElement("canvas").getContext("webgl");
-      const ext = gl && gl.getExtension("WEBGL_debug_renderer_info");
-      const r = ext ? gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) : "";
-      if (/Intel/i.test(r)) return "macIntel";
-    } catch(e){}
-    return "macArm";
-  }
-  return null;
-}
-const so = detectar();
-if (so) {
-  const btn = document.getElementById("btn-principal");
-  document.getElementById("btn-principal-texto").textContent = "Descargar para " + nombres[so];
-  btn.href = RUTAS[so]; btn.dataset.descarga = so;
-  btn.addEventListener("click", (e) => { if (yo) return; e.preventDefault(); abrirLogin("Inicia sesión con Discord o con Google para descargar el launcher. Al volver, la descarga empieza sola.", "/?bajar=" + RUTAS[so].split("/").pop() + "#descargar"); });
-  document.getElementById("detectado").innerHTML = "Detectamos <b>" + nombres[so] + "</b>. ¿Otro sistema? <a href=\"#descargar\">Ver todas las descargas</a>.";
-  const card = document.querySelector('.tarjeta [data-descarga="'+so+'"]').closest(".tarjeta");
-  card.classList.add("recomendada");
-  const sello = document.createElement("span"); sello.className = "sello"; sello.textContent = "TU SISTEMA"; card.prepend(sello);
-  if (so !== "windows") mostrar("mac");
-}
-
-/* Pestañas */
-function mostrar(cual){
-  ["windows","mac"].forEach(n => {
-    const on = n === cual;
-    document.getElementById("tab-"+n).setAttribute("aria-selected", on);
-    document.getElementById("guia-"+n).hidden = !on;
-  });
-}
-document.getElementById("tab-windows").onclick = () => mostrar("windows");
-document.getElementById("tab-mac").onclick = () => mostrar("mac");
-document.querySelectorAll('a[href="#cual-mac"]').forEach(a => a.addEventListener("click", () => mostrar("mac")));
+/* Spoiler del launcher */
+$("spoiler").addEventListener("click", function(){
+  const abierto = this.getAttribute("aria-pressed") === "true";
+  this.setAttribute("aria-pressed", !abierto);
+  this.setAttribute("aria-label", abierto ? "Mostrar el adelanto del launcher" : "Ocultar el adelanto del launcher");
+});
 
 /* Copiar correo */
 document.getElementById("btn-copiar").addEventListener("click", function(){
