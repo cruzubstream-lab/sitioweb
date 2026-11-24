@@ -239,6 +239,14 @@ main{min-height:calc(100vh - 140px)}
 .hp-pasos figure img{display:block;width:100%;height:auto}
 .hp-pasos figcaption{padding:8px 12px;color:var(--tenue);font-size:.88rem;border-top:1px solid var(--borde)}
 .hp-pasos figcaption b{color:#f6f6f8}
+.hp-verifica{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.hp-verifica>div{background:#0b1630;border:2px solid var(--borde);padding:14px 16px;color:var(--tenue);font-size:.95rem}
+.hp-verifica>div>b{display:block;color:#f6f6f8;margin-bottom:6px}.hp-verifica p b{color:#f6f6f8}.hp-verifica p{margin:0 0 8px}.hp-verifica ul{margin:0;padding-left:20px}.hp-verifica li{margin:0 0 6px}
+.hp-verifica a{color:#7fb4ff}.hp-verifica code{background:#0006;padding:1px 5px;border:1px solid var(--borde);font-size:.82rem}
+.hp-hash{display:grid;grid-template-columns:92px 1fr;gap:8px;align-items:center;margin:0 0 6px}.hp-hash span{color:#f6f6f8;font-weight:700;font-size:.85rem}.hp-hash span i{display:block;font-style:normal;font-weight:400;color:var(--tenue);font-size:.75rem}
+.hp-hash code{display:block;word-break:break-all;font-size:.75rem !important;padding:6px 8px !important;user-select:all}
+.hp-mini{font-size:.85rem}
+@media (max-width:900px){.hp-verifica{grid-template-columns:1fr}}
 .hp-explica{border:2px solid #ffd400;background:#1a1606;padding:14px 16px;color:var(--tenue);font-size:.95rem}
 .hp-explica>b{display:block;color:#ffd400;margin-bottom:6px;font-size:1.02rem}
 .hp-explica p{margin:0 0 8px}.hp-explica ul{margin:0 0 8px;padding-left:20px}.hp-explica li b,.hp-explica p b{color:#f6f6f8}
@@ -599,6 +607,26 @@ footer a{color:var(--tenue)}
           <div><b>Todavía no tiene firma comercial</b>Windows y Apple confían en los programas firmados con un certificado de pago. HyroPix aún no lo tiene, así que lo marcan como de un «editor desconocido» o un «desarrollador no identificado».</div>
           <div><b>Es nuevo y tiene pocas descargas</b>SmartScreen de Windows y algunos antivirus juzgan por fama: un instalador recién publicado no la tiene todavía. A veces lo marcan como amenaza por precaución (un «falso positivo»).</div>
           <div><b>Cómo comprobarlo tú mismo</b>Descarga HyroPix solo desde hyrostudios.com. Si quieres, sube el archivo a <a href="https://www.virustotal.com" target="_blank" rel="noopener" style="color:#7fb4ff">virustotal.com</a> antes de abrirlo: lo analizan decenas de antivirus a la vez.</div>
+        </div>
+        <div class="hp-verifica">
+          <div>
+            <b>No somos los únicos: les pasa a programas conocidos</b>
+            <p>Esta misma alerta automática de Windows ha salido con programas legítimos y conocidos:</p>
+            <ul>
+              <li><a href="https://forum.audacityteam.org/t/windows-build-trojan-win32-bearfoos-a-ml-detected/110886" target="_blank" rel="noopener">Audacity</a>: el editor de audio gratuito.</li>
+              <li><a href="https://steamcommunity.com/app/1795570/discussions/0/604147304925023721" target="_blank" rel="noopener">Aground Zero</a>, un juego de Steam. Su desarrollador explica que «!ml» significa detección por aprendizaje automático y que era un falso positivo.</li>
+              <li><a href="https://forum.arturia.com/t/trojan-in-arturia-software-center-updater/1346" target="_blank" rel="noopener">Arturia Software Center</a>: el programa de una marca de instrumentos musicales.</li>
+              <li>El laboratorio independiente <a href="https://www.av-comparatives.org/tests/false-alarm-test-march-2022" target="_blank" rel="noopener">AV-Comparatives</a> registra detecciones «Bearfoos …!ml» de Microsoft entre sus falsas alarmas.</li>
+            </ul>
+          </div>
+          <div>
+            <b>Comprueba tú mismo que tu archivo es el original</b>
+            <p>1. Sube el instalador a <a href="https://www.virustotal.com" target="_blank" rel="noopener">virustotal.com</a>: lo analizan más de 60 antivirus a la vez y verás el resultado de todos.</p>
+            <p>2. Compara su <b>huella SHA-256</b> con la de esta web. Si coinciden, tu archivo es exactamente el que publicamos y nadie lo ha modificado.</p>
+            <div class="hp-hash"><span>Windows <i id="hp-hash-v"></i></span><code id="hp-hash-win">Cargando…</code></div>
+            <div class="hp-hash"><span>Mac</span><code id="hp-hash-mac">Cargando…</code></div>
+            <p class="hp-mini">Para ver la huella de tu archivo: en Windows, abre PowerShell en Descargas y escribe <code>Get-FileHash .\HyroPix*.exe</code>. En Mac, abre Terminal y escribe <code>shasum -a 256 ~/Downloads/HyroPix*.dmg</code>. VirusTotal también la muestra.</p>
+          </div>
         </div>
         <p>Cuando HyroPix tenga su certificado de firma, estos avisos dejarán de salir. Mientras tanto, así se instala sin problemas (las imágenes son ilustraciones de cada aviso):</p>
         <div class="hp-pasos">
@@ -1536,6 +1564,12 @@ fetch("/descargas/hyropix.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).
   window.addEventListener("hashchange", mostrar);
   mostrar();
 })();
+</script>
+<script>
+fetch("/descargas/hyropix.json",{cache:"no-store"}).then(r=>r.json()).then(j=>{
+  const w=document.getElementById("hp-hash-win"), m=document.getElementById("hp-hash-mac"), v=document.getElementById("hp-hash-v");
+  if(w) w.textContent=(j.windows&&j.windows.sha256)||"Se mostrará con la próxima versión"; if(m) m.textContent=(j.mac&&j.mac.sha256)||"Se mostrará con la próxima versión"; if(v) v.textContent="v"+j.version;
+}).catch(()=>{});
 </script>
 </body>
 </html>
