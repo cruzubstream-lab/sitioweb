@@ -14,11 +14,13 @@
   "mac": {
     "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/hyropix/HyroPix-2.0.0-Mac-Apple.dmg",
     "archivo": "HyroPix-2.0.0-Mac-Apple.dmg",
-    "requisitos": "macOS 12 o superior · Apple M1, M2, M3 o M4"
+    "requisitos": "macOS 12 o superior · Apple M1, M2, M3 o M4",
+    "sha256": "f5d25c22092667f4f447bd0251fc7700024a26b1f5a675705f1b3f7dae59c668"
   },
   "windows": {
     "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/hyropix/HyroPix-2.0.0-Windows-Instalador.exe",
     "archivo": "HyroPix-2.0.0-Windows-Instalador.exe",
-    "requisitos": "Windows 10 u 11 (64 bits)"
+    "requisitos": "Windows 10 u 11 (64 bits)",
+    "sha256": "2be9b1483ffa7f18fe7f6ff8a50f01bd2e7d2bbe67c0de02693d647fe310ba24"
   }
 }
