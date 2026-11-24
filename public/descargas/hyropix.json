@@ -1,23 +1,24 @@
 {
   "app": "HyroPix",
-  "version": "1.0.0",
-  "nombre": "HyroPix v1",
-  "fecha": "2026-11-23",
+  "version": "2.0.0",
+  "nombre": "HyroPix v2",
+  "fecha": "2026-11-24",
   "notas": [
-    "Editor de fotos con capas, herramientas, ajustes y filtros",
-    "Editor de video con títulos, croma y exportación hasta 4K",
-    "Publicación programada en YouTube, YouTube Shorts y TikTok",
-    "HyroAI: asistente con inteligencia artificial (próximamente)",
-    "Cuentas con verificación en dos pasos"
+    "70 efectos estilo CapCut para fotos y videos: filtros, efectos y animaciones",
+    "Efectos exclusivos HyroPix: Pixel Craft, Neon Pulse, Holograma, Portal, Aura, HUD Gamer y más",
+    "Nueva pantalla de inicio con plantillas de tamaño (miniaturas, banners, emotes, historias)",
+    "Stickers y emoji en fotos y videos",
+    "Congelar fotograma y texto tipo máquina de escribir en el editor de video",
+    "HyroAI: asistente con inteligencia artificial (próximamente)"
   ],
   "mac": {
-    "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/hyropix/HyroPix-1.0.0-Mac-Apple.dmg",
-    "archivo": "HyroPix-1.0.0-Mac-Apple.dmg",
+    "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/hyropix/HyroPix-2.0.0-Mac-Apple.dmg",
+    "archivo": "HyroPix-2.0.0-Mac-Apple.dmg",
     "requisitos": "macOS 12 o superior · Apple M1, M2, M3 o M4"
   },
   "windows": {
-    "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/hyropix/HyroPix-1.0.0-Windows-Instalador.exe",
-    "archivo": "HyroPix-1.0.0-Windows-Instalador.exe",
+    "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/hyropix/HyroPix-2.0.0-Windows-Instalador.exe",
+    "archivo": "HyroPix-2.0.0-Windows-Instalador.exe",
     "requisitos": "Windows 10 u 11 (64 bits)"
   }
 }
