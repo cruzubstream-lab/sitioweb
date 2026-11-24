@@ -87,7 +87,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .menu{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
 .menu a{color:var(--tenue);text-decoration:none;font-weight:600;font-size:.95rem}
 .menu a:hover{color:var(--texto)}
-.menu .discord-mini{color:var(--texto);background:#5865f2;padding:6px 12px;border-radius:6px}
+.menu .discord-mini{color:#fff;background:#4752c4;padding:6px 12px;border-radius:6px}
 .menu{gap:14px}
 @media (max-width:720px){.menu a:not(.discord-mini){display:none}}
 @media (max-width:520px){.menu .discord-mini{display:none}.marca span{font-size:1.05rem}}
@@ -329,7 +329,7 @@ details p{padding:0 18px 18px;color:var(--tenue)}
 .cuenta img{width:30px;height:30px;border-radius:50%;border:2px solid var(--azul)}
 .cuenta .quien{font-weight:700;font-size:.92rem;max-width:12ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .btn-mini{font-family:var(--f-pixel);font-size:.95rem;padding:6px 12px;border:2px solid var(--azul);background:transparent;color:var(--texto);cursor:pointer}
-.btn-mini.lleno{background:#5865f2;border-color:#5865f2}
+.btn-mini.lleno{background:#4752c4;border-color:#4752c4;color:#fff}
 .btn-mini:hover{filter:brightness(1.15)}
 @media (max-width:720px){.cuenta .quien{display:none}}
 .aviso-login{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:12px 16px;margin-bottom:20px;border:2px solid #5865f2;background:#1b2160;color:#d6d9ff}
@@ -340,7 +340,7 @@ dialog.modal{border:2px solid var(--borde);background:var(--noche-2);color:var(-
 dialog.modal::backdrop{background:#020818cc}
 .modal-cuerpo{padding:28px;display:grid;gap:14px}
 .modal-cuerpo p{color:var(--tenue)}
-.btn-discord{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#5865f2;color:#fff;border:0;padding:14px 18px;font-weight:700;font-size:1rem;cursor:pointer;font-family:var(--f-texto)}
+.btn-discord{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#4752c4;color:#fff;border:0;padding:14px 18px;font-weight:700;font-size:1rem;cursor:pointer;font-family:var(--f-texto)}
 .btn-discord svg{width:22px;height:22px}
 .o-sep{display:flex;align-items:center;gap:10px;color:var(--tenue);font-size:.85rem}
 .o-sep::before,.o-sep::after{content:"";flex:1;height:1px;background:var(--borde)}
@@ -530,7 +530,7 @@ footer a{color:var(--tenue)}
 <canvas id="espacio" aria-hidden="true"></canvas>
 <header class="barra">
   <div class="envoltura">
-    <a class="marca" href="#inicio" aria-label="Hyro Studios, inicio">
+    <a class="marca" href="#inicio" title="Ir al inicio">
       <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path fill="#1a9fe0" d="M7 1h2v1h2v1h1v2h1v6h-1v2h-1v1H9v1H7v-1H5v-1H4v-2H3V5h1V3h1V2h2z"/><path fill="#0f5fa8" d="M4 9h8v2h-1v2H9v1H7v-1H5v-2H4z"/><path fill="#0b1630" d="M5 5h2v5h2V5h2v7H9v-1H7v1H5z"/><path fill="#fff" opacity=".7" d="M7 2h2v1H7zM5 3h1v1H5z"/></svg>
       <span><b>Hyro</b>Studios</span>
     </a>
