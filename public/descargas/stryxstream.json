@@ -11,20 +11,23 @@
     "Mac: corregido el aviso «StryxStream está dañado» al abrir la app descargada."
   ],
   "windows": {
-    "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/stryxstream/StryxStream-1.0.1-Windows-Instalador.exe",
-    "archivo": "StryxStream-1.0.1-Windows-Instalador.exe",
+    "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/stryxstream/StryxStream-Windows-Instalador.exe",
+    "archivo": "StryxStream-Windows-Instalador.exe",
+    "version": "1.0.1",
     "sha256": "fbbcbc2b017f24fd41818043daad11fda03d3f51239efd850df9eac05a233fc6",
     "requisitos": "Windows 10 u 11 (64 bits)"
   },
   "mac-apple": {
-    "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/stryxstream/StryxStream-1.0.1-Mac-Apple.dmg",
-    "archivo": "StryxStream-1.0.1-Mac-Apple.dmg",
+    "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/stryxstream/StryxStream-Mac-Apple.dmg",
+    "archivo": "StryxStream-Mac-Apple.dmg",
+    "version": "1.0.1",
     "sha256": "dee8572f65b9ed2b6d6962ac3c4322e0968e74873445349f51b1a34513e6728b",
     "requisitos": "macOS 11 o superior · Apple M1, M2, M3 o M4"
   },
   "mac-intel": {
-    "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/stryxstream/StryxStream-1.0.1-Mac-Intel.dmg",
-    "archivo": "StryxStream-1.0.1-Mac-Intel.dmg",
+    "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/stryxstream/StryxStream-Mac-Intel.dmg",
+    "archivo": "StryxStream-Mac-Intel.dmg",
+    "version": "1.0.1",
     "sha256": "f2ea7d4351698aba487b9f65ac94398f3c5b1ff3a88a203b43d0a63dc943da96",
     "requisitos": "macOS 11 o superior · Mac con procesador Intel"
   }
