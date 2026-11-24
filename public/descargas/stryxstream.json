@@ -1,32 +1,31 @@
 {
   "app": "StryxStream",
-  "version": "1.0.0",
-  "nombre": "StryxStream v1",
+  "version": "1.0.1",
+  "nombre": "StryxStream v1.0.1",
   "fecha": "2026-11-24",
   "notas": [
-    "Chat unificado de Twitch, Kick, YouTube y TikTok, en la app, en un panel dentro de OBS y con estilo «Solo texto» para el stream.",
-    "Estudio: tu propio OBS dentro de la app, con escenas, pantalla, cámara, chat y VTuber. Transmite a varias plataformas y graba en MP4.",
-    "Alertas personalizadas de follow, suscripción, donación y raid (2 estilos gratis, 7 Plus y las tuyas propias).",
-    "VTuber: personajes anime, clásicos de dominio público, creador de VTuber y tus propias imágenes. Mueven la boca cuando hablas.",
-    "Inicia sesión con tu cuenta de hyrostudios.com. Plus se activa en tu cuenta: más estilos de chat, fijar mensajes, lectura en voz alta y filtro de palabras.",
-    "Todo se guarda solo: tus VTuber, escenas y ajustes, con copia de seguridad y avisos de actualización."
+    "Estudio con la misma interfaz que OBS: Escenas, Fuentes, Mezclador de audio, Transiciones de escena y Controles.",
+    "Modo estudio: Vista previa y Programa, con transiciones de Corte o Desvanecimiento.",
+    "Fuentes con ojo y candado, doble clic para Propiedades y ventana de Ajustes de salida.",
+    "Mezclador con medidor en dB y botón de silencio, y barra de estado con tiempo en directo, grabación y FPS.",
+    "Mac: corregido el aviso «StryxStream está dañado» al abrir la app descargada."
   ],
   "windows": {
-    "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/stryxstream/StryxStream-1.0.0-Windows-Instalador.exe",
-    "archivo": "StryxStream-1.0.0-Windows-Instalador.exe",
-    "sha256": "61f388cb53d475f0292823a5f128c2a97bb72b9b877a9614ac71dc3512596040",
+    "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/stryxstream/StryxStream-1.0.1-Windows-Instalador.exe",
+    "archivo": "StryxStream-1.0.1-Windows-Instalador.exe",
+    "sha256": "fbbcbc2b017f24fd41818043daad11fda03d3f51239efd850df9eac05a233fc6",
     "requisitos": "Windows 10 u 11 (64 bits)"
   },
   "mac-apple": {
-    "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/stryxstream/StryxStream-1.0.0-Mac-Apple.dmg",
-    "archivo": "StryxStream-1.0.0-Mac-Apple.dmg",
-    "sha256": "e7d2a7ccb5e79640835d024051dbc07e6394921afa84f4f4028035bad36dc149",
+    "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/stryxstream/StryxStream-1.0.1-Mac-Apple.dmg",
+    "archivo": "StryxStream-1.0.1-Mac-Apple.dmg",
+    "sha256": "dee8572f65b9ed2b6d6962ac3c4322e0968e74873445349f51b1a34513e6728b",
     "requisitos": "macOS 11 o superior · Apple M1, M2, M3 o M4"
   },
   "mac-intel": {
-    "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/stryxstream/StryxStream-1.0.0-Mac-Intel.dmg",
-    "archivo": "StryxStream-1.0.0-Mac-Intel.dmg",
-    "sha256": "c9de3c6faa99f8783ef741fa6cb57b317dcb8bcbc88cd27b140c55c78150902b",
+    "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/stryxstream/StryxStream-1.0.1-Mac-Intel.dmg",
+    "archivo": "StryxStream-1.0.1-Mac-Intel.dmg",
+    "sha256": "f2ea7d4351698aba487b9f65ac94398f3c5b1ff3a88a203b43d0a63dc943da96",
     "requisitos": "macOS 11 o superior · Mac con procesador Intel"
   }
 }
