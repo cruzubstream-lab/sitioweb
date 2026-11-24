@@ -198,6 +198,35 @@ section.bloque{padding-block:72px}
 .hp-unica .como b{color:#f6f6f8}
 @media (max-width:900px){.hp-leyenda{grid-template-columns:1fr 1fr}.hp-unicas{grid-template-columns:1fr}}
 
+/* ---------- Pantallas (una sección por pantalla) ---------- */
+main [id]{scroll-margin-top:84px}
+main>[data-slide]{display:none}
+main>[data-slide].activa{display:block;animation:entrarSlide .38s ease}
+main>.heroe[data-slide].activa{display:block}
+@keyframes entrarSlide{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){main>[data-slide].activa{animation:none}}
+main{min-height:calc(100vh - 140px)}
+.menu a.activo{color:var(--texto);box-shadow:inset 0 -2px 0 #4a8cff}
+.slide-nav{display:flex;justify-content:space-between;gap:12px;padding:10px 0 40px}
+.slide-nav a{display:inline-flex;align-items:center;gap:8px;color:var(--tenue);text-decoration:none;font-weight:600;padding:10px 14px;border:2px solid var(--borde);background:#0b1630cc}
+.slide-nav a:hover{color:var(--texto);border-color:#4a8cff}
+.slide-nav .sig{margin-left:auto}
+.portada .envoltura{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding-block:72px 64px;min-height:calc(100vh - 180px)}
+.portada-texto{display:grid;gap:20px;min-width:0}
+.portada .lead{font-size:1.15rem;color:var(--tenue);max-width:34em}
+.portada .lead b{color:var(--texto)}
+.portada-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pcard{position:relative;display:grid;gap:6px;padding:18px 18px 18px;background:#0b1630d9;border:2px solid var(--borde);text-decoration:none;color:var(--texto);transition:transform .15s,border-color .15s}
+.pcard b{font-family:var(--f-pixel);font-size:1.15rem}
+.pcard span{color:var(--tenue);font-size:.92rem;padding-right:18px}
+.pcard i{position:absolute;right:14px;top:16px;font-style:normal;color:#4a8cff;font-weight:700}
+.pcard:hover{transform:translateY(-3px);border-color:#4a8cff}
+.pcard.destacada{grid-column:1/-1;background:linear-gradient(135deg,#2a1260e6,#0b3a5ae6);border-color:#6e4cff}
+.sorteo-vacio{text-align:center;display:grid;gap:14px;justify-items:center;padding:60px 20px;border:2px dashed var(--borde);background:#0b1630b3}
+.sorteo-vacio p{color:var(--tenue);margin:0}
+@media (max-width:900px){.portada .envoltura{grid-template-columns:1fr;min-height:0;padding-block:48px}}
+@media (max-width:720px){.menu{overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap !important}.menu::-webkit-scrollbar{display:none}.menu a:not(.discord-mini){display:inline-block !important;white-space:nowrap}.barra .envoltura{flex-wrap:wrap}.menu{width:100%;order:3;gap:16px;padding-bottom:8px}.portada-grid{grid-template-columns:1fr}}
+
 /* Guías */
 .pestanas{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
 .pestana{font-family:var(--f-pixel);font-size:1.05rem;padding:10px 18px;border:2px solid var(--borde);background:transparent;color:var(--tenue);cursor:pointer}
@@ -482,6 +511,7 @@ footer a{color:var(--tenue)}
       <a href="#proyectos">Próximamente</a>
       <a href="#partners">Partners</a>
       <a href="#foro">Foro</a>
+      <a href="#comunidad">Comunidad</a>
       <a class="discord-mini" href="https://discord.gg/Nj4MSpSTAM" target="_blank" rel="noopener">Discord</a>
       <div class="cuenta" id="cuenta">
         <button class="btn-mini lleno" id="btn-entrar" type="button">Iniciar sesión</button>
@@ -491,7 +521,28 @@ footer a{color:var(--tenue)}
 </header>
 
 <main id="inicio">
-  <section class="bloque" id="hyropix">
+  <section class="portada" id="portada" data-slide="inicio">
+    <div class="envoltura">
+      <div class="portada-texto">
+        <span class="etiqueta">Estudio independiente · Minecraft y creadores</span>
+        <h1 class="titulo-pixel">Hyro Studios<small>launchers, apps y comunidad</small></h1>
+        <p class="lead">Creamos herramientas para jugadores y creadores de contenido: launchers de Minecraft, <b>HyroPix</b> para editar fotos y videos, y una comunidad con sorteos y foro.</p>
+        <div class="acciones">
+          <a class="btn" href="#hyropix">Descargar HyroPix</a>
+          <a class="btn fantasma" href="#sorteo">Ver el sorteo activo</a>
+        </div>
+      </div>
+      <nav class="portada-grid" aria-label="Secciones de la web">
+        <a class="pcard destacada" href="#hyropix"><b>HyroPix</b><span>Editor de fotos y video para Mac y Windows. Gratis.</span><i aria-hidden="true">→</i></a>
+        <a class="pcard" href="#sorteo"><b>Sorteos</b><span>Participa y vota en el sorteo de la comunidad.</span><i aria-hidden="true">→</i></a>
+        <a class="pcard" href="#proyectos"><b>Próximamente</b><span>Nuestra network y el nuevo launcher.</span><i aria-hidden="true">→</i></a>
+        <a class="pcard" href="#partners"><b>Partners</b><span>Creadores que forman parte de Hyro.</span><i aria-hidden="true">→</i></a>
+        <a class="pcard" href="#foro"><b>Foro</b><span>Preguntas, ideas y conversación.</span><i aria-hidden="true">→</i></a>
+        <a class="pcard" href="#comunidad"><b>Comunidad</b><span>Discord, redes sociales y contacto.</span><i aria-hidden="true">→</i></a>
+      </nav>
+    </div>
+  </section>
+  <section class="bloque" id="hyropix" data-slide="hyropix">
     <div class="envoltura">
       <div class="hp-cab">
         <div class="hp-logo"><img src="/descargas/hyropix-icono.png" alt="" width="64" height="64"></div>
@@ -578,6 +629,18 @@ footer a{color:var(--tenue)}
         <p>Algunas funciones pensadas para creadores que no vas a encontrar juntas en otro editor:</p>
         <div class="hp-unicas">
           <article class="hp-unica">
+            <div class="img"><img src="/descargas/guia/hyropix-guia-efectos.webp" alt="Galería de efectos de HyroPix con efectos exclusivos como Pixel Craft, Neon Pulse y Holograma" width="558" height="580" loading="lazy"></div>
+            <div class="txt"><b class="t">70 efectos estilo CapCut (nuevo en v2)</b>
+              <p>Filtros de color, efectos como Glitch, VHS, Lluvia o Cámara REC, y animaciones de entrada para videos. Además hay efectos exclusivos de HyroPix: Pixel Craft, Neon Pulse, Holograma, Portal, HUD Gamer…</p>
+              <p class="como">En Foto: <b>Filtro → Efectos y filtros</b>. En Video: botón <b>✨ Efectos</b>.</p></div>
+          </article>
+          <article class="hp-unica">
+            <div class="img"><img src="/descargas/guia/hyropix-guia-inicio.webp" alt="Pantalla de inicio de HyroPix con accesos rápidos y plantillas de tamaño" width="900" height="621" loading="lazy"></div>
+            <div class="txt"><b class="t">Pantalla de inicio y plantillas (nuevo en v2)</b>
+              <p>Empieza en un clic: imagen nueva, video horizontal o vertical, y plantillas con el tamaño justo para miniaturas, banners, emotes y avatares.</p>
+              <p class="como">Se abre al entrar. Para volver, pulsa el <b>logo de HyroPix</b>.</p></div>
+          </article>
+          <article class="hp-unica">
             <div class="img"><img src="/descargas/guia/hyropix-guia-vertical.webp" alt="Video horizontal convertido a vertical 9:16 con fondo desenfocado" width="900" height="403" loading="lazy"></div>
             <div class="txt"><b class="t">De horizontal a vertical en un clic</b>
               <p>Convierte cualquier video a 9:16 para TikTok y Shorts. Rellena los lados con un fondo desenfocado en lugar de franjas negras.</p>
@@ -608,7 +671,7 @@ footer a{color:var(--tenue)}
     </div>
   </section>
 
-  <section class="bloque sorteos-top" id="sorteo">
+  <section class="bloque sorteos-top" id="sorteo" data-slide="sorteo">
     <div class="envoltura">
       <div class="cabecera">
         <span class="etiqueta sorteo-vivo"><i aria-hidden="true"></i>Sorteos de la comunidad · En curso</span>
@@ -630,12 +693,17 @@ footer a{color:var(--tenue)}
         <ol class="ranking" id="sorteo-lista"></ol>
         <p class="sorteo-reglas">Reglas: un voto por cuenta (puedes cambiarlo mientras el sorteo esté abierto), no puedes votarte a ti mismo y si hay empate gana quien se apuntó primero. El premio se entrega como código de regalo oficial de Minecraft.</p>
       </div>
-      <div class="contador-grande" id="contador-grande">
+      <div class="contador-grande" id="contador-grande" hidden>
         <span class="etiqueta">Comunidad Hyro</span>
         <p class="contador-cifra"><b id="contador-cifra">–</b><span>/ 90</span></p>
         <p class="contador-texto" id="contador-texto">personas registradas en hyrostudios.com</p>
       </div>
-      <div class="mas-sorteos">
+      <div class="sorteo-vacio" id="sorteo-vacio" hidden>
+        <h2>No hay ningún sorteo activo ahora mismo</h2>
+        <p>Los próximos sorteos se anuncian primero en nuestro Discord.</p>
+        <a class="btn azul" href="https://discord.gg/Nj4MSpSTAM" target="_blank" rel="noopener">Avisarme en Discord</a>
+      </div>
+      <div class="mas-sorteos" hidden>
         <div>
           <h3>Más sorteos para la comunidad</h3>
           <p>Cada cierto tiempo hacemos sorteos para la comunidad Hyro: juegos, rangos y sorpresas del próximo proyecto. Los nuevos sorteos se anuncian primero en el Discord.</p>
@@ -645,7 +713,7 @@ footer a{color:var(--tenue)}
     </div>
   </section>
 
-  <section class="heroe">
+  <section class="heroe" data-slide="proyectos">
     <div class="envoltura">
       <div class="heroe-texto">
         <span class="etiqueta">Hyro Studios · Próximamente</span>
@@ -663,7 +731,7 @@ footer a{color:var(--tenue)}
     </div>
   </section>
 
-  <section class="bloque" id="proyectos">
+  <section class="bloque" id="proyectos" data-slide="proyectos" style="padding-top:0">
     <div class="envoltura">
       <div class="cabecera">
         <span class="etiqueta">Próximo proyecto</span>
@@ -740,7 +808,7 @@ footer a{color:var(--tenue)}
     </div>
   </section>
 
-  <section class="bloque" id="foro" style="padding-top:0">
+  <section class="bloque" id="foro" data-slide="foro">
     <div class="envoltura">
       <div class="cabecera">
         <span class="etiqueta">Foro</span>
@@ -775,7 +843,7 @@ footer a{color:var(--tenue)}
     </div>
   </section>
 
-  <section class="bloque" id="partners" style="padding-top:0">
+  <section class="bloque" id="partners" data-slide="partners">
     <div class="envoltura">
       <div class="cabecera">
         <span class="etiqueta">Afiliados y partners</span>
@@ -811,7 +879,7 @@ footer a{color:var(--tenue)}
     </div>
   </section>
 
-  <section class="comunidad" id="comunidad">
+  <section class="comunidad" id="comunidad" data-slide="comunidad">
     <div class="envoltura">
       <div class="panel discord">
         <span class="etiqueta" style="color:#d6d9ff">Comunidad</span>
@@ -836,7 +904,7 @@ footer a{color:var(--tenue)}
     </div>
   </section>
 
-  <section class="bloque redes-bloque" id="redes">
+  <section class="bloque redes-bloque" id="redes" data-slide="comunidad">
     <div class="envoltura">
       <div class="cabecera">
         <span class="etiqueta">Redes sociales</span>
@@ -1204,7 +1272,7 @@ async function abrirTema(id){
       hilo.append(b);
     }
     $("foro-lista").hidden = true; $("form-tema").hidden = true; hilo.hidden = false;
-    $("foro").scrollIntoView({behavior:"smooth"});
+    irA("foro");
   } catch(e) { cargarTemas(); }
 }
 
@@ -1260,6 +1328,8 @@ function pintarSorteo(){
   const est = $("sorteo-estado"); est.textContent = "";
   $("contador-cifra").textContent = s.registrados;
   $("contador-grande").classList.toggle("cumplida", s.cerrado);
+  const activo = !s.cerrado;
+  document.querySelector("#sorteo .cabecera").hidden = !activo; document.querySelector("#sorteo .sorteo").hidden = !activo; $("sorteo-vacio").hidden = activo;
   if (s.cerrado) {
     est.append(el("b",{textContent:"¡Meta cumplida!"}), " Próximamente se anunciará al ganador en la comunidad de Discord.");
     $("contador-texto").textContent = "";
@@ -1377,6 +1447,45 @@ fetch("/descargas/hyropix.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).
   t("hp-arch-mac",i.mac&&i.mac.archivo);t("hp-arch-win",i.windows&&i.windows.archivo);
   t("hp-req-mac",i.mac&&i.mac.requisitos);t("hp-req-win",i.windows&&i.windows.requisitos);
 }).catch(()=>{});
+</script>
+<script>
+/* Pantallas: cada sección de la web se muestra sola, con una portada principal */
+(function(){
+  var orden = ["inicio","hyropix","sorteo","proyectos","partners","foro","comunidad"];
+  var nombres = {inicio:"Inicio",hyropix:"HyroPix",sorteo:"Sorteos",proyectos:"Próximamente",partners:"Partners",foro:"Foro",comunidad:"Comunidad"};
+  var slides = [].slice.call(document.querySelectorAll("main>[data-slide]"));
+  var base = document.title, actual = null, primera = true;
+  orden.forEach(function(id, i){
+    var secs = slides.filter(function(x){ return x.dataset.slide === id; }), ult = secs[secs.length-1]; if (!ult || id === "inicio") return;
+    var nav = document.createElement("div"); nav.className = "envoltura slide-nav";
+    var ant = orden[i-1], sig = orden[i+1];
+    nav.innerHTML = '<a href="#' + ant + '">← ' + nombres[ant] + '</a>' + (sig ? '<a class="sig" href="#' + sig + '">' + nombres[sig] + ' →</a>' : '<a class="sig" href="#inicio">Volver al inicio ↑</a>');
+    ult.appendChild(nav);
+  });
+  function destino(){
+    var id = decodeURIComponent(location.hash.replace("#",""));
+    if (!id || id === "inicio") return {s:"inicio"};
+    if (orden.indexOf(id) >= 0) return {s:id};
+    var el = document.getElementById(id), sec = el && el.closest("[data-slide]");
+    if (sec) return {s:sec.dataset.slide, el:el};
+    return {s: actual || "inicio"};
+  }
+  function mostrar(){
+    var d = destino();
+    if (d.s !== actual) {
+      slides.forEach(function(x){ x.classList.toggle("activa", x.dataset.slide === d.s); });
+      [].forEach.call(document.querySelectorAll(".menu a[href^='#']"), function(a){ a.classList.toggle("activo", a.getAttribute("href") === "#" + d.s); });
+      document.title = d.s === "inicio" ? base : nombres[d.s] + " · Hyro Studios";
+      actual = d.s;
+    }
+    if (d.el) requestAnimationFrame(function(){ d.el.scrollIntoView({behavior: primera ? "auto" : "smooth", block:"start"}); });
+    else window.scrollTo({top:0, behavior: primera ? "auto" : "smooth"});
+    primera = false;
+  }
+  window.irA = function(id){ if (location.hash !== "#" + id) location.hash = id; else mostrar(); };
+  window.addEventListener("hashchange", mostrar);
+  mostrar();
+})();
 </script>
 </body>
 </html>
