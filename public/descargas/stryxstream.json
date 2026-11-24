@@ -1,34 +1,31 @@
 {
   "app": "StryxStream",
-  "version": "1.0.1",
-  "nombre": "StryxStream v1.0.1",
+  "version": "1.0.2",
+  "nombre": "StryxStream v1.0.2",
   "fecha": "2026-11-24",
   "notas": [
-    "Estudio con la misma interfaz que OBS: Escenas, Fuentes, Mezclador de audio, Transiciones de escena y Controles.",
-    "Modo estudio: Vista previa y Programa, con transiciones de Corte o Desvanecimiento.",
-    "Fuentes con ojo y candado, doble clic para Propiedades y ventana de Ajustes de salida.",
-    "Mezclador con medidor en dB y botón de silencio, y barra de estado con tiempo en directo, grabación y FPS.",
-    "Mac: corregido el aviso «StryxStream está dañado» al abrir la app descargada."
+    "Panel admin dentro de la app para los administradores: ver usuarios registrados y darles o quitarles Plus.",
+    "Los administradores tienen todo Plus desbloqueado sin caducidad."
   ],
   "windows": {
     "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/stryxstream/StryxStream-Windows-Instalador.exe",
     "archivo": "StryxStream-Windows-Instalador.exe",
-    "version": "1.0.1",
-    "sha256": "fbbcbc2b017f24fd41818043daad11fda03d3f51239efd850df9eac05a233fc6",
+    "version": "1.0.2",
+    "sha256": "ec33527541c2a0f58c1c2a130e015f2e5ace2c2366b0480c2f246159eee4d771",
     "requisitos": "Windows 10 u 11 (64 bits)"
   },
   "mac-apple": {
     "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/stryxstream/StryxStream-Mac-Apple.dmg",
     "archivo": "StryxStream-Mac-Apple.dmg",
-    "version": "1.0.1",
-    "sha256": "dee8572f65b9ed2b6d6962ac3c4322e0968e74873445349f51b1a34513e6728b",
+    "version": "1.0.2",
+    "sha256": "b72789abcaac6e9bd9de3afa1920144b73e46ff0641a642bc9dcfa919a01650d",
     "requisitos": "macOS 11 o superior · Apple M1, M2, M3 o M4"
   },
   "mac-intel": {
     "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/stryxstream/StryxStream-Mac-Intel.dmg",
     "archivo": "StryxStream-Mac-Intel.dmg",
-    "version": "1.0.1",
-    "sha256": "f2ea7d4351698aba487b9f65ac94398f3c5b1ff3a88a203b43d0a63dc943da96",
+    "version": "1.0.2",
+    "sha256": "88ddd73aa7983a694f5c8a9a10a95f18e7cde2003b054b554676fdf72a9dffab",
     "requisitos": "macOS 11 o superior · Mac con procesador Intel"
   }
 }
