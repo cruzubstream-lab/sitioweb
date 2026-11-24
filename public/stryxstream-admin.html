@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>StryxStream · Panel Plus · Hyro Studios</title>
+<link rel="icon" href="/favicon.ico">
+<style>
+  :root { color-scheme: dark; --noche:#070d1f; --noche-2:#0d1730; --borde:#22335e; --texto:#eef2ff; --tenue:#9fb0d6; --morado:#8b5cf6; --ok:#22c55e; --err:#ef4444; --oro:#f5c542; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--noche); color: var(--texto); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  a { color: #7fb4ff; }
+  .envoltura { max-width: 1000px; margin: 0 auto; padding: 32px 18px 60px; }
+  h1 { margin: 0 0 4px; font-size: 1.7rem; }
+  .sub { color: var(--tenue); margin: 0 0 24px; }
+  .caja { background: var(--noche-2); border: 2px solid var(--borde); padding: 18px; margin-bottom: 18px; }
+  .caja h2 { margin: 0 0 12px; font-size: 1.1rem; }
+  .fila { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  input, select { background: var(--noche); color: var(--texto); border: 2px solid var(--borde); padding: 9px 11px; font: inherit; }
+  input:focus, select:focus { outline: none; border-color: var(--morado); }
+  .crece { flex: 1; min-width: 220px; }
+  button { cursor: pointer; border: 0; padding: 10px 16px; font: inherit; font-weight: 700; background: var(--morado); color: #fff; }
+  button.fantasma { background: transparent; box-shadow: inset 0 0 0 2px var(--borde); color: var(--texto); font-weight: 600; padding: 6px 10px; font-size: .85rem; }
+  button.peligro { color: #fca5a5; }
+  .resultado { display: none; margin-top: 14px; padding: 14px; background: rgba(34, 197, 94, .08); border: 2px solid rgba(34, 197, 94, .4); }
+  .resultado.ver { display: block; }
+  .clave { font: 700 1.3rem ui-monospace, Menlo, Consolas, monospace; letter-spacing: 1px; }
+  textarea { width: 100%; min-height: 130px; margin-top: 8px; background: var(--noche); color: var(--texto); border: 2px solid var(--borde); padding: 10px; font: .9rem system-ui; resize: vertical; }
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--borde); }
+  th { color: var(--tenue); font-weight: 600; }
+  code { font: .85rem ui-monospace, Menlo, Consolas, monospace; }
+  .tag { font-size: .75rem; font-weight: 700; padding: 2px 8px; white-space: nowrap; }
+  .t-nueva { background: rgba(139, 92, 246, .18); color: #c4b5fd; } .t-ok { background: rgba(34, 197, 94, .15); color: var(--ok); }
+  .t-cad { background: rgba(245, 197, 66, .15); color: var(--oro); } .t-anu { background: rgba(239, 68, 68, .15); color: var(--err); }
+  .stats { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+  .stat { flex: 1; min-width: 150px; background: var(--noche-2); border: 2px solid var(--borde); padding: 12px 14px; }
+  .stat b { display: block; font-size: 1.5rem; } .stat span { color: var(--tenue); font-size: .85rem; }
+  .tenue { color: var(--tenue); }
+  #app { display: none; }
+</style>
+</head>
+<body>
+<div class="envoltura">
+  <p><a href="/#stryxstream">← Volver a hyrostudios.com</a></p>
+  <h1>StryxStream · Panel Plus</h1>
+  <p class="sub">Cuando confirmes el pago en el ticket de Discord, busca a la persona y pulsa «Dar Plus» (o crea una clave si lo prefieres).</p>
+
+  <div class="caja" id="entrar" hidden>
+    <h2>Solo administradores</h2>
+    <p class="tenue" id="entrar-texto">Inicia sesión en hyrostudios.com con tu cuenta de Discord de administrador y vuelve a esta página.</p>
+    <a href="/#inicio"><button type="button">Ir a iniciar sesión</button></a>
+  </div>
+
+  <div id="app">
+    <div class="caja">
+      <div class="fila" style="justify-content:space-between;margin-bottom:10px">
+        <h2 style="margin:0">Usuarios de la app</h2>
+        <div class="fila"><input id="buscar-u" placeholder="Buscar por nombre o ID…"><button class="fantasma" id="actualizar-u" type="button">Actualizar</button></div>
+      </div>
+      <div class="fila" style="margin-bottom:12px">
+        <span class="tenue">Plan para «Dar Plus»:</span>
+        <select id="plan-u">
+          <option value="1w">1 semana · $1.49</option>
+          <option value="1m" selected>Mensual · $3.99</option>
+          <option value="3m">3 meses · $9.99</option>
+          <option value="6m">6 meses · $17.99</option>
+          <option value="2w">2 semanas · promoción gratis</option>
+        </select>
+        <span class="tenue">Si ya tiene Plus, los días se suman.</span>
+      </div>
+      <div style="overflow-x:auto"><table>
+        <thead><tr><th></th><th>Usuario</th><th>Usó la app</th><th>Plus</th><th></th></tr></thead>
+        <tbody id="lista-u"><tr><td colspan="5" class="tenue">Cargando…</td></tr></tbody>
+      </table></div>
+    </div>
+    <div class="stats" id="stats"></div>
+    <div class="caja">
+      <h2>Crear clave (alternativa)</h2>
+      <div class="fila">
+        <select id="plan">
+          <option value="1w">1 semana · $1.49</option>
+          <option value="1m" selected>Mensual · $3.99</option>
+          <option value="3m">3 meses · $9.99</option>
+          <option value="6m">6 meses · $17.99</option>
+          <option value="2w">2 semanas · promoción gratis</option>
+        </select>
+        <input id="nota" class="crece" maxlength="200" placeholder="Nota: usuario de Discord, nº de ticket, método de pago…">
+        <button id="crear" type="button">Crear clave</button>
+      </div>
+      <div class="resultado" id="resultado">
+        <div class="tenue">Clave creada:</div>
+        <div class="fila" style="margin-top:4px"><span class="clave" id="nueva"></span><button class="fantasma" id="copiar-clave" type="button">Copiar clave</button></div>
+        <div class="tenue" style="margin-top:12px">Mensaje listo para pegar en el ticket:</div>
+        <textarea id="mensaje" readonly></textarea>
+        <div class="fila" style="margin-top:8px"><button class="fantasma" id="copiar-msg" type="button">Copiar mensaje</button></div>
+      </div>
+    </div>
+    <div class="caja">
+      <div class="fila" style="justify-content:space-between;margin-bottom:10px">
+        <h2 style="margin:0">Claves</h2>
+        <div class="fila"><input id="buscar" placeholder="Buscar clave o nota…"><button class="fantasma" id="actualizar" type="button">Actualizar</button></div>
+      </div>
+      <div style="overflow-x:auto"><table>
+        <thead><tr><th>Clave</th><th>Plan</th><th>Nota</th><th>Estado</th><th></th></tr></thead>
+        <tbody id="lista"><tr><td colspan="5" class="tenue">Cargando…</td></tr></tbody>
+      </table></div>
+    </div>
+  </div>
+</div>
+<script>
+const API = "/api/stryxstream/claves";
+const PLAN = { "1w": "1 semana", "2w": "2 semanas", "1m": "1 mes", "3m": "3 meses", "6m": "6 meses" };
+let usuarios = [];
+const $ = (s) => document.querySelector(s);
+let claves = [];
+const fecha = (t) => new Date(t).toLocaleDateString("es", { day: "numeric", month: "short", year: "numeric" });
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+async function api(url, opciones) {
+  const r = await fetch(url, Object.assign({ headers: { "content-type": "application/json" }, credentials: "same-origin" }, opciones || {}));
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok || !j.ok) throw Object.assign(new Error(j.error || "Error " + r.status), { status: r.status });
+  return j;
+}
+function estado(k) {
+  if (k.anulada) return ["t-anu", "Anulada"];
+  if (!k.activa && !k.caduca) return ["t-nueva", "Sin activar"];
+  if (k.caduca && k.caduca <= Date.now()) return ["t-cad", "Caducó " + fecha(k.caduca)];
+  if (!k.activa) return ["t-nueva", "Libre para otro PC · hasta " + fecha(k.caduca)];
+  return ["t-ok", "Activa hasta " + fecha(k.caduca)];
+}
+function pintar() {
+  const q = $("#buscar").value.trim().toLowerCase();
+  const lista = claves.filter((k) => !q || k.clave.toLowerCase().includes(q) || String(k.nota || "").toLowerCase().includes(q));
+  $("#lista").innerHTML = lista.length ? lista.map((k) => {
+    const [c, t] = estado(k);
+    return `<tr><td><code>${k.clave}</code></td><td>${PLAN[k.plan] || esc(k.plan)}</td><td>${esc(k.nota) || '<span class="tenue">—</span>'}</td>
+      <td><span class="tag ${c}">${t}</span></td>
+      <td style="text-align:right;white-space:nowrap">
+        ${k.activa && !k.anulada ? `<button class="fantasma" data-accion="mover" data-clave="${k.clave}" title="Libera la clave para usarla en otro PC">Mover de PC</button>` : ""}
+        ${!k.anulada ? `<button class="fantasma peligro" data-accion="anular" data-clave="${k.clave}">Anular</button>` : ""}
+      </td></tr>`;
+  }).join("") : '<tr><td colspan="5" class="tenue">Todavía no hay claves.</td></tr>';
+  const activas = claves.filter((k) => !k.anulada && k.activa && k.caduca > Date.now()).length;
+  const libres = claves.filter((k) => !k.anulada && !k.activa && !k.caduca).length;
+  $("#stats").innerHTML = `<div class="stat"><b>${activas}</b><span>Plus activos</span></div><div class="stat"><b>${libres}</b><span>Claves sin activar</span></div><div class="stat"><b>${claves.length}</b><span>Claves en total</span></div>`;
+}
+async function cargar() {
+  const j = await api(API);
+  claves = j.claves;
+  pintar();
+}
+$("#crear").onclick = async () => {
+  const plan = $("#plan").value;
+  try {
+    const j = await api(API, { method: "POST", body: JSON.stringify({ plan, nota: $("#nota").value }) });
+    $("#nueva").textContent = j.clave;
+    $("#mensaje").value = `¡Gracias por tu compra! ⭐ Aquí tienes tu clave de StryxStream Plus (${PLAN[plan]}):
+
+${j.clave}
+
+Cómo activarla:
+1. Abre StryxStream y ve a la pestaña «StryxStream Plus».
+2. Pega la clave y pulsa «Activar».
+
+Los días empiezan a contar desde que la actives. La clave funciona en un solo PC; si cambias de equipo, abre un ticket y te la movemos.
+¿Aún no tienes la app? Descárgala en https://hyrostudios.com/#stryxstream`;
+    $("#resultado").classList.add("ver");
+    $("#nota").value = "";
+    cargar();
+  } catch (e) { alert(e.message); }
+};
+$("#copiar-clave").onclick = () => navigator.clipboard.writeText($("#nueva").textContent);
+$("#copiar-msg").onclick = () => navigator.clipboard.writeText($("#mensaje").value);
+$("#buscar").oninput = pintar;
+$("#actualizar").onclick = () => cargar().catch((e) => alert(e.message));
+$("#lista").onclick = async (e) => {
+  const b = e.target.closest("button[data-accion]");
+  if (!b) return;
+  const pregunta = b.dataset.accion === "anular"
+    ? `¿Anular ${b.dataset.clave}? La persona perderá Plus.`
+    : `¿Liberar ${b.dataset.clave} para activarla en otro PC? Conserva su fecha de caducidad.`;
+  if (!confirm(pregunta)) return;
+  try { await api(`${API}/${b.dataset.clave}`, { method: "POST", body: JSON.stringify({ accion: b.dataset.accion }) }); cargar(); }
+  catch (err) { alert(err.message); }
+};
+// ---------- usuarios de la app
+function pintarU() {
+  const q = $("#buscar-u").value.trim().toLowerCase();
+  const lista = usuarios.filter((u) => !q || String(u.nombre || "").toLowerCase().includes(q) || String(u.id).includes(q));
+  $("#lista-u").innerHTML = lista.length ? lista.map((u) => {
+    const activo = u.caduca && u.caduca > Date.now();
+    const plus = activo ? `<span class="tag t-ok">${PLAN[u.plan] || ""} · hasta ${fecha(u.caduca)}</span>` : (u.caduca ? `<span class="tag t-cad">Caducó ${fecha(u.caduca)}</span>` : '<span class="tenue">Gratis</span>');
+    return `<tr><td>${u.avatar ? `<img src="${esc(u.avatar)}" alt="" width="28" height="28" style="border-radius:50%">` : ""}</td>
+      <td><b>${esc(u.nombre) || "Sin nombre"}</b><br><code class="tenue">${esc(u.id)}</code>${u.nota ? `<br><span class="tenue">${esc(u.nota)}</span>` : ""}</td>
+      <td class="tenue">desde ${fecha(u.primera)}<br>último uso ${fecha(u.ultima)}</td>
+      <td>${plus}</td>
+      <td style="text-align:right;white-space:nowrap"><button data-dar="${esc(u.id)}" type="button">Dar Plus</button>
+        ${activo ? `<button class="fantasma peligro" data-quitar="${esc(u.id)}" type="button">Quitar</button>` : ""}</td></tr>`;
+  }).join("") : '<tr><td colspan="5" class="tenue">Nadie ha iniciado sesión en la app todavía.</td></tr>';
+}
+async function cargarU() { usuarios = (await api("/api/stryxstream/usuarios")).usuarios; pintarU(); }
+$("#buscar-u").oninput = pintarU;
+$("#actualizar-u").onclick = () => cargarU().catch((e) => alert(e.message));
+$("#lista-u").onclick = async (e) => {
+  const dar = e.target.closest("[data-dar]"), quitar = e.target.closest("[data-quitar]");
+  if (!dar && !quitar) return;
+  const id = (dar || quitar).dataset.dar || (dar || quitar).dataset.quitar;
+  const u = usuarios.find((x) => String(x.id) === id) || {};
+  try {
+    if (dar) {
+      const plan = $("#plan-u").value;
+      const nota = prompt(`Dar Plus de ${PLAN[plan]} a ${u.nombre || id}.\nNota (ticket, método de pago…):`, "");
+      if (nota === null) return;
+      await api(`/api/stryxstream/usuarios/${encodeURIComponent(id)}`, { method: "POST", body: JSON.stringify({ accion: "dar", plan, nota }) });
+      alert(`Listo: ${u.nombre || id} ya tiene Plus. Se le activa solo en la app (como mucho en unos minutos o al reabrirla).`);
+    } else {
+      if (!confirm(`¿Quitar el Plus a ${u.nombre || id}?`)) return;
+      await api(`/api/stryxstream/usuarios/${encodeURIComponent(id)}`, { method: "POST", body: JSON.stringify({ accion: "quitar" }) });
+    }
+    cargarU();
+  } catch (err) { alert(err.message); }
+};
+
+Promise.all([cargar(), cargarU()]).then(() => { $("#app").style.display = "block"; }).catch((e) => {
+  $("#entrar").hidden = false;
+  if (e.status === 403) $("#entrar-texto").textContent = "Inicia sesión en hyrostudios.com con tu cuenta de Discord de administrador y vuelve a esta página.";
+});
+</script>
+</body>
+</html>
