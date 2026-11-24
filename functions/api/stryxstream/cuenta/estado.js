@@ -1,6 +1,6 @@
 // La app pregunta si ya se confirmó el código. POST { codigo, secreto } -> { pendiente } o { token, usuario }
 import { json } from "../../../_lib.js";
-import { asegurarCuentas, plusDeCuenta, dentroDelLimite } from "../_licencias.js";
+import { asegurarCuentas, plusOAdmin, dentroDelLimite } from "../_licencias.js";
 
 export async function onRequestPost(context) {
   let body = {};
@@ -14,5 +14,6 @@ export async function onRequestPost(context) {
   if (!v.token) return json({ ok: true, pendiente: true });
   const u = await db.prepare("SELECT id, nombre, avatar FROM usuarios WHERE id = ?").bind(v.usuario_id).first();
   await db.prepare("DELETE FROM stryx_vinculos WHERE codigo = ?").bind(codigo).run();
-  return json({ ok: true, token: v.token, usuario: u, plus: await plusDeCuenta(db, v.usuario_id) });
+  const { plus, admin } = await plusOAdmin(context, v.usuario_id);
+  return json({ ok: true, token: v.token, usuario: u, plus, admin });
 }

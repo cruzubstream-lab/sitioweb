@@ -97,3 +97,10 @@ export async function dentroDelLimite(context, accion, max, ventanaMs) {
   await db.prepare("UPDATE stryx_limites SET n = n + 1 WHERE clave = ?").bind(clave).run();
   return true;
 }
+
+/** Plus de una cuenta, o Plus sin caducidad si es administrador. */
+export async function plusOAdmin(context, usuarioId) {
+  const ids = (context.env.ADMIN_IDS || "").split(",").map((x) => x.trim()).filter(Boolean);
+  if (ids.includes(String(usuarioId))) return { plus: { plan: "admin", caduca: 4102444800000 }, admin: true };
+  return { plus: await plusDeCuenta(context.env.DB, usuarioId), admin: false };
+}

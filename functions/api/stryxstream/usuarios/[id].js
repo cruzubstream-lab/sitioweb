@@ -1,11 +1,21 @@
 // Dar o quitar Plus a la cuenta de una persona. POST { accion: "dar", plan, nota } | { accion: "quitar" }
 // Al dar Plus, los días se suman a los que ya tenga.
 import { json, usuarioActual, esAdmin, mismoOrigen, limpiar } from "../../../_lib.js";
-import { asegurarCuentas, PLANES } from "../_licencias.js";
+import { asegurarCuentas, PLANES, usuarioApp } from "../_licencias.js";
+
+/** Admin con la sesión de la web (cookie) o de la app (Authorization: Bearer). */
+async function admin(context) {
+  const app = (context.request.headers.get("authorization") || "").startsWith("Bearer ");
+  const u = app ? await usuarioApp(context) : await usuarioActual(context);
+  return { ok: esAdmin(context, u), app };
+}
+
 
 export async function onRequestPost(context) {
-  if (!mismoOrigen(context.request)) return json({ ok: false, error: "Origen no permitido" }, 403);
-  if (!esAdmin(context, await usuarioActual(context))) return json({ ok: false, error: "Solo administradores" }, 403);
+  const a = await admin(context);
+  // La protección de origen es para la sesión de la web (cookie); la app usa su propio token.
+  if (!a.app && !mismoOrigen(context.request)) return json({ ok: false, error: "Origen no permitido" }, 403);
+  if (!a.ok) return json({ ok: false, error: "Solo administradores" }, 403);
   const id = String(context.params.id || "").slice(0, 80);
   let body = {};
   try { body = await context.request.json(); } catch {}
