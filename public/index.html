@@ -239,6 +239,9 @@ main{min-height:calc(100vh - 140px)}
 .hp-pasos figure img{display:block;width:100%;height:auto}
 .hp-pasos figcaption{padding:8px 12px;color:var(--tenue);font-size:.88rem;border-top:1px solid var(--borde)}
 .hp-pasos figcaption b{color:#f6f6f8}
+.hp-explica{border:2px solid #ffd400;background:#1a1606;padding:14px 16px;color:var(--tenue);font-size:.95rem}
+.hp-explica>b{display:block;color:#ffd400;margin-bottom:6px;font-size:1.02rem}
+.hp-explica p{margin:0 0 8px}.hp-explica ul{margin:0 0 8px;padding-left:20px}.hp-explica li b,.hp-explica p b{color:#f6f6f8}
 @media (max-width:900px){.hp-seguro .por-que,.hp-pasos{grid-template-columns:1fr}}
 
 /* Guías */
@@ -590,8 +593,8 @@ footer a{color:var(--tenue)}
       </div>
       <p class="nota-version" id="hp-version">Versión actual: HyroPix v1 (1.0.0). La app te avisa sola cuando hay una actualización.</p>
       <div class="hp-seguro" id="hyropix-avisos">
-        <h3>¿Windows o Mac te avisan de un virus? Tranquilo, te explicamos por qué</h3>
-        <p>Al instalar HyroPix por primera vez, Windows o Mac pueden mostrar un aviso de seguridad, e incluso decir que el archivo «puede ser peligroso». <b style="color:#fff">HyroPix no tiene virus.</b> Estos avisos salen con casi cualquier programa nuevo de un estudio pequeño, por estas razones:</p>
+        <h3>¿Windows 11 o Mac te avisan de un virus? Tranquilo, te explicamos por qué</h3>
+        <p>Al instalar HyroPix por primera vez, Windows 11 o Mac pueden mostrar un aviso de seguridad. En Windows puede salir incluso un aviso pequeño en una esquina de abajo que dice «Amenazas encontradas». <b style="color:#fff">HyroPix no tiene virus.</b> Estos avisos salen con casi cualquier programa nuevo de un estudio pequeño, por estas razones:</p>
         <div class="por-que">
           <div><b>Todavía no tiene firma comercial</b>Windows y Apple confían en los programas firmados con un certificado de pago. HyroPix aún no lo tiene, así que lo marcan como de un «editor desconocido» o un «desarrollador no identificado».</div>
           <div><b>Es nuevo y tiene pocas descargas</b>SmartScreen de Windows y algunos antivirus juzgan por fama: un instalador recién publicado no la tiene todavía. A veces lo marcan como amenaza por precaución (un «falso positivo»).</div>
@@ -600,12 +603,18 @@ footer a{color:var(--tenue)}
         <p>Cuando HyroPix tenga su certificado de firma, estos avisos dejarán de salir. Mientras tanto, así se instala sin problemas (las imágenes son ilustraciones de cada aviso):</p>
         <div class="hp-pasos">
           <div>
-            <h4>En Windows</h4>
-          <figure><img src="/descargas/avisos/aviso-w3.webp" alt="Aviso del navegador: el archivo no se descarga habitualmente, con la opción Conservar" width="900" loading="lazy"><figcaption><b>Al descargar.</b> Si Edge o Chrome dicen que el archivo «no se descarga habitualmente», abre el menú ⋯ y elige Conservar.</figcaption></figure>
-          <figure><img src="/descargas/avisos/aviso-w1.webp" alt="Pantalla azul Windows protegió su PC con el enlace Más información" width="900" loading="lazy"><figcaption><b>Paso 1.</b> Al abrir el instalador, si aparece «Windows protegió su PC», pulsa Más información.</figcaption></figure>
-          <figure><img src="/descargas/avisos/aviso-w2.webp" alt="Pantalla azul Windows protegió su PC con el botón Ejecutar de todas formas" width="900" loading="lazy"><figcaption><b>Paso 2.</b> Pulsa Ejecutar de todas formas y sigue el instalador.</figcaption></figure>
-          <figure><img src="/descargas/avisos/aviso-w4.webp" alt="Notificación de Seguridad de Windows: amenazas encontradas" width="900" loading="lazy"><figcaption><b>Si el antivirus lo bloquea.</b> Esta notificación es un falso positivo por ser una app nueva sin firma.</figcaption></figure>
-          <figure><img src="/descargas/avisos/aviso-w5.webp" alt="Seguridad de Windows, historial de protección, Acciones, Restaurar" width="900" loading="lazy"><figcaption><b>Para recuperarlo.</b> Seguridad de Windows → Protección contra virus y amenazas → Historial de protección → Acciones → Restaurar.</figcaption></figure>
+            <h4>En Windows 11</h4>
+          <figure><img src="/descargas/avisos/aviso-w3.webp" alt="Windows 11: aviso del navegador, el archivo no se descarga habitualmente, con la opción Conservar" width="900" loading="lazy"><figcaption><b>1. Al descargar.</b> Si Edge o Chrome dicen que el archivo «no se descarga habitualmente», abre el menú ⋯ de la descarga y elige <b>Conservar</b>.</figcaption></figure>
+          <figure><img src="/descargas/avisos/aviso-w4.webp" alt="Windows 11: aviso pequeño de Seguridad de Windows, Amenazas encontradas, en la esquina inferior" width="900" loading="lazy"><figcaption><b>2. Si sale el aviso pequeño «Amenazas encontradas».</b> Es el antivirus de Windows 11 apartando el instalador por precaución. Más abajo te explicamos por qué pasa.</figcaption></figure>
+          <figure><img src="/descargas/avisos/aviso-w5.webp" alt="Windows 11: Seguridad de Windows, Historial de protección, Acciones, Restaurar" width="900" loading="lazy"><figcaption><b>3. Recupera el instalador.</b> Toca el aviso o abre Seguridad de Windows → Protección antivirus y contra amenazas → Historial de protección → <b>Acciones → Restaurar</b>.</figcaption></figure>
+          <figure><img src="/descargas/avisos/aviso-w1.webp" alt="Windows 11: pantalla azul Windows protegió su PC con el enlace Más información" width="900" loading="lazy"><figcaption><b>4. Abre el instalador.</b> Si aparece «Windows protegió su PC», pulsa <b>Más información</b>.</figcaption></figure>
+          <figure><img src="/descargas/avisos/aviso-w2.webp" alt="Windows 11: pantalla azul con el botón Ejecutar de todas formas" width="900" loading="lazy"><figcaption><b>5.</b> Pulsa <b>Ejecutar de todas formas</b> y sigue el instalador. Esto solo pasa la primera vez.</figcaption></figure>
+            <div class="hp-explica">
+              <b>¿Por qué sale el aviso de «Amenazas encontradas»?</b>
+              <p>El antivirus de Windows 11 (Microsoft Defender) revisa automáticamente cada programa nuevo que descargas. No mira lo que hace el programa por dentro: decide por señales. Con el instalador de HyroPix coinciden tres:</p>
+              <ul><li>Es <b>nuevo</b> y todavía lo han descargado pocas personas.</li><li><b>No tiene firma digital de pago</b>, el «sello» con el que Microsoft reconoce al autor.</li><li>Es un <b>instalador</b>: copia archivos y crea accesos directos, igual que cualquier otro.</li></ul>
+              <p>Con esa mezcla, Windows a veces lo aparta por precaución y muestra ese aviso pequeño. Se llama <b>falso positivo</b> y les pasa a muchos programas nuevos de estudios pequeños. A medida que más gente lo instala, y cuando tengamos la firma digital, Windows deja de avisar.</p>
+            </div>
           </div>
           <div>
             <h4>En Mac</h4>
@@ -637,7 +646,7 @@ footer a{color:var(--tenue)}
             </ul></details>
         </div>
         <div>
-          <h3>Cómo instalarlo en Windows</h3>
+          <h3>Cómo instalarlo en Windows 11</h3>
           <ol>
             <li>Pulsa <b>Descargar para Windows</b>. Si el navegador avisa de que el archivo «no se descarga habitualmente», abre el menú <b>⋯</b> de la descarga y elige <b>Conservar</b> (Edge) o <b>Descargar de todas formas</b> (Chrome).</li>
             <li>Abre el archivo <b>HyroPix-…-Windows-Instalador.exe</b>.</li>
