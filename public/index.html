@@ -227,6 +227,20 @@ main{min-height:calc(100vh - 140px)}
 @media (max-width:900px){.portada .envoltura{grid-template-columns:1fr;min-height:0;padding-block:48px}}
 @media (max-width:720px){.menu{overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap !important}.menu::-webkit-scrollbar{display:none}.menu a:not(.discord-mini){display:inline-block !important;white-space:nowrap}.barra .envoltura{flex-wrap:wrap}.menu{width:100%;order:3;gap:16px;padding-bottom:8px}.portada-grid{grid-template-columns:1fr}}
 
+.hp-seguro{margin-top:34px;border:2px solid #3a4a7a;background:linear-gradient(160deg,#0f1a38e6,#0b1226e6);padding:22px 24px}
+.hp-seguro h3{font-family:var(--f-pixel);font-size:1.35rem;margin:0 0 10px}
+.hp-seguro .por-que{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0 4px}
+.hp-seguro .por-que div{background:#0b1630;border:2px solid var(--borde);padding:14px;color:var(--tenue);font-size:.95rem}
+.hp-seguro .por-que b{display:block;color:#f6f6f8;margin-bottom:4px}
+.hp-seguro>p{color:var(--tenue);margin:0}
+.hp-pasos{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px}
+.hp-pasos h4{font-family:var(--f-pixel);font-size:1.1rem;margin:0 0 10px}
+.hp-pasos figure{margin:0 0 12px;border:2px solid var(--borde);background:#0b1226}
+.hp-pasos figure img{display:block;width:100%;height:auto}
+.hp-pasos figcaption{padding:8px 12px;color:var(--tenue);font-size:.88rem;border-top:1px solid var(--borde)}
+.hp-pasos figcaption b{color:#f6f6f8}
+@media (max-width:900px){.hp-seguro .por-que,.hp-pasos{grid-template-columns:1fr}}
+
 /* Guías */
 .pestanas{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
 .pestana{font-family:var(--f-pixel);font-size:1.05rem;padding:10px 18px;border:2px solid var(--borde);background:transparent;color:var(--tenue);cursor:pointer}
@@ -575,6 +589,32 @@ footer a{color:var(--tenue)}
         </article>
       </div>
       <p class="nota-version" id="hp-version">Versión actual: HyroPix v1 (1.0.0). La app te avisa sola cuando hay una actualización.</p>
+      <div class="hp-seguro" id="hyropix-avisos">
+        <h3>¿Windows o Mac te avisan de un virus? Tranquilo, te explicamos por qué</h3>
+        <p>Al instalar HyroPix por primera vez, Windows o Mac pueden mostrar un aviso de seguridad, e incluso decir que el archivo «puede ser peligroso». <b style="color:#fff">HyroPix no tiene virus.</b> Estos avisos salen con casi cualquier programa nuevo de un estudio pequeño, por estas razones:</p>
+        <div class="por-que">
+          <div><b>Todavía no tiene firma comercial</b>Windows y Apple confían en los programas firmados con un certificado de pago. HyroPix aún no lo tiene, así que lo marcan como de un «editor desconocido» o un «desarrollador no identificado».</div>
+          <div><b>Es nuevo y tiene pocas descargas</b>SmartScreen de Windows y algunos antivirus juzgan por fama: un instalador recién publicado no la tiene todavía. A veces lo marcan como amenaza por precaución (un «falso positivo»).</div>
+          <div><b>Cómo comprobarlo tú mismo</b>Descarga HyroPix solo desde hyrostudios.com. Si quieres, sube el archivo a <a href="https://www.virustotal.com" target="_blank" rel="noopener" style="color:#7fb4ff">virustotal.com</a> antes de abrirlo: lo analizan decenas de antivirus a la vez.</div>
+        </div>
+        <p>Cuando HyroPix tenga su certificado de firma, estos avisos dejarán de salir. Mientras tanto, así se instala sin problemas (las imágenes son ilustraciones de cada aviso):</p>
+        <div class="hp-pasos">
+          <div>
+            <h4>En Windows</h4>
+          <figure><img src="/descargas/avisos/aviso-w3.webp" alt="Aviso del navegador: el archivo no se descarga habitualmente, con la opción Conservar" width="900" loading="lazy"><figcaption><b>Al descargar.</b> Si Edge o Chrome dicen que el archivo «no se descarga habitualmente», abre el menú ⋯ y elige Conservar.</figcaption></figure>
+          <figure><img src="/descargas/avisos/aviso-w1.webp" alt="Pantalla azul Windows protegió su PC con el enlace Más información" width="900" loading="lazy"><figcaption><b>Paso 1.</b> Al abrir el instalador, si aparece «Windows protegió su PC», pulsa Más información.</figcaption></figure>
+          <figure><img src="/descargas/avisos/aviso-w2.webp" alt="Pantalla azul Windows protegió su PC con el botón Ejecutar de todas formas" width="900" loading="lazy"><figcaption><b>Paso 2.</b> Pulsa Ejecutar de todas formas y sigue el instalador.</figcaption></figure>
+          <figure><img src="/descargas/avisos/aviso-w4.webp" alt="Notificación de Seguridad de Windows: amenazas encontradas" width="900" loading="lazy"><figcaption><b>Si el antivirus lo bloquea.</b> Esta notificación es un falso positivo por ser una app nueva sin firma.</figcaption></figure>
+          <figure><img src="/descargas/avisos/aviso-w5.webp" alt="Seguridad de Windows, historial de protección, Acciones, Restaurar" width="900" loading="lazy"><figcaption><b>Para recuperarlo.</b> Seguridad de Windows → Protección contra virus y amenazas → Historial de protección → Acciones → Restaurar.</figcaption></figure>
+          </div>
+          <div>
+            <h4>En Mac</h4>
+          <figure><img src="/descargas/avisos/aviso-m1.webp" alt="Aviso de macOS: no se puede abrir HyroPix porque Apple no puede comprobarlo, con el botón Aceptar" width="900" loading="lazy"><figcaption><b>Paso 1.</b> La primera vez, pulsa Aceptar (no «Trasladar a la papelera»).</figcaption></figure>
+          <figure><img src="/descargas/avisos/aviso-m2.webp" alt="Ajustes del Sistema, Privacidad y seguridad, botón Abrir igualmente" width="900" loading="lazy"><figcaption><b>Paso 2.</b> Ajustes del Sistema → Privacidad y seguridad → Abrir igualmente. Confirma con tu contraseña o Touch ID.</figcaption></figure>
+          <figure><img src="/descargas/avisos/aviso-m3.webp" alt="Aviso de macOS: HyroPix está dañado, y el comando de Terminal para solucionarlo" width="900" loading="lazy"><figcaption><b>Si dice que está «dañado».</b> No lo está: pulsa Cancelar, pega <code>xattr -cr /Applications/HyroPix.app</code> en Terminal y vuelve a abrirla.</figcaption></figure>
+          </div>
+        </div>
+      </div>
       <div class="hp-guia" id="hyropix-instalar">
         <div>
           <h3>Cómo instalarlo en Mac</h3>
@@ -605,7 +645,7 @@ footer a{color:var(--tenue)}
             <li>Si Windows pregunta «¿Quieres permitir que esta aplicación haga cambios?» (puede pasar al instalar WebView2), pulsa <b>Sí</b>.</li>
             <li>Sigue el instalador pulsando <b>Siguiente → Instalar → Terminar</b>. HyroPix quedará en el menú Inicio.</li>
           </ol>
-          <details><summary>Mi antivirus lo bloquea</summary>
+          <details><summary>Mi antivirus lo bloquea (<a href="#hyropix-avisos" style="color:#7fb4ff">ver explicación con imágenes</a>)</summary>
             <p>Es un aviso por ser una app nueva y sin firma comercial todavía. Descárgala solo desde hyrostudios.com y, si tu antivirus la pone en cuarentena, márcala como de confianza o restáurala.</p></details>
           <details><summary>Otros permisos que puede pedir</summary>
             <ul>
@@ -630,7 +670,7 @@ footer a{color:var(--tenue)}
         <div class="hp-unicas">
           <article class="hp-unica">
             <div class="img"><img src="/descargas/guia/hyropix-guia-efectos.webp" alt="Galería de efectos de HyroPix con efectos exclusivos como Pixel Craft, Neon Pulse y Holograma" width="558" height="580" loading="lazy"></div>
-            <div class="txt"><b class="t">70 efectos estilo CapCut (nuevo en v2)</b>
+            <div class="txt"><b class="t">70 efectos y filtros (nuevo en v2)</b>
               <p>Filtros de color, efectos como Glitch, VHS, Lluvia o Cámara REC, y animaciones de entrada para videos. Además hay efectos exclusivos de HyroPix: Pixel Craft, Neon Pulse, Holograma, Portal, HUD Gamer…</p>
               <p class="como">En Foto: <b>Filtro → Efectos y filtros</b>. En Video: botón <b>✨ Efectos</b>.</p></div>
           </article>
