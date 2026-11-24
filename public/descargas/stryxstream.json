@@ -1,31 +1,35 @@
 {
   "app": "StryxStream",
-  "version": "1.0.2",
-  "nombre": "StryxStream v1.0.2",
+  "version": "1.0.3",
+  "nombre": "StryxStream v1.0.3",
   "fecha": "2026-11-24",
   "notas": [
-    "Panel admin dentro de la app para los administradores: ver usuarios registrados y darles o quitarles Plus.",
-    "Los administradores tienen todo Plus desbloqueado sin caducidad."
+    "Pantalla de Inicio con guía paso a paso y tu privacidad: qué datos se guardan, seguridad y documentos legales.",
+    "Ajustes del Estudio iguales a OBS: General, Emisión, Salida, Audio, Video, Atajos y Avanzado.",
+    "Todas las claves ocultas con botón «Mostrar», y se vuelven a ocultar solas.",
+    "Conecta Twitch, Kick y YouTube con tu cuenta (cuando esté activado), como en OBS.",
+    "Corregido el micrófono y la cámara en Windows y Mac.",
+    "Kick conecta antes y las actualizaciones se comprueban con su huella SHA-256."
   ],
   "windows": {
     "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/stryxstream/StryxStream-Windows-Instalador.exe",
     "archivo": "StryxStream-Windows-Instalador.exe",
-    "version": "1.0.2",
-    "sha256": "ec33527541c2a0f58c1c2a130e015f2e5ace2c2366b0480c2f246159eee4d771",
+    "version": "1.0.3",
+    "sha256": "67d056736fbd646a6d0ad5140b09044ed8b26fc9637908defb02449ada317c7f",
     "requisitos": "Windows 10 u 11 (64 bits)"
   },
   "mac-apple": {
     "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/stryxstream/StryxStream-Mac-Apple.dmg",
     "archivo": "StryxStream-Mac-Apple.dmg",
-    "version": "1.0.2",
-    "sha256": "b72789abcaac6e9bd9de3afa1920144b73e46ff0641a642bc9dcfa919a01650d",
+    "version": "1.0.3",
+    "sha256": "331b539bf195eea5571f51df41a470daeba3c3cef535b9ac8337318bf9f05320",
     "requisitos": "macOS 11 o superior · Apple M1, M2, M3 o M4"
   },
   "mac-intel": {
     "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/stryxstream/StryxStream-Mac-Intel.dmg",
     "archivo": "StryxStream-Mac-Intel.dmg",
-    "version": "1.0.2",
-    "sha256": "88ddd73aa7983a694f5c8a9a10a95f18e7cde2003b054b554676fdf72a9dffab",
+    "version": "1.0.3",
+    "sha256": "7c11ca4ce55d2aa7a7df234ac3004cdbb04a8407757865a070cf8a680591ed27",
     "requisitos": "macOS 11 o superior · Mac con procesador Intel"
   }
 }
