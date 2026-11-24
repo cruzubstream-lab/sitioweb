@@ -37,3 +37,4 @@ export async function onRequestGet(context) {
   }
   return new Response(null, { status: 302, headers: { location: url, "cache-control": "no-store" } });
 }
+export const onRequestHead = onRequestGet;

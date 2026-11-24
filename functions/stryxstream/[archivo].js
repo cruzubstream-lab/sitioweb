@@ -12,3 +12,4 @@ export async function onRequestGet(context) {
   if (!destino) return volver();
   return new Response(null, { status: 302, headers: { location: destino, "cache-control": "no-store" } });
 }
+export const onRequestHead = onRequestGet;

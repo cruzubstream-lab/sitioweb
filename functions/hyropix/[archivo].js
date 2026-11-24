@@ -10,3 +10,4 @@ export async function onRequestGet(context) {
   if (!destino) return Response.redirect(new URL("/#hyropix", context.request.url).toString(), 302);
   return new Response(null, { status: 302, headers: { location: destino, "cache-control": "no-store" } });
 }
+export const onRequestHead = onRequestGet;
