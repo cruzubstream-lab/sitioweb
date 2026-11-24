@@ -247,6 +247,7 @@ main{min-height:calc(100vh - 140px)}
 .hp-hash code{display:block;word-break:break-all;font-size:.75rem !important;padding:6px 8px !important;user-select:all}
 .hp-mini{font-size:.85rem}
 @media (max-width:900px){.hp-verifica{grid-template-columns:1fr}}
+.hp-mini-ol{margin:8px 0 0;padding-left:20px}.hp-mini-ol li{margin:0 0 4px}.hp-mini-ol code{background:#0006;padding:1px 4px;font-size:.78rem;word-break:break-all}
 .hp-explica{border:2px solid #ffd400;background:#1a1606;padding:14px 16px;color:var(--tenue);font-size:.95rem}
 .hp-explica>b{display:block;color:#ffd400;margin-bottom:6px;font-size:1.02rem}
 .hp-explica p{margin:0 0 8px}.hp-explica ul{margin:0 0 8px;padding-left:20px}.hp-explica li b,.hp-explica p b{color:#f6f6f8}
@@ -637,6 +638,13 @@ footer a{color:var(--tenue)}
           <figure><img src="/descargas/avisos/aviso-w5.webp" alt="Windows 11: Seguridad de Windows, Historial de protección, Acciones, Restaurar" width="900" loading="lazy"><figcaption><b>3. Recupera el instalador.</b> Toca el aviso o abre Seguridad de Windows → Protección antivirus y contra amenazas → Historial de protección → <b>Acciones → Restaurar</b>.</figcaption></figure>
           <figure><img src="/descargas/avisos/aviso-w1.webp" alt="Windows 11: pantalla azul Windows protegió su PC con el enlace Más información" width="900" loading="lazy"><figcaption><b>4. Abre el instalador.</b> Si aparece «Windows protegió su PC», pulsa <b>Más información</b>.</figcaption></figure>
           <figure><img src="/descargas/avisos/aviso-w2.webp" alt="Windows 11: pantalla azul con el botón Ejecutar de todas formas" width="900" loading="lazy"><figcaption><b>5.</b> Pulsa <b>Ejecutar de todas formas</b> y sigue el instalador. Esto solo pasa la primera vez.</figcaption></figure>
+          <figure><img src="/descargas/avisos/aviso-w6.webp" alt="Windows 11: error Falta el acceso directo, Windows está buscando hyropix.exe" width="900" loading="lazy"><figcaption><b>6. Si al abrir HyroPix sale «Falta el acceso directo».</b> El antivirus borró el programa después de instalarlo y el acceso directo apunta a un archivo que ya no está. Pulsa <b>Cancelar</b> y haz esto:
+            <ol class="hp-mini-ol">
+              <li>Abre <b>Seguridad de Windows → Protección antivirus y contra amenazas → Historial de protección</b>.</li>
+              <li>Pulsa la entrada «Trojan:Win32/Bearfoos.A!ml» y elige <b>Acciones → Permitir en el dispositivo</b> (o Restaurar).</li>
+              <li>Vuelve a abrir HyroPix. Si en el historial ya no aparece, descarga e instala HyroPix otra vez.</li>
+              <li>Si lo vuelve a borrar: <b>Administrar la configuración → Exclusiones → Agregar una exclusión → Carpeta</b> y elige <code>C:\Users\(tu usuario)\AppData\Local\HyroPix</code>. Después reinstala.</li>
+            </ol></figcaption></figure>
             <div class="hp-explica">
               <b>¿Por qué sale el aviso de «Amenazas encontradas»?</b>
               <p>El antivirus de Windows 11 (Microsoft Defender) revisa automáticamente cada programa nuevo que descargas. No mira lo que hace el programa por dentro: decide por señales. Con el instalador de HyroPix coinciden tres:</p>
