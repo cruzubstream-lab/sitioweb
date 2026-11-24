@@ -27,7 +27,7 @@ export async function onRequestPost(context) {
     await db.prepare("UPDATE stryx_cuentas SET plan = NULL, caduca = NULL WHERE usuario_id = ?").bind(id).run();
     return json({ ok: true });
   }
-  if (body.accion !== "dar" || !PLANES[body.plan]) return json({ ok: false, error: "Plan no válido" }, 400);
+  if (body.accion !== "dar" || !Object.hasOwn(PLANES, String(body.plan))) return json({ ok: false, error: "Plan no válido" }, 400);
   const base = Math.max(Date.now(), c.caduca || 0);
   const caduca = base + PLANES[body.plan] * 86400000;
   await db.prepare("UPDATE stryx_cuentas SET plan = ?, caduca = ?, nota = ? WHERE usuario_id = ?")

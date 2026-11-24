@@ -25,7 +25,7 @@ export async function onRequestPost(context) {
   let body = {};
   try { body = await context.request.json(); } catch {}
   const plan = String(body.plan || "1m");
-  if (!PLANES[plan]) return json({ ok: false, error: "Plan no válido" }, 400);
+  if (!Object.hasOwn(PLANES, String(plan))) return json({ ok: false, error: "Plan no válido" }, 400);
   await asegurarTabla(context.env.DB);
   const clave = nuevaClave();
   await context.env.DB.prepare("INSERT INTO stryx_licencias (clave, plan, nota, creada, creada_por) VALUES (?, ?, ?, ?, ?)")
