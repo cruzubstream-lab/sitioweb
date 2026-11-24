@@ -1,28 +1,24 @@
 {
   "app": "HyroPix",
-  "version": "3.1.0",
-  "nombre": "HyroPix v3.1",
+  "version": "3.2.0",
+  "nombre": "HyroPix v3.2",
   "fecha": "2026-11-24",
   "notas": [
-    "Nuevo: Mejores momentos. Analiza tus videos y recorta las mejores partes, acercando el encuadre hacia la acción",
-    "Nuevo: tutorial guiado para empezar (también en Ayuda → Tutorial de HyroPix)",
-    "Nuevo: ayuda integrada. Pregunta tus dudas con tus palabras y te responde con los pasos y un botón para ir a la función",
-    "Estudio de renders 3D de Minecraft: tu skin en 40 poses, con cámaras, luces, fondos, efectos y objetos",
-    "Edición anime y acción: rayos de energía, choque de poderes, auras, contornos brillantes y frames de impacto",
-    "Editor de video con pestañas: Audio, Texto, Stickers, Efectos, Transiciones, Subtítulos, Filtros, Ajuste y Plantillas",
-    "Silenciar el sonido original de un video o de todos, y separar el audio a su propia pista",
-    "Nuevo diseño más limpio, con iconos propios"
+    "Tus proyectos se guardan solos: cada pocos segundos HyroPix guarda tus videos e imágenes en este equipo (también con Ctrl+S).",
+    "Nuevo «Seguir editando» en la pantalla de inicio: retoma cualquier proyecto con sus clips, efectos y archivos.",
+    "Actualizar ya no te hace perder nada: antes de instalar una versión nueva guardamos tu edición y al volver te ofrecemos seguir donde lo dejaste.",
+    "Arreglado: al cortar un clip ya no aparece la pantalla en negro unos segundos; el siguiente clip se prepara antes de llegar."
   ],
   "mac": {
-    "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/hyropix/HyroPix-3.1.0-Mac-Apple.dmg",
-    "archivo": "HyroPix-3.1.0-Mac-Apple.dmg",
-    "sha256": "bbd523abd54da0cacfa6f352d3aeb200af78ea0407b941949361a86caa168b3c",
+    "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/hyropix/HyroPix-3.2.0-Mac-Apple.dmg",
+    "archivo": "HyroPix-3.2.0-Mac-Apple.dmg",
+    "sha256": "a95b7142f5d0bb44551ab944ede142133a25af9ec54099927459e8eb86248ae7",
     "requisitos": "macOS 12 o superior · Apple M1, M2, M3 o M4"
   },
   "windows": {
-    "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/hyropix/HyroPix-3.1.0-Windows-Instalador.exe",
-    "archivo": "HyroPix-3.1.0-Windows-Instalador.exe",
-    "sha256": "aa32c893527ccd00df04dbe9c37ab2b588e137161c33b78c3aba98cdae7ef429",
+    "url": "https://github.com/cruzubstream-lab/sitioweb/releases/download/hyropix/HyroPix-3.2.0-Windows-Instalador.exe",
+    "archivo": "HyroPix-3.2.0-Windows-Instalador.exe",
+    "sha256": "73a8b858efbd93e452d26621c9872d290fc3db0660e281d5dfafc1c15ac6a1ac",
     "requisitos": "Windows 10 u 11 (64 bits)"
   }
 }
